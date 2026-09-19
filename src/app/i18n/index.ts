@@ -1,13 +1,22 @@
 import { createI18n } from 'vue-i18n'
 import interfaceMessages from './ui.en.json'
 import coreMessages from './core.en.json'
+import shellMessages from './shell.en.json'
+import gameMessages from './game.en.json'
+import libraryMessages from './library.en.json'
 
 export const i18n = createI18n({
   legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
   messages: {
-    en: { ...interfaceMessages, ...coreMessages },
+    en: {
+      ...interfaceMessages,
+      ...coreMessages,
+      ...shellMessages,
+      ...gameMessages,
+      ...libraryMessages,
+    },
   },
 })
 

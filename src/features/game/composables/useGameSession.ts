@@ -89,8 +89,8 @@ export function useGameSession() {
     skipCard: () => persistAction(() => skipCurrentCard(currentSession(), random)),
     activateRule: (targetId?: string) =>
       persistAction(() => activateCurrentRule(currentSession(), targetId)),
-    addHouseRule: (text: string, targetId?: string) =>
-      persistAction(() => submitHouseRule(currentSession(), text, targetId, random)),
+    addHouseRule: (text: string) =>
+      persistAction(() => submitHouseRule(currentSession(), text, random)),
     endGame: () => persistAction(() => null),
   }
 }

@@ -32,7 +32,7 @@ export interface HouseRule {
   readonly id: string
   readonly authorId: string
   readonly text: string
-  readonly scope: RuleScope
+  readonly scope: { readonly kind: 'everyone' }
 }
 
 export interface GameSession {
@@ -261,12 +261,7 @@ export function skipCurrentCard(session: GameSession, random: Random): GameSessi
   return advanceTurn(withoutCurrentRule, random)
 }
 
-export function submitHouseRule(
-  session: GameSession,
-  text: string,
-  targetId: string | undefined,
-  random: Random,
-): GameSession {
+export function submitHouseRule(session: GameSession, text: string, random: Random): GameSession {
   const author = getHouseRuleAuthor(session)
   if (author === null) throw new GameError('No house rule is due.')
   const trimmedText = text.trim()
@@ -277,7 +272,7 @@ export function submitHouseRule(
     id: `house-${session.houseRules.length}`,
     authorId: author.id,
     text: trimmedText,
-    scope: scopeFor(session, targetId),
+    scope: { kind: 'everyone' },
   }
   return drawCard({ ...session, houseRules: [...session.houseRules, rule], phase: 'turn' }, random)
 }
@@ -398,11 +393,12 @@ export function parseGameSession(candidate: unknown): GameSession {
     if (rule.id !== `house-${index}` || rule.authorId !== players[index]?.id) {
       throw new GameError('Saved house rule authors must follow player order exactly once.')
     }
+    savedScope(rule.scope, base)
     return {
       id: rule.id as string,
       authorId: rule.authorId as string,
       text: savedText(rule.text),
-      scope: savedScope(rule.scope, base),
+      scope: { kind: 'everyone' },
     }
   })
   const rulesDue = Math.min(Math.floor(completedTurns / (players.length * 2)), players.length)

@@ -2,15 +2,15 @@
 import { ref } from 'vue'
 import { t } from '@/app/i18n'
 import type { Player } from '../domain/game'
-defineProps<{ author: Player; players: readonly Player[]; busy: boolean }>()
-const emit = defineEmits<{ submit: [text: string, targetId?: string] }>()
-const rule = ref(''),
-  targetId = ref('')
+import AppButton from '@/shared/components/AppButton.vue'
+defineProps<{ author: Player; busy: boolean }>()
+const emit = defineEmits<{ submit: [text: string] }>()
+const rule = ref('')
 </script>
 <template>
-  <form class="permanent-form stack" @submit.prevent="emit('submit', rule, targetId || undefined)">
+  <form class="play-house-form stack" @submit.prevent="emit('submit', rule)">
     <div>
-      <p class="eyebrow">{{ t('game.permanentRules') }}</p>
+      <p class="eyebrow">{{ t('play.houseScope') }}</p>
       <h2>{{ t('game.permanentTitle') }}</h2>
       <p>{{ t('game.permanentIntro', { name: author.name }) }}</p>
     </div>
@@ -22,19 +22,11 @@ const rule = ref(''),
         maxlength="240"
         :placeholder="t('game.permanentPlaceholder')"
         :disabled="busy"
-      /></label
-    ><label class="field"
-      >{{ t('game.target')
-      }}<select v-model="targetId" :disabled="busy">
-        <option value="">{{ t('game.everyone') }}</option>
-        <option v-for="player in players" :key="player.id" :value="player.id">
-          {{ player.name }}
-        </option>
-      </select></label
-    >
-    <p class="help-text">{{ t('game.mandatory') }}</p>
-    <button class="button button-primary" :disabled="busy || !rule.trim()">
-      {{ t('game.permanentSave') }}
-    </button>
+      />
+    </label>
+    <p class="help-text">{{ t('play.houseHelp') }}</p>
+    <AppButton type="submit" :disabled="busy || !rule.trim()">{{
+      t('game.permanentSave')
+    }}</AppButton>
   </form>
 </template>

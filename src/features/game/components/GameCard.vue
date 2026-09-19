@@ -2,12 +2,13 @@
 import { computed, ref, watch } from 'vue'
 import { t } from '@/app/i18n'
 import type { GameSession } from '../domain/game'
-import { getCardArtwork } from '@/features/cards/artwork'
+import { useCardArtwork } from '@/features/cards/composables/useCardArtwork'
+import AppButton from '@/shared/components/AppButton.vue'
 const props = defineProps<{ session: GameSession; busy: boolean }>()
 const emit = defineEmits<{ next: []; skip: []; activate: [targetId?: string] }>()
 const targetId = ref('')
 const card = computed(() => props.session.currentCard)
-const artwork = computed(() => (card.value ? getCardArtwork(card.value) : undefined))
+const artwork = useCardArtwork(card)
 const activated = computed(() =>
   props.session.temporaryRules.some(
     (rule) => rule.activatedOnTurn === props.session.completedTurns,
@@ -22,57 +23,55 @@ watch(
 )
 </script>
 <template>
-  <div v-if="card">
+  <div v-if="card" class="play-card-area">
     <article
-      class="game-card"
+      class="play-card"
       :class="{
-        'temporary-card': card.kind === 'temporary-rule',
-        'special-card': card.kind === 'special',
+        'play-card-temporary': card.kind === 'temporary-rule',
+        'play-card-special': card.kind === 'special',
       }"
     >
-      <div>
-        <p class="eyebrow">
-          {{
-            t(
-              card.kind === 'temporary-rule'
-                ? 'game.temporary'
-                : card.kind === 'special'
-                  ? 'game.special'
-                  : 'game.prompt',
-            )
-          }}
-          · {{ card.title }}
-        </p>
-        <img v-if="artwork" class="card-artwork" :src="artwork.src" :alt="artwork.alt" />
-        <p class="game-card-text">{{ card.text }}</p>
+      <div class="play-card-caption">
+        <span>{{
+          t(
+            card.kind === 'temporary-rule'
+              ? 'play.temporary'
+              : card.kind === 'special'
+                ? 'play.special'
+                : 'play.prompt',
+          )
+        }}</span>
+        <span>{{ card.title }}</span>
       </div>
-      <div class="game-card-footer">
-        <a
-          v-if="artwork"
-          class="photo-credit"
-          :href="artwork.sourceUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          >{{ t('game.photoCredit', { name: artwork.credit }) }}</a
-        >
-        <span class="game-card-decoration" aria-hidden="true">✳</span>
-      </div>
+      <img
+        v-if="artwork"
+        class="play-card-artwork card-artwork"
+        :src="artwork.src"
+        :alt="artwork.alt"
+      />
+      <p class="play-card-text">{{ card.text }}</p>
+      <a
+        v-if="artwork?.sourceUrl"
+        class="play-photo-credit"
+        :href="artwork.sourceUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        >{{ t('game.photoCredit', { name: artwork.credit }) }}</a
+      >
     </article>
     <form
       v-if="needsActivation"
-      class="panel target-form"
+      class="play-target-form"
       @submit.prevent="emit('activate', targetId || undefined)"
     >
-      <template v-if="card.kind === 'temporary-rule' && card.target === 'choose-player'"
-        ><label class="field"
-          >{{ t('game.target')
-          }}<select v-model="targetId" required :disabled="busy">
-            <option disabled value="">{{ t('game.targetPlaceholder') }}</option>
-            <option v-for="player in session.players" :key="player.id" :value="player.id">
-              {{ player.name }}
-            </option></select
-          ><small>{{ t('game.targetHelp') }}</small></label
-        ></template
+      <label v-if="card.kind === 'temporary-rule' && card.target === 'choose-player'" class="field"
+        >{{ t('game.target')
+        }}<select v-model="targetId" required :disabled="busy">
+          <option disabled value="">{{ t('game.targetPlaceholder') }}</option>
+          <option v-for="player in session.players" :key="player.id" :value="player.id">
+            {{ player.name }}
+          </option>
+        </select></label
       >
       <p v-else class="help-text">
         {{
@@ -84,26 +83,26 @@ watch(
           })
         }}
       </p>
-      <button
-        class="button button-lime"
-        :disabled="
-          busy || (card.kind === 'temporary-rule' && card.target === 'choose-player' && !targetId)
-        "
-      >
-        {{ t('game.activate') }}
-      </button>
+      <div class="play-actions">
+        <AppButton
+          type="submit"
+          :disabled="
+            busy || (card.kind === 'temporary-rule' && card.target === 'choose-player' && !targetId)
+          "
+          >{{ t('game.activate') }}</AppButton
+        >
+        <AppButton variant="secondary" :disabled="busy" @click="emit('skip')">{{
+          t('game.skip')
+        }}</AppButton>
+      </div>
     </form>
-    <div class="game-action-row">
-      <button
-        v-if="!needsActivation"
-        class="button button-primary"
-        :disabled="busy"
-        @click="emit('next')"
+    <div v-else class="play-actions">
+      <AppButton :disabled="busy" @click="emit('next')"
+        >{{ t('game.next') }} <span aria-hidden="true">→</span></AppButton
       >
-        {{ t('game.next') }} <span aria-hidden="true">↗</span></button
-      ><button class="button button-quiet" :disabled="busy" @click="emit('skip')">
-        {{ t('game.skip') }}
-      </button>
+      <AppButton variant="secondary" :disabled="busy" @click="emit('skip')">{{
+        t('game.skip')
+      }}</AppButton>
     </div>
   </div>
 </template>

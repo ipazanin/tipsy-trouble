@@ -12,7 +12,6 @@ const { isGameActive, sessionBusy, sessionError, sessionLoaded, loadSession, sta
   useGameSession()
 const players = ref<PlayerProfile[]>([]),
   selectedIds = ref<string[]>([]),
-  editing = ref<PlayerProfile>(),
   error = ref(''),
   loaded = ref(false),
   specials = ref(true),
@@ -51,18 +50,6 @@ async function saved(player: PlayerProfile) {
     players.value.push(player)
     selectedIds.value.push(player.id)
   } else players.value[previous] = player
-  editing.value = undefined
-}
-async function remove(player: PlayerProfile) {
-  if (!window.confirm(t('players.deleteConfirm', { name: player.name }))) return
-  try {
-    await library.deletePlayer(player.id)
-    players.value = players.value.filter((saved) => saved.id !== player.id)
-    selectedIds.value = selectedIds.value.filter((id) => id !== player.id)
-    if (editing.value?.id === player.id) editing.value = undefined
-  } catch (failure) {
-    error.value = failure instanceof Error ? failure.message : t('common.error')
-  }
 }
 async function start() {
   if (selected.value.length < 2) {
@@ -91,9 +78,12 @@ async function start() {
     <p v-if="!loaded" class="loading-state">{{ t('common.loading') }}</p>
     <div v-else class="setup-columns">
       <div class="stack">
-        <PlayerForm :player="editing" @saved="saved" @cancel="editing = undefined" />
+        <PlayerForm @saved="saved" />
         <section>
-          <h2>{{ t('players.saved') }}</h2>
+          <div class="saved-heading">
+            <h2>{{ t('players.saved') }}</h2>
+            <RouterLink to="/library?tab=players">{{ t('library.managePlayers') }} ↗</RouterLink>
+          </div>
           <p v-if="!players.length" class="empty-state">{{ t('players.empty') }}</p>
           <div class="player-list">
             <div v-for="player in players" :key="player.id" class="player-row">
@@ -116,21 +106,6 @@ async function start() {
                   selectedIds.includes(player.id) ? '✓' : '+'
                 }}</span>
               </button>
-              <div class="player-tools">
-                <button
-                  class="icon-button"
-                  :aria-label="t('players.edit', { name: player.name })"
-                  @click="editing = player"
-                >
-                  ✎</button
-                ><button
-                  class="icon-button"
-                  :aria-label="t('players.delete', { name: player.name })"
-                  @click="remove(player)"
-                >
-                  ×
-                </button>
-              </div>
             </div>
           </div>
         </section>
@@ -204,3 +179,106 @@ async function start() {
     </div>
   </section>
 </template>
+
+<style scoped>
+.setup-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+  margin-top: 28px;
+}
+.setup-columns > .panel {
+  position: sticky;
+  top: 24px;
+}
+.saved-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.saved-heading > a {
+  font-size: 0.8rem;
+  color: var(--coral);
+  padding: 10px 0;
+}
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.player-row {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.player-pick {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  background: var(--panel);
+  color: var(--cream);
+  text-align: left;
+}
+.player-pick.selected {
+  background: color-mix(in srgb, var(--lime) 10%, var(--panel));
+  box-shadow: inset 0 0 0 1px var(--lime);
+}
+.player-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 650;
+}
+.selection-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--muted);
+}
+.selected .selection-mark {
+  background: var(--lime);
+  color: var(--ink);
+}
+.ordered-list {
+  padding: 0;
+  margin: 24px 0;
+  list-style: none;
+}
+.ordered-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.order-number {
+  color: var(--muted);
+  font-size: 0.8rem;
+  width: 14px;
+}
+.order-controls {
+  display: flex;
+}
+.setup-start {
+  width: 100%;
+  margin-top: 12px;
+}
+@media (max-width: 760px) {
+  .setup-columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .setup-columns > .panel {
+    position: static;
+  }
+}
+</style>

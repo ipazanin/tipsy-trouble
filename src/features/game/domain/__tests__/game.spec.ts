@@ -53,7 +53,7 @@ describe('turns and scheduled house rules', () => {
       expect(() => skipCurrentCard(session, random)).toThrow('Create the scheduled house rule')
       expect(() => completeTurn(session, random)).toThrow('Create the scheduled house rule')
       const before = session.completedTurns
-      session = submitHouseRule(session, ` Rule ${index + 1} `, undefined, random)
+      session = submitHouseRule(session, ` Rule ${index + 1} `, random)
       expect(session.completedTurns).toBe(before)
       expect(getCurrentPlayer(session).id).toBe('A')
       expect(session.houseRules[index]?.text).toBe(`Rule ${index + 1}`)
@@ -74,7 +74,7 @@ describe('turns and scheduled house rules', () => {
     expect(original.currentCard?.id).toBe('one')
   })
 
-  it('rejects invalid roster, house-rule text, targets and premature submission', () => {
+  it('rejects invalid roster, house-rule text and premature submission', () => {
     expect(() => createGame(players.slice(0, 1), [prompt('one')], undefined, random)).toThrow(
       GameError,
     )
@@ -82,15 +82,15 @@ describe('turns and scheduled house rules', () => {
       createGame([players[0]!, players[0]!], [prompt('one')], undefined, random),
     ).toThrow(GameError)
     let session = createGame(players, [prompt('one')], undefined, random)
-    expect(() => submitHouseRule(session, 'Rule', undefined, random)).toThrow('No house rule')
+    expect(() => submitHouseRule(session, 'Rule', random)).toThrow('No house rule')
     session = advance(session, 8)
     for (const text of ['', '   ', 'x'.repeat(241)]) {
-      expect(() => submitHouseRule(session, text, undefined, random)).toThrow(GameError)
+      expect(() => submitHouseRule(session, text, random)).toThrow(GameError)
     }
-    expect(() => submitHouseRule(session, 'Rule', 'absent', random)).toThrow(GameError)
-    session = submitHouseRule(session, 'Tell a joke.', 'C', random)
+    session = submitHouseRule(session, 'Tell a joke.', random)
+    expect(session.houseRules[0]?.scope).toEqual({ kind: 'everyone' })
     expect(getPlayerRules(session, 'C').houseRules).toHaveLength(1)
-    expect(getPlayerRules(session, 'B').houseRules).toHaveLength(0)
+    expect(getPlayerRules(session, 'B').houseRules).toHaveLength(1)
   })
 })
 
@@ -137,7 +137,7 @@ describe('temporary rule lifetimes', () => {
     expect(session.phase).toBe('house-rule')
     expect(session.temporaryRules[0]?.remainingTurns).toBe(4)
     expect(parseGameSession(JSON.parse(JSON.stringify(session)))).toEqual(session)
-    session = submitHouseRule(session, 'Say please.', undefined, random)
+    session = submitHouseRule(session, 'Say please.', random)
     expect(session.temporaryRules[0]?.remainingTurns).toBe(4)
     expect(getPlayerRules(session, 'D').temporaryRules).toHaveLength(1)
     session = advance(session, 3)
@@ -242,6 +242,28 @@ describe('draws and special cards', () => {
 })
 
 describe('session restoration', () => {
+  it('normalizes legacy player-scoped house rules without changing the live turn or timers', () => {
+    let session = createGame(
+      players,
+      [prompt('story'), temporary('choose-player', 'circles', 5)],
+      undefined,
+      random,
+    )
+    session = advance(session, 7)
+    session = activateCurrentRule(session, 'C')
+    session = completeTurn(session, random)
+    session = submitHouseRule(session, 'Say please.', random)
+    const legacy = JSON.parse(JSON.stringify(session))
+    legacy.houseRules[0].scope = { kind: 'player', playerId: 'C' }
+    const restored = parseGameSession(legacy)
+    expect(restored).toEqual(session)
+    expect(restored.temporaryRules[0]?.scope).toEqual({ kind: 'player', playerId: 'C' })
+    for (const player of players)
+      expect(getPlayerRules(restored, player.id).houseRules).toHaveLength(1)
+    legacy.houseRules[0].scope.playerId = 'absent'
+    expect(() => parseGameSession(legacy)).toThrow(GameError)
+  })
+
   it('preserves current activation and prevents a second application after JSON roundtrip', () => {
     const session = activateCurrentRule(
       createGame(players, [temporary('choose-player')], undefined, random),

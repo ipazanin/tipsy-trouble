@@ -22,8 +22,8 @@ export default defineConfig({
         start_url: '/tipsy-trouble/',
         scope: '/tipsy-trouble/',
         display: 'standalone',
-        background_color: '#19212b',
-        theme_color: '#19212b',
+        background_color: '#131d27',
+        theme_color: '#131d27',
         icons: [
           { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },

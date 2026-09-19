@@ -37,6 +37,32 @@ describe('local backup validation', () => {
     expect(await parseBackup(exported)).toEqual(contents)
   })
 
+  it('rejects missing image assets in both custom cards and game snapshots', async () => {
+    const illustrated = { ...customCard, imageId: 'missing-image' }
+    await expect(parseBackup(backup({ customCards: [illustrated] }))).rejects.toThrow(
+      'missing a referenced card image',
+    )
+    const players = [
+      { id: 'a', name: 'Ana' },
+      { id: 'b', name: 'Bob' },
+    ]
+    const session = createGame(players, [illustrated], undefined, () => 0)
+    await expect(parseBackup(backup({ session }))).rejects.toThrow(
+      'missing a referenced card image',
+    )
+    await expect(serializeBackup({ players, customCards: [], session })).rejects.toThrow(
+      'missing a referenced card image',
+    )
+  })
+
+  it('rejects external and SVG card image payloads', async () => {
+    for (const dataUrl of ['https://example.com/photo.jpg', 'data:image/svg+xml;base64,PHN2Zy8+']) {
+      await expect(
+        parseBackup(backup({ cardImages: [{ id: 'image-1', dataUrl }] })),
+      ).rejects.toThrow('invalid or oversized card image')
+    }
+  })
+
   it('accepts an empty library without a saved game', async () => {
     expect(await parseBackup(backup({ players: [], customCards: [] }))).toEqual({
       players: [],

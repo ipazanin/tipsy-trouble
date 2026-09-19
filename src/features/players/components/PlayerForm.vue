@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, onScopeDispose, ref, watch } from 'vue'
 import { t } from '@/app/i18n'
 import { library } from '@/app/library'
 import type { PlayerProfile } from '../domain/playerProfile'
 import { createPlayerPhoto } from '@/infrastructure/storage/playerPhotos'
 import PlayerAvatar from '@/shared/components/PlayerAvatar.vue'
-const props = defineProps<{ player?: PlayerProfile }>()
+const props = defineProps<{ player?: PlayerProfile; cancellable?: boolean }>()
 const emit = defineEmits<{ saved: [player: PlayerProfile]; cancel: [] }>()
 const nameInput = ref<HTMLInputElement>()
+let active = true
+onScopeDispose(() => {
+  active = false
+})
 const name = ref(''),
   photo = ref<Blob>(),
   busy = ref(false),
@@ -28,7 +32,8 @@ async function choosePhoto(event: Event) {
   busy.value = true
   error.value = ''
   try {
-    photo.value = await createPlayerPhoto(file)
+    const preparedPhoto = await createPlayerPhoto(file)
+    if (active) photo.value = preparedPhoto
   } catch (failure) {
     error.value = failure instanceof Error ? failure.message : t('common.error')
   } finally {
@@ -50,6 +55,7 @@ async function save() {
   }
   try {
     await library.savePlayer(player)
+    if (!active) return
     emit('saved', player)
     name.value = ''
     photo.value = undefined
@@ -96,7 +102,7 @@ async function save() {
     <div class="form-actions">
       <button class="button button-primary" :disabled="busy">{{ t('players.save') }}</button
       ><button
-        v-if="props.player"
+        v-if="props.player || cancellable"
         type="button"
         class="button button-quiet"
         :disabled="busy"
@@ -107,3 +113,11 @@ async function save() {
     </div>
   </form>
 </template>
+
+<style scoped>
+.photo-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+</style>

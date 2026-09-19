@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
+import AppDialog from '@/shared/components/AppDialog.vue'
 import { t } from '@/app/i18n'
 import { library } from '@/app/library'
 import { useGameSession } from '@/features/game/composables/useGameSession'
 import type { BackupSummary } from '@/infrastructure/storage/localLibrary'
 const emit = defineEmits<{ imported: [] }>()
 const { loadSession, sessionBusy } = useGameSession()
+const confirming = ref(false)
+const importInvoker = shallowRef<HTMLElement | null>(null)
 const busy = ref(false),
   error = ref(''),
   success = ref(''),
@@ -41,6 +44,7 @@ async function inspect(event: Event) {
   if (!file) return
   busy.value = true
   try {
+    if (file.size > 25 * 1024 * 1024) throw new Error('Choose a backup smaller than 25 MB.')
     const contents = await file.text()
     summary.value = await library.inspectBackup(contents)
     json.value = contents
@@ -50,9 +54,15 @@ async function inspect(event: Event) {
     busy.value = false
   }
 }
+async function requestImport(event: SubmitEvent) {
+  if (restoreSession.value) {
+    importInvoker.value = event.submitter instanceof HTMLElement ? event.submitter : null
+    confirming.value = true
+  } else await importBackup()
+}
 async function importBackup() {
   if (!summary.value || busy.value || sessionBusy.value) return
-  if (restoreSession.value && !window.confirm(t('cards.restoreConfirm'))) return
+  confirming.value = false
   busy.value = true
   sessionBusy.value = true
   error.value = ''
@@ -79,7 +89,7 @@ async function importBackup() {
     <button class="button button-secondary" :disabled="busy || sessionBusy" @click="exportBackup">
       {{ t('cards.export') }} <span aria-hidden="true">↓</span>
     </button>
-    <form class="backup-form" @submit.prevent="importBackup">
+    <form class="backup-form" @submit.prevent="requestImport">
       <label class="field"
         >{{ t('cards.file')
         }}<input
@@ -102,5 +112,37 @@ async function importBackup() {
     </form>
     <p v-if="error" class="error-message" role="alert">{{ error }}</p>
     <p v-if="success" class="success-message" role="status">{{ success }}</p>
+    <AppDialog
+      :open="confirming"
+      :return-focus="importInvoker"
+      :title="t('library.restoreTitle')"
+      :confirm-label="t('cards.importButton')"
+      :busy="busy"
+      danger
+      @confirm="importBackup"
+      @close="confirming = false"
+      ><p>{{ t('cards.restoreConfirm') }}</p></AppDialog
+    >
   </section>
 </template>
+
+<style scoped>
+.backup-panel {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.backup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.backup-form > button {
+  align-self: flex-start;
+}
+</style>

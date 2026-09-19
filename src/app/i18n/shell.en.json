@@ -1,0 +1,30 @@
+{
+  "shell": {
+    "skip": "Skip to content",
+    "navigation": "Main navigation",
+    "home": "Tipsy Trouble home",
+    "play": "Play",
+    "libraryLabel": "Library",
+    "howTo": "How to play",
+    "homeTitle": "Good company.",
+    "homeAccent": "A little trouble.",
+    "homeIntro": "Pick your people. Pass the phone. See where the cards take you.",
+    "start": "Start playing",
+    "resume": "Resume game",
+    "savedGame": "Your game is right where you left it.",
+    "libraryTitle": "Your library",
+    "libraryDescription": "Saved players, custom cards and backups.",
+    "safe": "Any drink. No drink. Always okay to pass.",
+    "sampleLabel": "A taste of trouble",
+    "sampleTitle": "Most likely to…",
+    "sampleText": "Turn a quiet night into a story?",
+    "sampleFooter": "You know exactly who.",
+    "storage": "Players, photos, cards and your game stay in this browser. Keep a backup in your Library before clearing browser data. Private browsing may not keep your saves.",
+    "library": {
+      "navigation": "Library sections",
+      "players": "Players",
+      "cards": "Cards",
+      "backups": "Backups"
+    }
+  }
+}

@@ -1,11 +1,53 @@
 <script setup lang="ts">
-import { nextTick, ref, watch } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { t } from '@/app/i18n'
 import { library } from '@/app/library'
 import type { CardDefinition } from '../domain/cards'
-const props = defineProps<{ card?: CardDefinition }>()
+import type { CardImage } from '../domain/cardImage'
+import { createCardImage } from '@/infrastructure/storage/cardImages'
+import { useCardArtwork } from '../composables/useCardArtwork'
+import AppButton from '@/shared/components/AppButton.vue'
+const props = defineProps<{ card?: CardDefinition; cancellable?: boolean }>()
 const emit = defineEmits<{ saved: []; cancel: [] }>()
 const titleInput = ref<HTMLInputElement>()
+const imageInput = ref<HTMLInputElement>()
+const draftId = ref(`custom-${crypto.randomUUID()}`)
+const imageId = ref<string>()
+const preparedImage = shallowRef<CardImage>()
+const previewUrl = ref('')
+function releasePreview() {
+  if (previewUrl.value) URL.revokeObjectURL(previewUrl.value)
+  previewUrl.value = ''
+}
+let active = true
+onScopeDispose(() => {
+  active = false
+  releasePreview()
+})
+function resetImage() {
+  releasePreview()
+  imageId.value = undefined
+  preparedImage.value = undefined
+  if (imageInput.value) imageInput.value.value = ''
+}
+async function chooseImage(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0]
+  if (!file || busy.value) return
+  busy.value = true
+  error.value = ''
+  try {
+    const image = await createCardImage(file)
+    if (!active) return
+    releasePreview()
+    preparedImage.value = image
+    imageId.value = image.id
+    previewUrl.value = URL.createObjectURL(new Blob([image.bytes], { type: image.mimeType }))
+  } catch (failure) {
+    error.value = failure instanceof Error ? failure.message : t('common.error')
+  } finally {
+    busy.value = false
+  }
+}
 const title = ref(''),
   text = ref(''),
   kind = ref<CardDefinition['kind']>('prompt'),
@@ -14,9 +56,20 @@ const title = ref(''),
   target = ref<'current-player' | 'everyone' | 'choose-player'>('choose-player'),
   busy = ref(false),
   error = ref('')
+const previewCard = computed<CardDefinition>(() => ({
+  id: props.card?.id ?? draftId.value,
+  title: title.value || 'Preview',
+  text: text.value || 'Preview',
+  contentLocale: 'en',
+  kind: 'prompt',
+  ...(imageId.value ? { imageId: imageId.value } : {}),
+}))
+const artwork = useCardArtwork(previewCard)
 watch(
   () => props.card,
   (card) => {
+    resetImage()
+    imageId.value = card?.imageId
     title.value = card?.title ?? ''
     text.value = card?.text ?? ''
     kind.value = card?.kind ?? 'prompt'
@@ -33,10 +86,11 @@ async function save() {
   busy.value = true
   error.value = ''
   const content = {
-    id: props.card?.id ?? `custom-${crypto.randomUUID()}`,
+    id: props.card?.id ?? draftId.value,
     title: title.value.trim(),
     text: text.value.trim(),
     contentLocale: props.card?.contentLocale ?? 'en',
+    ...(imageId.value ? { imageId: imageId.value } : {}),
   }
   const card: CardDefinition =
     kind.value === 'temporary-rule'
@@ -48,10 +102,13 @@ async function save() {
         }
       : { ...content, kind: kind.value }
   try {
-    await library.saveCustomCard(card)
+    await library.saveCustomCard(card, preparedImage.value)
+    if (!active) return
     emit('saved')
     title.value = ''
     text.value = ''
+    resetImage()
+    draftId.value = `custom-${crypto.randomUUID()}`
     kind.value = 'prompt'
     duration.value = 1
     durationUnit.value = 'circles'
@@ -64,7 +121,7 @@ async function save() {
 }
 </script>
 <template>
-  <form class="panel stack" @submit.prevent="save">
+  <form class="panel stack card-editor" @submit.prevent="save">
     <h2>{{ t(card ? 'cards.edit' : 'cards.add') }}</h2>
     <label class="field"
       >{{ t('cards.titleLabel')
@@ -115,11 +172,30 @@ async function save() {
         </select></label
       >
     </template>
+    <div class="card-image-field">
+      <img :src="previewUrl || artwork.src" :alt="t('library.imagePreview')" />
+      <div class="stack">
+        <label class="field"
+          >{{ t('library.imageLabel')
+          }}<input
+            ref="imageInput"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            :disabled="busy"
+            @change="chooseImage"
+          /><small>{{ t('library.imageHint') }}</small></label
+        >
+        <AppButton v-if="imageId" variant="quiet" :disabled="busy" @click="resetImage">{{
+          t('library.imageReset')
+        }}</AppButton>
+        <p v-else class="help-text">{{ t('library.imageStock') }}</p>
+      </div>
+    </div>
     <p v-if="error" class="error-message" role="alert">{{ error }}</p>
     <div class="form-actions">
       <button class="button button-primary" :disabled="busy">{{ t('cards.save') }}</button
       ><button
-        v-if="card"
+        v-if="card || cancellable"
         class="button button-quiet"
         type="button"
         :disabled="busy"
@@ -130,3 +206,33 @@ async function save() {
     </div>
   </form>
 </template>
+
+<style scoped>
+.card-editor {
+  margin-bottom: 24px;
+}
+.card-image-field {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  padding-top: 8px;
+}
+.card-image-field > img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.card-image-field small {
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .card-image-field {
+    grid-template-columns: 1fr;
+  }
+  .card-image-field > img {
+    max-width: 280px;
+  }
+}
+</style>

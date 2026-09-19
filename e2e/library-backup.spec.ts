@@ -20,7 +20,7 @@ async function storedLibrary(page: Page) {
       customCards: CardDefinition[]
       session?: GameSession
     }>((resolve, reject) => {
-      const opening = indexedDB.open('tipsy-trouble', 1)
+      const opening = indexedDB.open('tipsy-trouble')
       opening.onerror = () => reject(opening.error)
       opening.onsuccess = () => {
         const database = opening.result
@@ -81,11 +81,13 @@ test('exports photos and cards, merges them, and restores a game only with confi
   await expect.poll(async () => (await storedLibrary(page)).session?.completedTurns).toBe(1)
 
   await page.goto('./#/cards')
+  await page.getByRole('button', { name: 'Create a card' }).click()
   await page.getByLabel('Card title', { exact: true }).fill(customCard.title)
   await page.getByLabel('Card text', { exact: true }).fill(customCard.text)
   await page.getByRole('button', { name: 'Save card', exact: true }).click()
   await expect(page.getByRole('heading', { name: customCard.title, exact: true })).toBeVisible()
   const beforeExport = await storedLibrary(page)
+  await page.goto('./#/library?tab=backups')
   const downloadReady = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Export backup' }).click()
   const download = await downloadReady
@@ -112,15 +114,16 @@ test('exports photos and cards, merges them, and restores a game only with confi
   await expect.poll(async () => (await storedLibrary(page)).session?.completedTurns).toBe(2)
   const newerSession = (await storedLibrary(page)).session
 
-  await page.goto('./#/players')
-  page.once('dialog', (dialog) => void dialog.accept())
+  await page.goto('./#/library?tab=players')
   await page.getByRole('button', { name: 'Delete Alice', exact: true }).click()
-  await expect(page.getByRole('button', { name: 'Add Alice to this game' })).toHaveCount(0)
+  await page.getByRole('dialog').getByRole('button', { name: 'Delete', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Alice', exact: true })).toHaveCount(0)
   await page.goto('./#/cards')
-  page.once('dialog', (dialog) => void dialog.accept())
   await page.getByRole('button', { name: 'Delete', exact: true }).click()
+  await page.getByRole('dialog').getByRole('button', { name: 'Delete', exact: true }).click()
   await expect(page.getByRole('heading', { name: customCard.title, exact: true })).toHaveCount(0)
 
+  await page.goto('./#/library?tab=backups')
   await selectBackup(page, json)
   const restore = page.getByLabel('Also restore the game from this backup')
   await expect(restore).not.toBeChecked()
@@ -140,13 +143,17 @@ test('exports photos and cards, merges them, and restores a game only with confi
     .poll(() => restoredPhoto.evaluate((photo: HTMLImageElement) => photo.naturalWidth))
     .toBeGreaterThan(0)
   await page.goto('./#/cards')
+  await page.goto('./#/library?tab=backups')
   await selectBackup(page, json)
   await restore.check()
-  page.once('dialog', (dialog) => void dialog.dismiss())
   await page.getByRole('button', { name: 'Import selected backup', exact: true }).click()
+  await page.getByRole('dialog').getByRole('button', { name: 'Cancel', exact: true }).click()
   expect((await storedLibrary(page)).session).toEqual(newerSession)
-  page.once('dialog', (dialog) => void dialog.accept())
   await page.getByRole('button', { name: 'Import selected backup', exact: true }).click()
+  await page
+    .getByRole('dialog')
+    .getByRole('button', { name: 'Import selected backup', exact: true })
+    .click()
   await expect.poll(async () => (await storedLibrary(page)).session).toEqual(beforeExport.session)
   await page.goto('./#/play')
   await page.reload()
@@ -165,11 +172,11 @@ test('rejects a reserved built-in card identifier without changing any library s
   ]
   const session = createGame(players, [customCard], undefined, () => 0.999)
   await page.goto('./#/cards')
-  await expect(page.getByRole('heading', { name: 'Keep your good ideas.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Your library.' })).toBeVisible()
   await page.evaluate(
     ({ players, customCard, session }) =>
       new Promise<void>((resolve, reject) => {
-        const opening = indexedDB.open('tipsy-trouble', 1)
+        const opening = indexedDB.open('tipsy-trouble')
         opening.onerror = () => reject(opening.error)
         opening.onsuccess = () => {
           const database = opening.result
@@ -195,6 +202,7 @@ test('rejects a reserved built-in card identifier without changing any library s
   await page.reload()
   await expect(page.getByRole('heading', { name: customCard.title, exact: true })).toBeVisible()
   const beforeImport = await storedLibrary(page)
+  await page.goto('./#/library?tab=backups')
   await selectBackup(
     page,
     JSON.stringify({
@@ -220,5 +228,6 @@ test('rejects a reserved built-in card identifier without changing any library s
   expect(await storedLibrary(page)).toEqual(beforeImport)
   await page.reload()
   expect(await storedLibrary(page)).toEqual(beforeImport)
+  await page.goto('./#/library?tab=cards')
   await expect(page.getByRole('heading', { name: customCard.title, exact: true })).toBeVisible()
 })

@@ -1,0 +1,29 @@
+{
+  "library": {
+    "eyebrow": "Make it yours",
+    "title": "Your library.",
+    "intro": "Familiar faces. Inside jokes. Ready for the next round.",
+    "navigation": "Library sections",
+    "players": "Players",
+    "cards": "Cards",
+    "backups": "Backups",
+    "play": "Set up a game",
+    "playersHeading": "Your regulars",
+    "playersIntro": "Save your people here, then choose who's playing when you start a game.",
+    "playersEmpty": "Room for your people.",
+    "playersEmptyText": "Add a name and an optional photo. They'll be here next time.",
+    "cardsIntro": "Your creations join {count} built-in cards in the next game you start.",
+    "cardsEmpty": "Every group has a story.",
+    "localNote": "Saved in this browser, on this device. Export a backup to keep a copy or move your library. Clearing browser data removes local saves.",
+    "deleteTitle": "Remove from your library?",
+    "managePlayers": "Manage saved players",
+    "setupSavedHint": "Choose from your library, or add someone new below.",
+    "imageLabel": "Card image",
+    "imageHint": "Optional · JPEG, PNG or WebP · up to 10 MB. Resized to fit 1200 × 800 pixels and saved under 512 KB for offline play.",
+    "imageStock": "A stock photo is used until you add your own.",
+    "imageReset": "Use stock photo",
+    "imagePreview": "Card image preview",
+    "imagePreparing": "Preparing your image…",
+    "restoreTitle": "Restore this saved game?"
+  }
+}

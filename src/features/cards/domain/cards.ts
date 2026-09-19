@@ -1,3 +1,5 @@
+import { validateCardImageId } from './cardImage'
+
 export const MAX_DECK_CARDS = 1000
 
 export interface CardContent {
@@ -5,6 +7,7 @@ export interface CardContent {
   readonly title: string
   readonly text: string
   readonly contentLocale: string
+  readonly imageId?: string
 }
 
 export type CardDefinition =
@@ -53,6 +56,7 @@ export function parseCardDefinition(candidate: unknown): CardDefinition {
     title: text(card.title, 'Card title', 80),
     text: text(card.text, 'Card text', 240),
     contentLocale,
+    ...(card.imageId !== undefined ? { imageId: validateCardImageId(card.imageId) } : {}),
   }
   if (card.kind === 'prompt' || card.kind === 'special') {
     return { ...content, kind: card.kind }

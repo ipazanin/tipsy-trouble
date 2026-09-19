@@ -2,6 +2,8 @@ import { parseCardDefinition, type CardDefinition } from '@/features/cards/domai
 import { parseGameSession, type GameSession } from '@/features/game/domain/game'
 import { validatePlayerProfile, type PlayerProfile } from '@/features/players/domain/playerProfile'
 import { createPlayerPhoto } from './playerPhotos'
+import { validateCardImageId, type CardImage } from '@/features/cards/domain/cardImage'
+import { validateCardImageContents } from './cardImages'
 import {
   MAX_CUSTOM_CARDS,
   MAX_SAVED_PLAYERS,
@@ -15,6 +17,52 @@ export interface LibraryContents {
   players: PlayerProfile[]
   customCards: CardDefinition[]
   session?: GameSession
+  cardImages?: CardImage[]
+}
+
+export function referencedImageIds(
+  cards: readonly CardDefinition[],
+  session?: GameSession,
+): Set<string> {
+  return new Set(
+    [
+      ...cards,
+      ...(session?.deck ?? []),
+      ...(session?.remainingCards ?? []),
+      ...(session?.currentCard ? [session.currentCard] : []),
+    ].flatMap((card) => (card.imageId ? [card.imageId] : [])),
+  )
+}
+
+async function parseCardImage(candidate: unknown): Promise<CardImage> {
+  const image = backupRecord(candidate)
+  const id = validateCardImageId(image.id)
+  if (
+    typeof image.dataUrl !== 'string' ||
+    image.dataUrl.length > 700_000 ||
+    !/^data:image\/jpeg;base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(
+      image.dataUrl,
+    )
+  )
+    throw new Error('The backup contains an invalid or oversized card image.')
+  const bytes = Uint8Array.from(
+    atob(image.dataUrl.slice('data:image/jpeg;base64,'.length)),
+    (character) => character.charCodeAt(0),
+  ).buffer
+  const savedImage: CardImage = { id, mimeType: 'image/jpeg', bytes }
+  await validateCardImageContents(savedImage)
+  return savedImage
+}
+
+function validateImageReferences(
+  cards: readonly CardDefinition[],
+  session: GameSession | undefined,
+  images: readonly CardImage[],
+): void {
+  const available = new Set(images.map((image) => image.id))
+  for (const imageId of referencedImageIds(cards, session)) {
+    if (!available.has(imageId)) throw new Error('The backup is missing a referenced card image.')
+  }
 }
 
 function backupRecord(candidate: unknown): Record<string, unknown> {
@@ -82,6 +130,16 @@ export async function parseBackup(json: string): Promise<LibraryContents> {
   uniqueIdentifiers(customCards, 'card')
   validateCustomCardIds(customCards.map((card) => card.id))
   const session = backup.session === undefined ? undefined : parseGameSession(backup.session)
+  if (
+    backup.cardImages !== undefined &&
+    (!Array.isArray(backup.cardImages) || backup.cardImages.length > MAX_CUSTOM_CARDS * 2)
+  )
+    throw new Error('The backup contains an invalid card image list.')
+  const cardImages: CardImage[] = []
+  for (const image of (backup.cardImages ?? []) as unknown[])
+    cardImages.push(await parseCardImage(image))
+  uniqueIdentifiers(cardImages, 'image')
+  validateImageReferences(customCards, session, cardImages)
   const players: PlayerProfile[] = []
   for (const candidate of backup.players) {
     const savedPlayer = backupRecord(candidate)
@@ -96,7 +154,7 @@ export async function parseBackup(json: string): Promise<LibraryContents> {
     players.push(player)
   }
   uniqueIdentifiers(players, 'player')
-  return { players, customCards, session }
+  return { players, customCards, session, ...(cardImages.length ? { cardImages } : {}) }
 }
 
 function photoDataUrl(photo: Blob): Promise<string> {
@@ -120,6 +178,18 @@ export async function serializeBackup(contents: LibraryContents): Promise<string
   uniqueIdentifiers(contents.customCards, 'card')
   validateSavedPlayerIds(contents.players.map((player) => player.id))
   validateCustomCardIds(contents.customCards.map((card) => card.id))
+  const cards = contents.customCards.map(parseCardDefinition)
+  const session = contents.session === undefined ? undefined : parseGameSession(contents.session)
+  const images = contents.cardImages ?? []
+  uniqueIdentifiers(images, 'image')
+  validateImageReferences(cards, session, images)
+  for (const image of images) await validateCardImageContents(image)
+  const cardImages = await Promise.all(
+    images.map(async (image) => ({
+      id: image.id,
+      dataUrl: await photoDataUrl(new Blob([image.bytes], { type: image.mimeType })),
+    })),
+  )
   const players = await Promise.all(
     contents.players.map(async (player) => ({
       id: player.id,
@@ -133,8 +203,9 @@ export async function serializeBackup(contents: LibraryContents): Promise<string
       version: 1,
       exportedAt: new Date().toISOString(),
       players,
-      customCards: contents.customCards,
-      session: contents.session,
+      customCards: cards,
+      session,
+      ...(cardImages.length ? { cardImages } : {}),
     },
     null,
     2,

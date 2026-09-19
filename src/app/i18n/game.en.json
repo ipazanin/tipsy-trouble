@@ -1,0 +1,20 @@
+{
+  "play": {
+    "prompt": "Prompt",
+    "temporary": "Temporary rule",
+    "special": "Special",
+    "players": "Players",
+    "rules": "Active rules",
+    "upNext": "Up next",
+    "ruleTurn": "House rule time",
+    "savedLocally": "Saved on this device · pick up where you left off",
+    "endTitle": "End this game?",
+    "endBody": "Your current game and its rules will be cleared. Your saved players, cards and images stay in your library.",
+    "keepPlaying": "Keep playing",
+    "houseScope": "Everyone · until the game ends",
+    "houseHelp": "This house rule applies to everyone. Add it to continue playing.",
+    "showRules": "Show rules",
+    "hideRules": "Hide rules",
+    "ruleSummary": "{temporary} temporary · {house} for the whole game"
+  }
+}

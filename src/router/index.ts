@@ -7,7 +7,8 @@ const router = createRouter({
     { path: '/about', component: () => import('@/app/views/AboutView.vue') },
     { path: '/players', component: () => import('@/features/players/views/PlayerSetupView.vue') },
     { path: '/play', component: () => import('@/features/game/views/GameView.vue') },
-    { path: '/cards', component: () => import('@/features/cards/views/CardLibraryView.vue') },
+    { path: '/library', component: () => import('@/features/library/views/LibraryView.vue') },
+    { path: '/cards', redirect: { path: '/library', query: { tab: 'cards' } } },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
   scrollBehavior(to, _from, savedPosition) {

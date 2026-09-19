@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createGame, type GameSession } from '../../domain/game'
 
 const storage = vi.hoisted(() => ({
+  clearGame: vi.fn<() => Promise<void>>(),
   loadGame: vi.fn<() => Promise<GameSession | undefined>>(),
   saveGame: vi.fn<(session: GameSession) => Promise<void>>(),
 }))
@@ -78,5 +79,21 @@ describe('persisting a game action', () => {
     expect(game.sessionBusy.value).toBe(false)
     expect(game.gameSession.value?.completedTurns).toBe(1)
     expect(game.gameSession.value?.currentPlayerIndex).toBe(1)
+  })
+})
+
+describe('ending a game', () => {
+  it('keeps the session until deletion succeeds and allows retrying a failed deletion', async () => {
+    const { useGameSession } = await import('../useGameSession')
+    const game = useGameSession()
+    await game.loadSession()
+    storage.clearGame.mockRejectedValueOnce(new Error('Storage unavailable.'))
+    await expect(game.endGame()).resolves.toBe(false)
+    expect(game.gameSession.value).toBe(savedSession)
+    expect(storage.saveGame).not.toHaveBeenCalled()
+    storage.clearGame.mockResolvedValueOnce(undefined)
+    await expect(game.endGame()).resolves.toBe(true)
+    expect(game.gameSession.value).toBeNull()
+    expect(game.sessionError.value).toBe('')
   })
 })
