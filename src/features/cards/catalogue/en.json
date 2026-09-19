@@ -1,0 +1,170 @@
+{
+  "three-word-day": {
+    "title": "Three-word day",
+    "text": "Describe your day in exactly three words. Everyone votes on the most dramatic description. Its author gives out one sip."
+  },
+  "tiny-sales-pitch": {
+    "title": "An offer you can refuse",
+    "text": "Pick an ordinary object nearby and give it a ten-second sales pitch. If anyone wants to buy it, give out one sip. Otherwise, take one."
+  },
+  "unpopular-snack": {
+    "title": "Snack court",
+    "text": "Defend an unpopular food combination. The table votes: delicious or disaster? Join the smaller group for one sip."
+  },
+  "soundtrack": {
+    "title": "Your entrance music",
+    "text": "Choose the song that should play whenever you enter a room. The player on your left chooses your entrance pose. Perform the pose or take one sip."
+  },
+  "bad-superpower": {
+    "title": "Super, probably",
+    "text": "Invent a useless superpower. The player on your right explains how it could save the world. If the table buys the explanation, you both give out one sip."
+  },
+  "two-second-logo": {
+    "title": "Air designer",
+    "text": "Draw a familiar logo in the air with one finger. The first person to name it gives out one sip. Nobody gets it? Take one sip."
+  },
+  "imaginary-holiday": {
+    "title": "National what day?",
+    "text": "Invent a holiday and its strangest tradition. Everyone who would celebrate it raises a hand. If nobody volunteers, take one sip."
+  },
+  "table-awards": {
+    "title": "And the award goes to…",
+    "text": "Give the player on your left a made-up award for something kind or funny. They give a five-second acceptance speech, then choose someone to take one sip."
+  },
+  "odd-one-out": {
+    "title": "Three things",
+    "text": "Name three things. The next player has ten seconds to explain something they all have in common. A convincing answer earns them one sip to give away; otherwise they take one."
+  },
+  "five-things": {
+    "title": "Packing light",
+    "text": "Name five things you would take to a deserted island, without using anything another player says first. The table supplies distractions. Pause for five seconds and take one sip."
+  },
+  "backwards-introduction": {
+    "title": "Wrong answers welcome",
+    "text": "The player on your right asks you three simple questions. Give a different, obviously wrong answer each time. Accidentally tell the truth? Take one sip."
+  },
+  "mystery-object": {
+    "title": "Mystery object",
+    "text": "Choose something you can see. Describe it without its name, colour, or usual purpose. The first person to guess it gives out one sip."
+  },
+  "group-photo-title": {
+    "title": "Name the album",
+    "text": "If tonight were an album, what would its title be? Everyone suggests one. The table’s favourite gives out one sip."
+  },
+  "tiny-debate": {
+    "title": "Very serious debate",
+    "text": "You and the player on your left each get ten seconds: which is better, an extra hour of sleep or an extra hour of free time? Everyone else votes. The losing side takes one sip; with two players, call it a draw."
+  },
+  "holiday-planner": {
+    "title": "Mystery holiday",
+    "text": "Describe a real place you want to visit using only three clues. The first person to guess it gives out one sip. Reveal the answer if nobody knows it."
+  },
+  "silent-movie": {
+    "title": "Silent cinema",
+    "text": "Act out making your favourite meal without speaking. You have twenty seconds. Whoever guesses first gives out one sip; no correct guesses means you take one."
+  },
+  "table-telepathy": {
+    "title": "Same wavelength",
+    "text": "Choose another player. On the count of three, each name a fruit. Match and give out one sip each. Miss and simply try again once."
+  },
+  "museum-piece": {
+    "title": "Museum of ordinary things",
+    "text": "Present something nearby as a priceless museum exhibit. Explain its mysterious history in two sentences. The first player to laugh takes one sip."
+  },
+  "new-constellation": {
+    "title": "Written in the stars",
+    "text": "Invent a constellation named after someone at the table. Describe its shape and the legend behind it. That player gives out one sip."
+  },
+  "restaurant-review": {
+    "title": "Five-star nonsense",
+    "text": "Review an imaginary restaurant where the food is great but everything else is bizarre. Finish with a star rating. The table’s harshest critic takes one sip."
+  },
+  "animal-interview": {
+    "title": "A word with the penguin",
+    "text": "The player on your right interviews you as an animal they choose. Answer two questions in character. Break character and take one sip."
+  },
+  "one-word-story": {
+    "title": "Once upon a table",
+    "text": "Build a story around the table, one word per player. After one complete circle, you must give the story a title. Anyone who laughs during their word takes one sip."
+  },
+  "terrible-invention": {
+    "title": "Patent pending",
+    "text": "Invent a product that solves a very minor problem in a ridiculous way. The next player names it. Everyone who would use it takes one sip."
+  },
+  "time-traveller": {
+    "title": "Welcome to the future",
+    "text": "Explain a smartphone to a visitor from two hundred years ago without using the words phone, internet, or computer. Let another player choose a sip for you if you slip up."
+  },
+  "fake-fact": {
+    "title": "Completely unverified",
+    "text": "Make up a harmless, obviously silly fact about an everyday object. Another player delivers it like a documentary narrator. First to laugh takes one sip."
+  },
+  "perfect-pair": {
+    "title": "Better together",
+    "text": "Name two things that belong together. The next player replaces one with something unexpected and explains why the new pair works. The table decides who gives out one sip."
+  },
+  "mini-mime": {
+    "title": "Tiny job interview",
+    "text": "Mime a job using only your hands. The first player to guess the job gives out one sip. After twenty seconds, reveal it and move on."
+  },
+  "opening-credits": {
+    "title": "Tonight, starring…",
+    "text": "Introduce the table as the cast of a fictional show. Give each player a character name. The player on your left chooses someone to take one sip."
+  },
+  "weather-report": {
+    "title": "Party forecast",
+    "text": "Deliver a ten-second weather forecast for the mood at the table. Include one dramatic prediction. Anyone who interrupts takes one sip."
+  },
+  "first-impression": {
+    "title": "A pleasant surprise",
+    "text": "Tell someone at the table one nice thing you noticed about them. Both of you choose a third player for a shared toast; with two players, toast each other."
+  },
+  "rhythm-copy": {
+    "title": "Tabletop orchestra",
+    "text": "Tap a short rhythm. The player on your left copies it and adds one beat. Continue once around the table. The first missed beat costs one sip."
+  },
+  "shared-toast": {
+    "title": "Cheers to that",
+    "text": "Name one small thing worth celebrating today. Everyone may add their own. Raise a glass together and take a sip if you like."
+  },
+  "royal-requests": {
+    "title": "Royal requests",
+    "text": "Begin every request to another player with “Your Majesty.” Forget the royal treatment and take one sip."
+  },
+  "third-person": {
+    "title": "Your own narrator",
+    "text": "Speak about yourself in the third person. Slip back to “I” or “me” and take one sip."
+  },
+  "news-anchor": {
+    "title": "Live from the table",
+    "text": "Deliver everything you say in your best serious newsreader voice. Break character and take one sip."
+  },
+  "question-time": {
+    "title": "Any questions?",
+    "text": "Everything you say must be a question. Make a statement and take one sip."
+  },
+  "invisible-microphone": {
+    "title": "You’re on air",
+    "text": "Hold an imaginary microphone whenever you speak. Forget it and take one sip."
+  },
+  "dramatic-pause": {
+    "title": "Wait for it…",
+    "text": "Pause dramatically before answering any question. Rush the answer and take one sip."
+  },
+  "round-of-applause": {
+    "title": "The standing ovation, seated",
+    "text": "Give a tiny round of applause whenever someone finishes reading a new card. Miss your cue and take one sip."
+  },
+  "imaginary-hat": {
+    "title": "A tip of the hat",
+    "text": "Tip an imaginary hat whenever you say another player’s name. Forget your manners and take one sip."
+  },
+  "last-call": {
+    "title": "Last call",
+    "text": "A rare special: finish what is left of your drink, take one sip, or pass. Your choice. Give the table a toast before the next card."
+  },
+  "captains-choice": {
+    "title": "Captain’s choice",
+    "text": "A rare special: you may finish your drink and give a victory speech, or take one sip and let the table write the speech for you. Passing is always fine."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "snacks": {
+    "author": "Hybrid Storytellers",
+    "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1642520075943-b5ca77921357?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "music": {
+    "author": "The Retro Store",
+    "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1631692363957-2c9274968acf?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "island": {
+    "author": "Sharif Khaleel",
+    "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1665391837905-74d250172dd3?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "stars": {
+    "author": "Dario Brönnimann",
+    "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1663187114582-5cfcbdac5481?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "books": {
+    "author": "Martin de Arriba",
+    "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1615976909545-a2d402c7dac3?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "microphone": {
+    "author": "Mona Rivas",
+    "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1747933891351-4c98829866b9?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "rain": {
+    "author": "Mila Vasileva",
+    "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1686895294645-ac76d3b61684?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "hat": {
+    "author": "Benjamin R.",
+    "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1656166229926-01ad337abe35?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "penguin": {
+    "author": "Francisco Arnela",
+    "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1528035616016-47b960a7fac4?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "celebration": {
+    "author": "Vitaliy Zamedyanskiy",
+    "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1578853204435-3dfd309066a9?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "creativity": {
+    "author": "Jess Bailey",
+    "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1764044371318-c7a7d546859c?w=1024&q=80&fm=jpg&fit=max"
+  },
+  "cinema": {
+    "author": "André Julien",
+    "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+    "licenseUrl": "https://unsplash.com/license",
+    "imageUrl": "https://images.unsplash.com/photo-1758851088217-df00ca346e24?w=1024&q=80&fm=jpg&fit=max"
+  }
+}

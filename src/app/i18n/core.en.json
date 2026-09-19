@@ -1,0 +1,20 @@
+{
+  "pwa": {
+    "ready": "Ready for offline play",
+    "readyDetails": "This game is saved on your device. You can open it without an internet connection.",
+    "close": "Got it",
+    "update": "A fresh deck of updates is ready",
+    "updateDetails": "Your saved players and cards will stay on this device.",
+    "updateAfterGame": "An update is ready. Finish your game to install it.",
+    "updateNow": "Update now",
+    "later": "Later",
+    "error": "Offline setup could not finish. Reconnect and reload before taking the game offline.",
+    "updateError": "The update could not finish. Your current game is still available.",
+    "install": "Install Tipsy Trouble",
+    "installDetails": "Keep the game close. Add it to your home screen for quick access.",
+    "ios": "On iPhone or iPad, open this page in Safari, choose Share, then Add to Home Screen and Open as Web App.",
+    "android": "On Android, use your browser menu and choose Install app or Add to Home Screen.",
+    "desktop": "Use your browser’s install option. On a Mac, Safari also offers File → Add to Dock. Firefox on Mac can play offline in a regular tab.",
+    "offline": "You’re offline. The game stays at the table."
+  }
+}
