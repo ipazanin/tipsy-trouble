@@ -8,15 +8,15 @@ import type { PlayerProfile } from '../domain/playerProfile'
 import PlayerForm from '../components/PlayerForm.vue'
 import PlayerAvatar from '@/shared/components/PlayerAvatar.vue'
 const router = useRouter()
-const { isGameActive, sessionBusy, sessionError, sessionLoaded, loadSession, startGame } =
-  useGameSession()
+const { sessionBusy, sessionError, sessionLoaded, loadSession, startGame } = useGameSession()
 const players = ref<PlayerProfile[]>([]),
   selectedIds = ref<string[]>([]),
   error = ref(''),
   loaded = ref(false),
   specials = ref(true),
   chance = ref(1),
-  maximum = ref(1)
+  maximum = ref(1),
+  seed = ref('')
 const selected = computed(() =>
   selectedIds.value
     .map((id) => players.value.find((player) => player.id === id))
@@ -60,6 +60,7 @@ async function start() {
     await startGame(selected.value, {
       specialChance: specials.value ? chance.value / 100 : 0,
       maxSpecialsPerGame: specials.value ? maximum.value : 0,
+      ...(seed.value.trim() ? { seed: seed.value.trim() } : {}),
     })
   )
     await router.push('/play')
@@ -162,13 +163,23 @@ async function start() {
             </div>
             <p class="help-text">{{ t('players.specialHelp') }}</p>
           </details>
-          <template v-if="isGameActive"
-            ><p class="callout">{{ t('players.active') }}</p>
-            <RouterLink class="button button-primary setup-start" to="/play">{{
-              t('players.resume')
-            }}</RouterLink></template
-          ><button
-            v-else
+          <details>
+            <summary>{{ t('players.advanced') }}</summary>
+            <label class="field">
+              {{ t('players.seed') }}
+              <input
+                v-model="seed"
+                type="text"
+                maxlength="80"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                aria-describedby="seed-help"
+              />
+            </label>
+            <p id="seed-help" class="help-text">{{ t('players.seedHelp') }}</p>
+          </details>
+          <button
             class="button button-primary setup-start"
             :disabled="selected.length < 2 || sessionBusy || !sessionLoaded"
           >
@@ -202,7 +213,7 @@ async function start() {
 }
 .saved-heading > a {
   font-size: 0.8rem;
-  color: var(--coral);
+  color: var(--accent);
   padding: 10px 0;
 }
 .player-list {
@@ -222,12 +233,12 @@ async function start() {
   width: 100%;
   padding: 12px;
   background: var(--panel);
-  color: var(--cream);
+  color: var(--text);
   text-align: left;
 }
 .player-pick.selected {
   background: color-mix(in srgb, var(--lime) 10%, var(--panel));
-  box-shadow: inset 0 0 0 1px var(--lime);
+  box-shadow: inset 0 0 0 1px var(--positive);
 }
 .player-name {
   flex: 1;
@@ -241,7 +252,7 @@ async function start() {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--background);
   color: var(--muted);
 }
 .selected .selection-mark {

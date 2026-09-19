@@ -1,11 +1,21 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { useGameSession } from '@/features/game/composables/useGameSession'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', component: () => import('@/app/views/HomeView.vue') },
     { path: '/about', component: () => import('@/app/views/AboutView.vue') },
-    { path: '/players', component: () => import('@/features/players/views/PlayerSetupView.vue') },
+    { path: '/license', component: () => import('@/app/views/LicenseView.vue') },
+    {
+      path: '/players',
+      component: () => import('@/features/players/views/PlayerSetupView.vue'),
+      async beforeEnter() {
+        const { loadSession, sessionLoaded, isGameActive } = useGameSession()
+        await loadSession()
+        return sessionLoaded.value && !isGameActive.value ? true : '/play'
+      },
+    },
     { path: '/play', component: () => import('@/features/game/views/GameView.vue') },
     { path: '/library', component: () => import('@/features/library/views/LibraryView.vue') },
     { path: '/cards', redirect: { path: '/library', query: { tab: 'cards' } } },

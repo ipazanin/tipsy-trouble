@@ -30,3 +30,34 @@ describe('card image contracts', () => {
     }
   })
 })
+
+describe('JPEG envelope validation boundaries', () => {
+  it.each([4, MAX_CARD_IMAGE_BYTES])('accepts a JPEG envelope of %s bytes', (length) => {
+    const bytes = new Uint8Array(length)
+    bytes.set([0xff, 0xd8])
+    bytes.set([0xff, 0xd9], length - 2)
+    expect(() =>
+      validateCardImage({ id: 'image-1', mimeType: 'image/jpeg', bytes: bytes.buffer }),
+    ).not.toThrow()
+  })
+
+  it.each([
+    { mimeType: 'image/png', bytes: [0xff, 0xd8, 0xff, 0xd9] },
+    { mimeType: 'image/jpeg', bytes: [0xff, 0xd8, 0xff] },
+    { mimeType: 'image/jpeg', bytes: [0xff, 0, 0xff, 0xd9] },
+    { mimeType: 'image/jpeg', bytes: [0xff, 0xd8, 0, 0xd9] },
+    { mimeType: 'image/jpeg', bytes: [0xff, 0xd8, 0xff, 0] },
+  ])('rejects invalid MIME or JPEG markers %#', (candidate) => {
+    expect(() =>
+      validateCardImage({
+        id: 'image-1',
+        mimeType: candidate.mimeType as 'image/jpeg',
+        bytes: new Uint8Array(candidate.bytes).buffer,
+      }),
+    ).toThrow('valid JPEG')
+  })
+
+  it.each([undefined, null, 12, {}, []])('rejects non-text reference %#', (reference) => {
+    expect(() => validateCardImageId(reference)).toThrow('identifiers')
+  })
+})

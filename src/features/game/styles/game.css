@@ -9,7 +9,7 @@
   gap: 20px;
   padding: 12px 0 18px;
   margin-bottom: 4px;
-  background: var(--ink);
+  background: var(--background);
 }
 .play-current-player {
   display: flex;
@@ -51,7 +51,7 @@
   font-size: 0.7rem;
 }
 .play-end-button {
-  color: var(--coral);
+  color: var(--accent);
   border-color: color-mix(in srgb, var(--coral) 45%, transparent);
   flex-shrink: 0;
 }
@@ -86,7 +86,7 @@
   margin-bottom: 14px;
   font-size: 0.7rem;
   font-weight: 700;
-  color: #514940;
+  color: var(--on-card-muted);
   overflow-wrap: anywhere;
 }
 .play-card-caption > span:first-child {
@@ -115,7 +115,7 @@
   width: fit-content;
   max-width: 100%;
   margin-top: 14px;
-  color: #514940;
+  color: var(--on-card-muted);
   font-size: 0.65rem;
   overflow-wrap: anywhere;
 }
@@ -164,7 +164,7 @@
 }
 .play-rules-toggle {
   background: transparent;
-  color: var(--lime);
+  color: var(--positive);
   border: 0;
   padding: 8px 0 8px 8px;
   min-height: 44px;
@@ -189,7 +189,7 @@
 .play-rule-details h3 > span {
   float: right;
   font-size: 0.65rem;
-  color: var(--lime);
+  color: var(--positive);
   text-transform: none;
   letter-spacing: 0;
 }
@@ -220,7 +220,7 @@
   color: var(--muted);
 }
 .play-rule-meta strong {
-  color: var(--lime);
+  color: var(--positive);
 }
 .play-rule-list small {
   display: block;
@@ -231,6 +231,9 @@
 .play-roster {
   margin-top: 14px;
   padding: 0 4px;
+}
+.play-roster code {
+  overflow-wrap: anywhere;
 }
 .play-roster summary {
   display: flex;
@@ -271,7 +274,7 @@
   font-size: 0.65rem;
 }
 .play-roster .is-current {
-  color: var(--coral);
+  color: var(--accent);
 }
 .play-house-form {
   padding: 24px;

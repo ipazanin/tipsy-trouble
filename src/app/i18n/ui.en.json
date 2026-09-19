@@ -37,7 +37,7 @@
     "cardTitle": "Who's the most likely to…",
     "cardText": "Turn a quiet night into a story?",
     "cardFooter": "You know exactly who.",
-    "safe": "Play your way. Any drink, or no drink. You can always pass."
+    "safe": "Play your way. Any drink, or no drink."
   },
   "about": {
     "eyebrow": "LESS READING. MORE PLAYING.",
@@ -46,12 +46,12 @@
     "step1Title": "Get your people in",
     "step1": "Add at least two players, choose who's joining, and set the order. Saved players stay on this device for next time.",
     "step2Title": "Follow the card",
-    "step2": "Read the current player's card aloud. Complete it or pass, then hand the phone to the next player. Everyone getting a turn completes one circle.",
+    "step2": "Read the current player's card aloud, then tap Done to move on. For a temporary rule, choose a player if asked; Activate & next player saves the rule and moves on together. Everyone getting a turn completes one circle.",
     "step3Title": "Keep the rules in sight",
-    "step3": "Temporary rules name a player and expire after the shown number of turns or circles. Permanent house rules stay until the game ends.",
+    "step3": "Temporary rules apply to a named player or everyone and expire after the shown number of turns or circles. Permanent house rules always apply to everyone until the game ends.",
     "step4Title": "Make your own trouble",
-    "step4": "Every two completed circles, a new player writes a permanent house rule. Each player gets one turn to write a rule; those prompts cannot be skipped.",
-    "note": "No scores, no pressure, and no one has to drink. Agree on boundaries together, and pass on anything that isn't fun.",
+    "step4": "Every two completed circles, the next player writes a permanent house rule for everyone. After each player has written one, these prompts stop.",
+    "note": "No scores, no pressure, and no one has to drink. Agree on boundaries together; any drink or no drink works.",
     "storageTitle": "Your game stays with you",
     "storage": "Players, photos, custom cards, and your current game are stored in this browser. Clearing browser data removes them. Export a backup from the card library. Private browsing may not keep saves after you close it.",
     "start": "Bring the crew"
@@ -88,7 +88,10 @@
     "specialEnabled": "Include rare special cards",
     "specialChance": "Chance per draw (%)",
     "specialMaximum": "Maximum specials per game",
-    "specialHelp": "Specials start at a 1% chance per draw, with at most one per game. Set either number to zero to turn them off."
+    "specialHelp": "Specials start at a 1% chance per draw, with at most one per game. Set either number to zero to turn them off.",
+    "advanced": "Advanced settings",
+    "seed": "Deck seed (optional)",
+    "seedHelp": "Leave blank for a fresh shuffle. Reuse a seed with the same cards, player order, settings, and choices to replay the same sequence. Your saved game remembers its place."
   },
   "game": {
     "eyebrow": "LET THE GOOD TIMES ROLL",
@@ -96,7 +99,6 @@
     "turn": "Turn {count}",
     "yourTurn": "{name}, you're up.",
     "next": "Done · next player",
-    "skip": "Pass this card",
     "end": "End game",
     "endConfirm": "End this game? Current cards and house rules will be cleared. Saved players and custom cards will stay.",
     "emptyTitle": "The table is waiting.",
@@ -107,9 +109,7 @@
     "special": "RARE TROUBLE",
     "target": "Who gets this rule?",
     "everyone": "Everyone",
-    "targetHelp": "Choose a player, then activate the rule to continue.",
     "targetPlaceholder": "Choose a player",
-    "activate": "Activate rule",
     "rules": "The house rules",
     "temporaryRules": "For now",
     "permanentRules": "For the whole game",
@@ -131,6 +131,13 @@
     "photoCredit": "Photo: {name}",
     "viewOneRule": "1 active rule · View",
     "viewRules": "{count} active rules · View"
+  },
+  "license": {
+    "title": "MIT license",
+    "intro": "Tipsy Trouble's original code and built-in card text are available under the MIT license.",
+    "photosTitle": "Stock photographs",
+    "photos": "Stock photographs remain under the Unsplash License. Photographer credits and source links accompany the game cards. Uploaded images retain their owners' rights.",
+    "photosLink": "Read the Unsplash License"
   },
   "cards": {
     "eyebrow": "YOUR KIND OF TROUBLE",

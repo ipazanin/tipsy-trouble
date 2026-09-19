@@ -4,6 +4,8 @@ import { validatePlayerProfile, type PlayerProfile } from '@/features/players/do
 import { createPlayerPhoto } from './playerPhotos'
 import { validateCardImageId, type CardImage } from '@/features/cards/domain/cardImage'
 import { validateCardImageContents } from './cardImages'
+import { builtInCards } from '@/features/cards/catalogue'
+import { parseDeckPreferences, type DeckPreferences } from '@/features/cards/domain/deckPreferences'
 import {
   MAX_CUSTOM_CARDS,
   MAX_SAVED_PLAYERS,
@@ -18,6 +20,7 @@ export interface LibraryContents {
   customCards: CardDefinition[]
   session?: GameSession
   cardImages?: CardImage[]
+  deckPreferences?: DeckPreferences
 }
 
 export function referencedImageIds(
@@ -129,6 +132,13 @@ export async function parseBackup(json: string): Promise<LibraryContents> {
   const customCards = backup.customCards.map(parseCardDefinition)
   uniqueIdentifiers(customCards, 'card')
   validateCustomCardIds(customCards.map((card) => card.id))
+  const deckPreferences =
+    backup.deckPreferences === undefined
+      ? undefined
+      : parseDeckPreferences(
+          backup.deckPreferences,
+          [...builtInCards, ...customCards].map((card) => card.id),
+        )
   const session = backup.session === undefined ? undefined : parseGameSession(backup.session)
   if (
     backup.cardImages !== undefined &&
@@ -154,7 +164,13 @@ export async function parseBackup(json: string): Promise<LibraryContents> {
     players.push(player)
   }
   uniqueIdentifiers(players, 'player')
-  return { players, customCards, session, ...(cardImages.length ? { cardImages } : {}) }
+  return {
+    players,
+    customCards,
+    session,
+    ...(cardImages.length ? { cardImages } : {}),
+    ...(deckPreferences ? { deckPreferences } : {}),
+  }
 }
 
 function photoDataUrl(photo: Blob): Promise<string> {
@@ -180,6 +196,13 @@ export async function serializeBackup(contents: LibraryContents): Promise<string
   validateCustomCardIds(contents.customCards.map((card) => card.id))
   const cards = contents.customCards.map(parseCardDefinition)
   const session = contents.session === undefined ? undefined : parseGameSession(contents.session)
+  const deckPreferences =
+    contents.deckPreferences === undefined
+      ? undefined
+      : parseDeckPreferences(
+          contents.deckPreferences,
+          [...builtInCards, ...cards].map((card) => card.id),
+        )
   const images = contents.cardImages ?? []
   uniqueIdentifiers(images, 'image')
   validateImageReferences(cards, session, images)
@@ -206,6 +229,7 @@ export async function serializeBackup(contents: LibraryContents): Promise<string
       customCards: cards,
       session,
       ...(cardImages.length ? { cardImages } : {}),
+      ...(deckPreferences ? { deckPreferences } : {}),
     },
     null,
     2,

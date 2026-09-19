@@ -3,14 +3,26 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { t } from '@/app/i18n'
 import PwaStatus from '@/app/pwa/PwaStatus.vue'
+import ThemePreference from '@/app/theme/ThemePreference.vue'
 import AppIcon from '@/shared/components/AppIcon.vue'
 import { useGameSession } from '@/features/game/composables/useGameSession'
+import { getCurrentPlayer, getHouseRuleAuthor } from '@/features/game/domain/game'
 
 const route = useRoute()
 const mainContent = ref<HTMLElement>()
 const playing = computed(() => route.path === '/play')
 const brandIcon = `${import.meta.env.BASE_URL}icon.svg`
-const { loadSession, isGameActive } = useGameSession()
+const { loadSession, sessionLoaded, isGameActive, gameSession } = useGameSession()
+const savedTurn = computed(() => {
+  const session = gameSession.value
+  if (!session) return ''
+  const ruleAuthor = getHouseRuleAuthor(session)
+  const player = ruleAuthor ?? getCurrentPlayer(session)
+  return t(ruleAuthor ? 'shell.savedRuleTurn' : 'shell.savedTurn', {
+    name: player.name,
+    count: session.completedTurns + 1,
+  })
+})
 onMounted(() => void loadSession())
 
 watch(
@@ -41,8 +53,8 @@ function focusContent() {
       </RouterLink>
       <nav class="site-nav" :aria-label="t('shell.navigation')">
         <RouterLink
-          v-if="!playing"
-          :to="isGameActive ? '/play' : '/players'"
+          v-if="sessionLoaded && !playing && !isGameActive"
+          to="/players"
           :class="{ 'is-active': route.path === '/' || route.path === '/players' }"
         >
           {{ t('shell.play') }}
@@ -52,17 +64,39 @@ function focusContent() {
         </RouterLink>
       </nav>
     </header>
+    <aside
+      v-if="isGameActive && !playing && route.path !== '/'"
+      class="resume-strip"
+      :aria-label="t('shell.activeGame')"
+    >
+      <RouterLink
+        class="resume-game"
+        to="/play"
+        :aria-label="t('shell.resume')"
+        aria-describedby="saved-game-context"
+      >
+        <span class="resume-icon"><AppIcon name="play" :size="18" /></span>
+        <span class="resume-copy">
+          <strong><span class="resume-status" aria-hidden="true" />{{ t('shell.resume') }}</strong>
+          <span id="saved-game-context" :title="savedTurn">{{ savedTurn }}</span>
+        </span>
+        <AppIcon name="arrow-right" :size="20" />
+      </RouterLink>
+    </aside>
     <main id="main-content" ref="mainContent" tabindex="-1"><RouterView /></main>
     <PwaStatus />
     <footer class="site-footer">
-      <div class="footer-links">
-        <RouterLink to="/about">{{ t('shell.howTo') }}</RouterLink>
-        <span>Domain Software Solutions d.o.o</span>
+      <div class="footer-credit">
+        <span class="footer-company">Domain Software Solutions d.o.o</span>
+        <a class="footer-contact" href="mailto:ivan.pazanin1996@gmail.com">
+          <span>Ivan Pazanin</span>
+          <span>ivan.pazanin1996@gmail.com</span>
+        </a>
       </div>
-      <a class="footer-contact" href="mailto:ivan.pazanin1996@gmail.com">
-        <span>Ivan Pazanin</span>
-        <span>ivan.pazanin1996@gmail.com</span>
-      </a>
+      <div class="footer-preferences">
+        <ThemePreference />
+        <RouterLink class="footer-license" to="/license">{{ t('shell.license') }}</RouterLink>
+      </div>
     </footer>
   </div>
 </template>

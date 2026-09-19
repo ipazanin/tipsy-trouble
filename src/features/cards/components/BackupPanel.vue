@@ -4,9 +4,10 @@ import AppDialog from '@/shared/components/AppDialog.vue'
 import { t } from '@/app/i18n'
 import { library } from '@/app/library'
 import { useGameSession } from '@/features/game/composables/useGameSession'
-import type { BackupSummary } from '@/infrastructure/storage/localLibrary'
+import type { BackupSummary, ImportResult } from '@/infrastructure/storage/localLibrary'
 const emit = defineEmits<{ imported: [] }>()
-const { loadSession, sessionBusy } = useGameSession()
+const { loadSession, sessionBusy, sessionError } = useGameSession()
+const pendingImport = ref<ImportResult>()
 const confirming = ref(false)
 const importInvoker = shallowRef<HTMLElement | null>(null)
 const busy = ref(false),
@@ -61,7 +62,7 @@ async function requestImport(event: SubmitEvent) {
   } else await importBackup()
 }
 async function importBackup() {
-  if (!summary.value || busy.value || sessionBusy.value) return
+  if (!summary.value || busy.value || sessionBusy.value || pendingImport.value) return
   confirming.value = false
   busy.value = true
   sessionBusy.value = true
@@ -69,13 +70,34 @@ async function importBackup() {
   success.value = ''
   try {
     const result = await library.importBackup(json.value, { restoreSession: restoreSession.value })
-    if (result.sessionRestored) await loadSession(true)
-    success.value = t('cards.importDone', { players: result.players, cards: result.customCards })
-    json.value = ''
-    summary.value = undefined
-    emit('imported')
+    if (result.sessionRestored) {
+      pendingImport.value = result
+      await synchronizeImport()
+    } else finishImport(result)
   } catch (failure) {
     error.value = failure instanceof Error ? failure.message : t('common.error')
+  } finally {
+    busy.value = false
+    sessionBusy.value = false
+  }
+}
+function finishImport(result: ImportResult) {
+  success.value = t('cards.importDone', { players: result.players, cards: result.customCards })
+  json.value = ''
+  summary.value = undefined
+  pendingImport.value = undefined
+  emit('imported')
+}
+async function synchronizeImport() {
+  if (await loadSession(true)) finishImport(pendingImport.value!)
+  else error.value = `${t('play.restoreLoadError')} ${sessionError.value}`
+}
+async function retrySessionLoad() {
+  busy.value = true
+  sessionBusy.value = true
+  error.value = ''
+  try {
+    await synchronizeImport()
   } finally {
     busy.value = false
     sessionBusy.value = false
@@ -86,7 +108,11 @@ async function importBackup() {
   <section class="panel backup-panel">
     <h2>{{ t('cards.backupTitle') }}</h2>
     <p class="muted">{{ t('cards.backupText') }}</p>
-    <button class="button button-secondary" :disabled="busy || sessionBusy" @click="exportBackup">
+    <button
+      class="button button-secondary"
+      :disabled="busy || sessionBusy || Boolean(pendingImport)"
+      @click="exportBackup"
+    >
       {{ t('cards.export') }} <span aria-hidden="true">↓</span>
     </button>
     <form class="backup-form" @submit.prevent="requestImport">
@@ -95,22 +121,36 @@ async function importBackup() {
         }}<input
           type="file"
           accept="application/json,.json"
-          :disabled="busy || sessionBusy"
+          :disabled="busy || sessionBusy || Boolean(pendingImport)"
           @change="inspect"
       /></label>
       <p class="help-text">{{ t('cards.importHint') }}</p>
+      <p class="help-text">{{ t('library.backupDeckHint') }}</p>
       <p v-if="summary" class="success-message">
         {{ t('cards.preview', { players: summary.players, cards: summary.customCards }) }}
       </p>
       <label v-if="summary?.hasSession" class="checkbox-line"
-        ><input v-model="restoreSession" type="checkbox" :disabled="busy" />{{
-          t('cards.restore')
-        }}</label
-      ><button class="button button-primary" :disabled="!summary || busy || sessionBusy">
+        ><input
+          v-model="restoreSession"
+          type="checkbox"
+          :disabled="busy || Boolean(pendingImport)"
+        />{{ t('cards.restore') }}</label
+      ><button
+        class="button button-primary"
+        :disabled="!summary || busy || sessionBusy || Boolean(pendingImport)"
+      >
         {{ t('cards.importButton') }}
       </button>
     </form>
     <p v-if="error" class="error-message" role="alert">{{ error }}</p>
+    <button
+      v-if="pendingImport"
+      class="button button-secondary"
+      :disabled="busy || sessionBusy"
+      @click="retrySessionLoad"
+    >
+      {{ t('play.retryRestoredGame') }}
+    </button>
     <p v-if="success" class="success-message" role="status">{{ success }}</p>
     <AppDialog
       :open="confirming"

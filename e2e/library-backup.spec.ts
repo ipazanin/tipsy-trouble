@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 import { readFile } from 'node:fs/promises'
 import { expect, test, type Page } from '@playwright/test'
 import type { CardDefinition } from '../src/features/cards/domain/cards'
-import { createGame, type GameSession } from '../src/features/game/domain/game'
+import { completeTurn, createGame, type GameSession } from '../src/features/game/domain/game'
 import type { PlayerProfile } from '../src/features/players/domain/playerProfile'
 
 const customCard: CardDefinition = {
@@ -63,6 +63,13 @@ async function selectBackup(page: Page, json: string) {
   })
 }
 
+async function finishCurrentCard(page: Page) {
+  await expect(page.getByRole('article')).toBeVisible()
+  const target = page.getByRole('combobox', { name: 'Who gets this rule?', exact: true })
+  if (await target.isVisible()) await target.selectOption({ index: 1 })
+  await page.getByRole('button', { name: /^(Done · next player|Activate & next player)$/ }).click()
+}
+
 test('exports photos and cards, merges them, and restores a game only with confirmation', async ({
   page,
 }) => {
@@ -77,7 +84,7 @@ test('exports photos and cards, merges them, and restores a game only with confi
   await page.getByRole('button', { name: 'Save player', exact: true }).click()
   await expect(page.getByRole('button', { name: 'Remove Bob from this game' })).toBeVisible()
   await page.getByRole('button', { name: 'Deal us in' }).click()
-  await page.getByRole('button', { name: 'Pass this card', exact: true }).click()
+  await finishCurrentCard(page)
   await expect.poll(async () => (await storedLibrary(page)).session?.completedTurns).toBe(1)
 
   await page.goto('./#/cards')
@@ -110,7 +117,7 @@ test('exports photos and cards, merges them, and restores a game only with confi
   expect(exported.session).toEqual(beforeExport.session)
 
   await page.goto('./#/play')
-  await page.getByRole('button', { name: 'Pass this card', exact: true }).click()
+  await finishCurrentCard(page)
   await expect.poll(async () => (await storedLibrary(page)).session?.completedTurns).toBe(2)
   const newerSession = (await storedLibrary(page)).session
 
@@ -136,8 +143,11 @@ test('exports photos and cards, merges them, and restores a game only with confi
   expect(merged.customCards).toEqual(beforeExport.customCards)
   expect(merged.session).toEqual(newerSession)
 
-  await page.goto('./#/players')
-  const restoredPhoto = page.getByRole('button', { name: 'Add Alice to this game' }).locator('img')
+  await page.goto('./#/library?tab=players')
+  const restoredPhoto = page
+    .locator('article')
+    .filter({ has: page.getByRole('heading', { name: 'Alice', exact: true }) })
+    .locator('img')
   await expect(restoredPhoto).toBeVisible()
   await expect
     .poll(() => restoredPhoto.evaluate((photo: HTMLImageElement) => photo.naturalWidth))
@@ -230,4 +240,126 @@ test('rejects a reserved built-in card identifier without changing any library s
   expect(await storedLibrary(page)).toEqual(beforeImport)
   await page.goto('./#/library?tab=cards')
   await expect(page.getByRole('heading', { name: customCard.title, exact: true })).toBeVisible()
+})
+
+test('reports a restored-game read failure and retries without rewriting the restored session', async ({
+  page,
+}) => {
+  const players = [
+    { id: 'alice', name: 'Alice' },
+    { id: 'bob', name: 'Bob' },
+  ]
+  const settings = { specialChance: 0, maxSpecialsPerGame: 0 }
+  const previous = createGame(players, [customCard], settings, () => 0)
+  const restoredCard: CardDefinition = {
+    ...customCard,
+    id: 'restored-story',
+    text: 'Read the restored game card.',
+  }
+  const restored = completeTurn(
+    createGame(players, [restoredCard], settings, () => 0),
+    () => 0,
+  )
+  await page.goto('./#/play')
+  await expect(
+    page.getByRole('heading', { name: 'The table is waiting.', exact: true }),
+  ).toBeVisible()
+  await page.evaluate(
+    (session) =>
+      new Promise<void>((resolve, reject) => {
+        const opening = indexedDB.open('tipsy-trouble')
+        opening.onerror = () => reject(opening.error)
+        opening.onsuccess = () => {
+          const database = opening.result
+          const write = database.transaction('session', 'readwrite')
+          write.objectStore('session').put(session, 'current')
+          write.oncomplete = () => {
+            database.close()
+            resolve()
+          }
+          write.onabort = () => {
+            database.close()
+            reject(write.error)
+          }
+        }
+      }),
+    previous,
+  )
+  await page.reload()
+  await expect(page.getByRole('heading', { name: "Alice, you're up.", exact: true })).toBeVisible()
+  await page.goto('./#/library?tab=backups')
+  await selectBackup(
+    page,
+    JSON.stringify({
+      format: 'tipsy-trouble',
+      version: 1,
+      players,
+      customCards: [restoredCard],
+      session: restored,
+    }),
+  )
+  await page.getByLabel('Also restore the game from this backup').check()
+  await page.evaluate(() => {
+    const probe = window as typeof window & {
+      restoreReadFailure: boolean
+      restoreSessionWrites: number
+    }
+    probe.restoreReadFailure = true
+    probe.restoreSessionWrites = 0
+    const get = IDBObjectStore.prototype.get
+    const put = IDBObjectStore.prototype.put
+    IDBObjectStore.prototype.get = function (...args) {
+      if (
+        this.name === 'session' &&
+        this.transaction.mode === 'readonly' &&
+        this.transaction.objectStoreNames.length === 1 &&
+        probe.restoreReadFailure
+      ) {
+        throw new DOMException('Restored game read failed.', 'UnknownError')
+      }
+      return get.apply(this, args)
+    }
+    IDBObjectStore.prototype.put = function (...args) {
+      if (this.name === 'session') probe.restoreSessionWrites++
+      return put.apply(this, args)
+    }
+  })
+  await page.getByRole('button', { name: 'Import selected backup', exact: true }).click()
+  await page
+    .getByRole('dialog')
+    .getByRole('button', { name: 'Import selected backup', exact: true })
+    .click()
+  await expect(page.getByRole('alert')).toContainText(
+    'Your backup was saved, but the restored game could not be loaded.',
+  )
+  await expect(
+    page.getByText('Imported 2 players and 1 custom cards.', { exact: true }),
+  ).toHaveCount(0)
+  expect((await storedLibrary(page)).session).toEqual(restored)
+  const retry = page.getByRole('button', { name: 'Retry loading restored game', exact: true })
+  await retry.click()
+  await expect(page.getByRole('alert')).toContainText('Restored game read failed.')
+  expect(
+    await page.evaluate(
+      () => (window as typeof window & { restoreSessionWrites: number }).restoreSessionWrites,
+    ),
+  ).toBe(1)
+  await page.evaluate(() => {
+    ;(window as typeof window & { restoreReadFailure: boolean }).restoreReadFailure = false
+  })
+  await retry.click()
+  await expect(
+    page.getByText('Imported 2 players and 1 custom cards.', { exact: true }),
+  ).toBeVisible()
+  await expect(retry).toHaveCount(0)
+  expect(
+    await page.evaluate(
+      () => (window as typeof window & { restoreSessionWrites: number }).restoreSessionWrites,
+    ),
+  ).toBe(1)
+  await page.goto('./#/play')
+  await expect(page.getByRole('heading', { name: "Bob, you're up.", exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Done · next player', exact: true }).click()
+  await expect.poll(async () => (await storedLibrary(page)).session?.completedTurns).toBe(2)
+  expect((await storedLibrary(page)).session?.deck).toEqual(restored.deck)
 })

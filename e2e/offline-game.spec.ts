@@ -161,7 +161,10 @@ async function showRules(page: Page) {
 }
 
 async function completeTurn(page: Page, completedTurns: number) {
-  await page.getByRole('button', { name: 'Done · next player', exact: true }).click()
+  await expect(page.getByRole('article')).toBeVisible()
+  const target = page.getByRole('combobox', { name: 'Who gets this rule?', exact: true })
+  if (await target.isVisible()) await target.selectOption({ index: 1 })
+  await page.getByRole('button', { name: /^(Done · next player|Activate & next player)$/ }).click()
   await expect.poll(async () => (await storedGame(page))?.completedTurns).toBe(completedTurns)
 }
 
@@ -190,8 +193,7 @@ test('saves player photos and resumes the actual dealt card after a reload', asy
     page.getByRole('button', { name: 'Remove Bob from this game', exact: true }),
   ).toBeVisible()
   await page.getByRole('button', { name: 'Deal us in' }).click()
-  await page.getByRole('button', { name: 'Pass this card', exact: true }).click()
-  await expect.poll(async () => (await storedGame(page))?.completedTurns).toBe(1)
+  await completeTurn(page, 1)
   const saved = await storedGame(page)
 
   await page.reload()
@@ -199,17 +201,16 @@ test('saves player photos and resumes the actual dealt card after a reload', asy
   await expect(page.getByText(saved!.currentCard!.text, { exact: true })).toBeVisible()
   expect(await storedGame(page)).toEqual(saved)
 
-  await page.goto('./#/players')
+  await page.goto('./#/library?tab=players')
   const photo = page
-    .getByRole('button', { name: 'Add Alice to this game', exact: true })
+    .getByRole('article')
+    .filter({ has: page.getByRole('heading', { name: 'Alice', exact: true }) })
     .locator('img')
   await expect(photo).toBeVisible()
   await expect
     .poll(() => photo.evaluate((image: HTMLImageElement) => image.naturalWidth))
     .toBeGreaterThan(0)
-  await expect(
-    page.getByRole('button', { name: 'Add Bob to this game', exact: true }),
-  ).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Edit Bob', exact: true })).toBeVisible()
 })
 
 test('reloads offline and opens the previously unvisited custom card editor', async ({
@@ -229,9 +230,14 @@ test('reloads offline and opens the previously unvisited custom card editor', as
       page.getByRole('heading', { name: "Alice, you're up.", exact: true }),
     ).toBeVisible()
     await waitForOfflineControl(page)
+    await page.getByRole('combobox', { name: 'Appearance', exact: true }).selectOption('dark')
     await outage.disconnect()
     const response = await page.reload()
     expect(response?.fromServiceWorker()).toBe(true)
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+    await expect(page.getByRole('combobox', { name: 'Appearance', exact: true })).toHaveValue(
+      'dark',
+    )
     await expect(
       page.getByRole('heading', { name: "Alice, you're up.", exact: true }),
     ).toBeVisible()
@@ -270,6 +276,12 @@ test('reloads offline and opens the previously unvisited custom card editor', as
     await expect
       .poll(() => customArtwork.evaluate((image: HTMLImageElement) => image.naturalWidth))
       .toBeGreaterThan(0)
+    await page
+      .getByRole('contentinfo')
+      .getByRole('link', { name: 'MIT license', exact: true })
+      .click()
+    await expect(page.getByRole('heading', { name: 'MIT license', exact: true })).toBeVisible()
+    await expect(page.getByText('Copyright (c) 2026 Ivan Pazanin', { exact: false })).toBeVisible()
     await page.goto(`${appRoot}#/play`)
     await expect(page.getByRole('heading', { name: "Bob, you're up.", exact: true })).toBeVisible()
     expect((await storedGame(page))?.completedTurns).toBe(1)
@@ -294,8 +306,8 @@ test('tracks chosen temporary rules and gives each player exactly one scheduled 
     page,
     fixtureGame([temporary, ...Array.from({ length: 12 }, (_, index) => prompt(String(index)))]),
   )
-  await page.getByLabel('Who gets this rule?').selectOption('bob')
-  await page.getByRole('button', { name: 'Activate rule', exact: true }).click()
+  await page.getByRole('combobox', { name: 'Who gets this rule?', exact: true }).selectOption('bob')
+  await page.getByRole('button', { name: 'Activate & next player', exact: true }).click()
   await showRules(page)
   await expect(page.getByText('2 turns remaining', { exact: true })).toBeVisible()
   await expect(page.getByText('For Bob', { exact: true })).toBeVisible()
@@ -305,11 +317,11 @@ test('tracks chosen temporary rules and gives each player exactly one scheduled 
   await expect(page.getByText('2 turns remaining', { exact: true })).toBeVisible()
   expect(await storedGame(page)).toEqual(activatedSession)
   await expect(page.getByRole('article')).toContainText(activatedSession!.currentCard!.title)
-  await expect(page.getByRole('heading', { name: "Alice, you're up.", exact: true })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Activate rule', exact: true })).toHaveCount(0)
-  await completeTurn(page, 1)
-  await showRules(page)
-  await expect(page.getByText('2 turns remaining', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: "Bob, you're up.", exact: true })).toBeVisible()
+  await expect(
+    page.getByRole('button', { name: 'Activate & next player', exact: true }),
+  ).toHaveCount(0)
+  expect(activatedSession?.completedTurns).toBe(1)
   await completeTurn(page, 2)
   await expect(page.getByText(/^1 turns? remaining$/)).toBeVisible()
   await completeTurn(page, 3)
@@ -339,7 +351,9 @@ test('tracks chosen temporary rules and gives each player exactly one scheduled 
   await page
     .getByLabel('Your house rule', { exact: true })
     .fill('Alice introduces every card with a bow.')
-  await expect(page.getByLabel('Who gets this rule?')).toHaveCount(0)
+  await expect(
+    page.getByRole('combobox', { name: 'Who gets this rule?', exact: true }),
+  ).toHaveCount(0)
   await page.getByRole('button', { name: 'Make it a house rule', exact: true }).click()
   await expect.poll(async () => (await storedGame(page))?.houseRules.length).toBe(2)
   for (let turn = 9; turn <= 12; turn++) await completeTurn(page, turn)
@@ -387,16 +401,10 @@ test('rejects an invalid backup without changing saved players, cards or the gam
   await expect(page.getByRole('heading', { name: existing.title, exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Overwritten card', exact: true })).toHaveCount(0)
   expect(await storedGame(page)).toEqual(saved)
-  await page.goto('./#/players')
-  await expect(
-    page.getByRole('button', { name: 'Add Alice to this game', exact: true }),
-  ).toBeVisible()
-  await expect(
-    page.getByRole('button', { name: 'Add Bob to this game', exact: true }),
-  ).toBeVisible()
-  await expect(
-    page.getByRole('button', { name: 'Add Unexpected player to this game', exact: true }),
-  ).toHaveCount(0)
+  await page.goto('./#/library?tab=players')
+  await expect(page.getByRole('heading', { name: 'Alice', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Bob', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Unexpected player', exact: true })).toHaveCount(0)
 })
 
 test('places rules beside the card on laptops and reveals saved turns', async ({ page }) => {
@@ -509,10 +517,13 @@ test('keeps current and next players visible while scrolling a phone and expands
     duration: { amount: 2, unit: 'turns' },
   }
   await seedLibrary(page, fixtureGame([temporary]))
-  await page.getByRole('button', { name: 'Activate rule', exact: true }).click()
+  await page.getByRole('button', { name: 'Activate & next player', exact: true }).click()
+  await page
+    .getByRole('button', { name: 'Activate & next player', exact: true })
+    .scrollIntoViewIfNeeded()
   const turnbar = page.locator('.play-turnbar')
   await expect(turnbar).toBeInViewport()
-  await expect(turnbar.getByText('Bob', { exact: true })).toBeVisible()
+  await expect(turnbar.getByText('Alice', { exact: true })).toBeVisible()
   const bounds = await turnbar.boundingBox()
   expect(bounds!.y).toBeGreaterThanOrEqual(0)
   expect(bounds!.y).toBeLessThan(5)
@@ -528,8 +539,8 @@ test('keeps current and next players visible while scrolling a phone and expands
     .getByRole('region', { name: 'Active rules', exact: true })
     .boundingBox()
   expect(rulesBox!.y).toBeGreaterThan(cardBox!.y + cardBox!.height)
-  await completeTurn(page, 1)
-  const heading = page.getByRole('heading', { name: "Bob, you're up.", exact: true })
+  await completeTurn(page, 2)
+  const heading = page.getByRole('heading', { name: "Alice, you're up.", exact: true })
   await expect(heading).toBeFocused()
   await expect(heading).toBeInViewport()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
@@ -597,4 +608,46 @@ test('keeps long player names compact and accessible on a narrow phone', async (
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   )
+})
+
+test('resumes an already activated legacy card without applying it twice and shows the roster', async ({
+  page,
+}) => {
+  const temporary: CardDefinition = {
+    id: 'legacy-rule',
+    kind: 'temporary-rule',
+    title: 'Quiet voices',
+    text: 'Use a quiet voice.',
+    contentLocale: 'en',
+    target: 'choose-player',
+    duration: { amount: 2, unit: 'turns' },
+  }
+  const session: GameSession = {
+    ...fixtureGame([temporary, prompt('after-rule')]),
+    temporaryRules: [
+      {
+        id: 'temporary-0',
+        cardId: temporary.id,
+        text: temporary.text,
+        scope: { kind: 'player', playerId: 'bob' },
+        remainingTurns: 2,
+        activatedOnTurn: 0,
+      },
+    ],
+  }
+  await seedLibrary(page, session)
+  await expect(
+    page.getByRole('combobox', { name: 'Who gets this rule?', exact: true }),
+  ).toHaveCount(0)
+  await expect(
+    page.getByRole('button', { name: 'Activate & next player', exact: true }),
+  ).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Pass this card', exact: true })).toHaveCount(0)
+  const roster = page.locator('.play-roster')
+  await expect(roster).toHaveAttribute('open', '')
+  await expect(roster.getByText('Alice', { exact: true })).toBeVisible()
+  await expect(roster.getByText('Bob', { exact: true })).toBeVisible()
+  await completeTurn(page, 1)
+  expect((await storedGame(page))?.temporaryRules).toEqual(session.temporaryRules)
+  await expect(page.getByRole('heading', { name: "Bob, you're up.", exact: true })).toBeFocused()
 })

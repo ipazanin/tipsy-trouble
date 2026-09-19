@@ -2,15 +2,21 @@
 
 ## Direction
 
-A shared-phone party game should get people into the next turn quickly. Keep the navy surface quiet, use coral for the main action, and reserve lime for supporting emphasis. The two-card-and-spark mark is the app identity: use `public/icon.svg` in the shell and regenerate install icons with `npm run icons:generate`.
+A shared-phone party game should get people into the next turn quickly. Keep surfaces quiet in both light and dark appearances, use coral for the main action, and reserve lime for supporting emphasis. The two-card-and-spark mark is the app identity: use `public/icon.svg` in the shell and regenerate install icons with `npm run icons:generate`.
 
 Home presents one play action and a visible Library entry. Library separates saved players, custom cards and backups through route links. Setup selects and orders the roster. During play, put the player, card and next action ahead of optional rules and other navigation. Keep long lists, editors and explanations out of the initial view until requested.
 
 ## Foundations
 
-`src/shared/styles/main.css` is the source of truth for colors, spacing, radii and shared controls. Use `--ink`, `--cream`, `--muted`, `--coral`, `--lime`, `--line` and `--panel` by role. Use the `--space-*` scale for spacing and `--radius-sm`, `--radius` and `--radius-lg` for shape. Keep screen-specific composition in scoped component styles.
+`src/shared/styles/main.css` is the source of truth for colors, spacing, radii and shared controls. Use adaptive `--background`, `--text`, `--muted`, `--panel`, `--line`, `--accent`, `--positive` and `--focus` for the interface. Reserve fixed `--ink` for dark text on brand fills, `--cream` for card paper, and `--coral` / `--lime` for brand fills. Never use a fixed brand color as normal surface text. Use the `--space-*` scale for spacing and `--radius-sm`, `--radius` and `--radius-lg` for shape. Keep screen-specific composition in scoped component styles.
 
 Use the local system font stack; no remote fonts, icon scripts or stylesheets are required. Make headings concise and labels sentence case. Body copy supports the current decision. Use one strong visual focal point per screen and avoid repeating metadata as badges. Decorative artwork may disappear on small screens; actions and essential game content may not.
+
+## Appearance
+
+Device appearance is the default. The footer's Appearance select offers Device default, Light and Dark; an explicit choice stays local to the browser. `public/theme.js` runs before the app renders, applies the saved preference, and owns the page background, native `color-scheme` and browser `theme-color`. It follows OS changes only in Device default mode and synchronizes choices across tabs. Storage failures keep the choice usable for the current tab. Keep this bootstrap dependency-free and included in the offline cache.
+
+Themes change interface surfaces and text, including forms, dialogs, rules and PWA notices. Card paper, brand fills and original uploaded images retain their colors. Check contrast on both the page and elevated panels; never apply a global image filter to approximate a theme.
 
 ## Shared components
 

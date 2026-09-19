@@ -70,9 +70,17 @@ test('uploaded artwork survives editing, deleting, game reload and backup restor
   await page.getByLabel('Card image', { exact: false }).setInputFiles('public/pwa-192x192.png')
   await expect(page.getByRole('button', { name: 'Use stock photo' })).toBeVisible()
   await page.getByRole('button', { name: 'Save card', exact: true }).click()
-  await expect(page.locator('.saved-card-tile img')).toHaveAttribute('src', /^blob:/)
+  await expect(
+    page
+      .getByRole('region', { name: 'Enabled custom cards', exact: true })
+      .locator('.saved-card-tile img'),
+  ).toHaveAttribute('src', /^blob:/)
   await page.reload()
-  await expect(page.locator('.saved-card-tile img')).toHaveAttribute('src', /^blob:/)
+  await expect(
+    page
+      .getByRole('region', { name: 'Enabled custom cards', exact: true })
+      .locator('.saved-card-tile img'),
+  ).toHaveAttribute('src', /^blob:/)
   const original = await exportBackup(page)
   expect(original.cardImages).toHaveLength(1)
   expect(original.cardImages[0]!.dataUrl).toMatch(/^data:image\/jpeg;base64,/)
@@ -94,11 +102,19 @@ test('uploaded artwork survives editing, deleting, game reload and backup restor
   await page.getByRole('button', { name: 'Edit', exact: true }).click()
   await page.getByRole('button', { name: 'Use stock photo' }).click()
   await page.getByRole('button', { name: 'Save card', exact: true }).click()
-  await expect(page.locator('.saved-card-tile img')).toHaveAttribute('src', /artwork\/.+\.webp$/)
+  await expect(
+    page
+      .getByRole('region', { name: 'Enabled custom cards', exact: true })
+      .locator('.saved-card-tile img'),
+  ).toHaveAttribute('src', /artwork\/.+\.webp$/)
   expect(await imageCount(page)).toBe(1)
   await page.getByRole('button', { name: 'Delete', exact: true }).click()
   await page.getByRole('dialog').getByRole('button', { name: 'Delete', exact: true }).click()
-  await expect(page.locator('.saved-card-tile')).toHaveCount(0)
+  await expect(
+    page
+      .getByRole('region', { name: 'Enabled custom cards', exact: true })
+      .locator('.saved-card-tile'),
+  ).toHaveCount(0)
   await expect(page.getByRole('region', { name: 'Your cards', exact: true })).toBeFocused()
   const gameOnly = await exportBackup(page)
   expect(gameOnly.customCards).toHaveLength(0)
@@ -140,7 +156,11 @@ test('rejects bad uploads and conflicting backup image bytes without partial wri
   await imageInput.setInputFiles('public/pwa-192x192.png')
   await expect(page.getByRole('button', { name: 'Use stock photo' })).toBeVisible()
   await page.getByRole('button', { name: 'Save card', exact: true }).click()
-  await expect(page.locator('.saved-card-tile img')).toHaveAttribute('src', /^blob:/)
+  await expect(
+    page
+      .getByRole('region', { name: 'Enabled custom cards', exact: true })
+      .locator('.saved-card-tile img'),
+  ).toHaveAttribute('src', /^blob:/)
   const original = await exportBackup(page)
   const differentImage = await page.evaluate(() => {
     const canvas = document.createElement('canvas')

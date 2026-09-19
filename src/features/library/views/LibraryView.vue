@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, shallowRef } from 'vue'
+import { computed, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { t } from '@/app/i18n'
 import { library } from '@/app/library'
+import { useGameSession } from '@/features/game/composables/useGameSession'
 import AppButton from '@/shared/components/AppButton.vue'
 import AppDialog from '@/shared/components/AppDialog.vue'
 import PlayerAvatar from '@/shared/components/PlayerAvatar.vue'
 import PlayerForm from '@/features/players/components/PlayerForm.vue'
 import CardEditor from '@/features/cards/components/CardEditor.vue'
 import BackupPanel from '@/features/cards/components/BackupPanel.vue'
-import CardArtworkImage from '@/features/cards/components/CardArtworkImage.vue'
+import CardLibrarySection from '../components/CardLibrarySection.vue'
 import LibraryTabs from '@/shared/components/LibraryTabs.vue'
 import AppSectionHeader from '@/shared/components/AppSectionHeader.vue'
 import { builtInCards } from '@/features/cards/catalogue'
@@ -17,10 +18,50 @@ import type { CardDefinition } from '@/features/cards/domain/cards'
 import type { PlayerProfile } from '@/features/players/domain/playerProfile'
 
 const route = useRoute()
+const { isGameActive, sessionLoaded } = useGameSession()
 const tabs = ['players', 'cards', 'backups'] as const
 const tab = computed(() => tabs.find((tab) => tab === route.query.tab) ?? 'players')
 const players = ref<PlayerProfile[]>([])
 const cards = ref<CardDefinition[]>([])
+const disabledCardIds = ref<readonly string[]>([])
+const toggling = ref(false)
+let viewActive = true
+onScopeDispose(() => {
+  viewActive = false
+})
+const cardGroups = computed(() => {
+  const disabled = new Set(disabledCardIds.value)
+  return [
+    {
+      key: 'enabledCustom',
+      custom: true,
+      enabled: true,
+      cards: cards.value.filter((card) => !disabled.has(card.id)),
+    },
+    {
+      key: 'disabledCustom',
+      custom: true,
+      enabled: false,
+      cards: cards.value.filter((card) => disabled.has(card.id)),
+    },
+    {
+      key: 'enabledBuiltIn',
+      custom: false,
+      enabled: true,
+      cards: builtInCards.filter((card) => !disabled.has(card.id)),
+    },
+    {
+      key: 'disabledBuiltIn',
+      custom: false,
+      enabled: false,
+      cards: builtInCards.filter((card) => disabled.has(card.id)),
+    },
+  ]
+})
+const enabledCards = computed(() =>
+  cardGroups.value.filter((group) => group.enabled).flatMap((group) => group.cards),
+)
+const noOrdinaryCards = computed(() => !enabledCards.value.some((card) => card.kind !== 'special'))
 const editingPlayer = ref<PlayerProfile>()
 const editingCard = ref<CardDefinition>()
 const playerFormOpen = ref(false)
@@ -33,15 +74,21 @@ const loaded = ref(false)
 const error = ref('')
 const removalError = ref('')
 const success = ref('')
+watch(tab, () => {
+  success.value = ''
+})
 const sectionHeading = ref<InstanceType<typeof AppSectionHeader>>()
 
 async function load() {
   error.value = ''
   try {
-    ;[players.value, cards.value] = await Promise.all([
+    const [savedPlayers, deck] = await Promise.all([
       library.listPlayers(),
-      library.listCustomCards(),
+      library.loadDeckConfiguration(),
     ])
+    players.value = savedPlayers
+    cards.value = deck.customCards
+    disabledCardIds.value = deck.disabledCardIds
     loaded.value = true
   } catch (failure) {
     error.value = failure instanceof Error ? failure.message : t('common.error')
@@ -49,6 +96,31 @@ async function load() {
 }
 onMounted(load)
 
+async function toggleCard(card: CardDefinition) {
+  if (toggling.value) return
+  toggling.value = true
+  error.value = ''
+  success.value = ''
+  try {
+    const enabled = disabledCardIds.value.includes(card.id)
+    await library.setCardEnabled(card.id, enabled)
+    const deck = await library.loadDeckConfiguration()
+    cards.value = deck.customCards
+    disabledCardIds.value = deck.disabledCardIds
+    if (!viewActive || tab.value !== 'cards') return
+    success.value = t(enabled ? 'library.cardEnabled' : 'library.cardDisabled', {
+      title: card.title,
+    })
+    toggling.value = false
+    await nextTick()
+    if (viewActive && tab.value === 'cards')
+      document.getElementById(`card-toggle-${card.id}`)?.focus()
+  } catch (failure) {
+    error.value = failure instanceof Error ? failure.message : t('common.error')
+  } finally {
+    toggling.value = false
+  }
+}
 function editPlayer(player?: PlayerProfile) {
   editingPlayer.value = player
   playerFormOpen.value = true
@@ -108,7 +180,10 @@ async function remove() {
         <h1>{{ t('library.title') }}</h1>
         <p class="page-intro">{{ t('library.intro') }}</p>
       </div>
-      <RouterLink class="button button-secondary" to="/players"
+      <RouterLink
+        v-if="sessionLoaded && !isGameActive"
+        class="button button-secondary"
+        to="/players"
         >{{ t('library.play') }} <span aria-hidden="true">↗</span></RouterLink
       >
     </header>
@@ -174,9 +249,14 @@ async function remove() {
         role="region"
         :aria-label="t('cards.custom')"
         :title="t('cards.custom')"
-        :description="t('library.cardsIntro', { count: builtInCards.length })"
+        :description="
+          t('library.cardsIntro', {
+            enabled: enabledCards.length,
+            count: builtInCards.length + cards.length,
+          })
+        "
       >
-        <AppButton v-if="!cardFormOpen" @click="editCard()"
+        <AppButton v-if="!cardFormOpen" :disabled="toggling" @click="editCard()"
           >{{ t('cards.add') }} <span aria-hidden="true">+</span></AppButton
         >
       </AppSectionHeader>
@@ -188,42 +268,19 @@ async function remove() {
         @saved="saved"
         @cancel="cardFormOpen = false"
       />
-      <div v-if="!cards.length && !cardFormOpen" class="library-empty">
-        <span aria-hidden="true">✦</span>
-        <h3>{{ t('library.cardsEmpty') }}</h3>
-        <p>{{ t('cards.empty') }}</p>
-      </div>
-      <div class="saved-card-grid">
-        <article v-for="card in cards" :key="card.id" class="saved-card-tile">
-          <CardArtworkImage :card="card" />
-          <div class="saved-card-copy">
-            <p class="eyebrow">
-              {{
-                t(
-                  card.kind === 'temporary-rule'
-                    ? 'cards.temporary'
-                    : card.kind === 'special'
-                      ? 'game.special'
-                      : 'cards.prompt',
-                )
-              }}
-            </p>
-            <h3>{{ card.title }}</h3>
-            <p>{{ card.text }}</p>
-            <div class="tile-actions">
-              <AppButton variant="quiet" :disabled="cardFormOpen" @click="editCard(card)">{{
-                t('common.edit')
-              }}</AppButton
-              ><AppButton
-                variant="quiet"
-                :disabled="cardFormOpen"
-                @click="confirmCardRemoval(card, $event)"
-                >{{ t('common.delete') }}</AppButton
-              >
-            </div>
-          </div>
-        </article>
-      </div>
+      <p v-if="noOrdinaryCards" class="callout" role="status">{{ t('library.noOrdinaryCards') }}</p>
+      <CardLibrarySection
+        v-for="group in cardGroups"
+        :key="group.key"
+        :title="t(`library.${group.key}`)"
+        :cards="group.cards"
+        :custom="group.custom"
+        :enabled="group.enabled"
+        :busy="toggling || cardFormOpen"
+        @toggle="toggleCard"
+        @edit="editCard"
+        @remove="confirmCardRemoval"
+      />
     </template>
     <BackupPanel v-else @imported="load" />
     <p class="library-storage-note">{{ t('library.localNote') }}</p>
@@ -288,42 +345,6 @@ async function remove() {
   gap: 8px;
   margin-top: auto;
 }
-.saved-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  margin-top: 24px;
-}
-.saved-card-tile {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--panel);
-}
-.saved-card-tile > img {
-  width: 100%;
-  aspect-ratio: 3/2;
-  object-fit: cover;
-}
-.saved-card-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 22px;
-  flex: 1;
-}
-.saved-card-copy h3 {
-  font-size: 1.3rem;
-  overflow-wrap: anywhere;
-}
-.saved-card-copy > p:not(.eyebrow) {
-  color: var(--muted);
-  font-size: 0.9rem;
-  overflow-wrap: anywhere;
-}
 .library-empty {
   display: flex;
   flex-direction: column;
@@ -337,10 +358,10 @@ async function remove() {
 }
 .library-empty > span {
   font-size: 3rem;
-  color: var(--coral);
+  color: var(--accent);
 }
 .library-empty h3 {
-  color: var(--cream);
+  color: var(--text);
   font-size: 1.3rem;
 }
 .library-storage-note {

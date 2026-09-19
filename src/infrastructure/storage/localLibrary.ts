@@ -5,6 +5,12 @@ import type { PlayerProfile } from '@/features/players/domain/playerProfile'
 import { parseBackup, serializeBackup, referencedImageIds } from './localBackup'
 import type { CardImage } from '@/features/cards/domain/cardImage'
 import { validateCardImageContents } from './cardImages'
+import { builtInCards } from '@/features/cards/catalogue'
+import {
+  parseDeckPreferences,
+  mergeDeckPreferences,
+  type DeckPreferences,
+} from '@/features/cards/domain/deckPreferences'
 import { validateCustomCardIds, validateSavedPlayerIds } from './localLibraryPolicy'
 import {
   decodePlayerProfile,
@@ -17,6 +23,7 @@ interface LocalLibraryDatabase extends DBSchema {
   customCards: { key: string; value: CardDefinition }
   session: { key: 'current'; value: GameSession }
   cardImages: { key: string; value: CardImage }
+  preferences: { key: 'deck'; value: DeckPreferences }
 }
 
 export interface BackupSummary {
@@ -54,7 +61,7 @@ function sameImage(first: CardImage, second: CardImage): boolean {
 async function removeUnusedImages(
   transaction: IDBPTransaction<
     LocalLibraryDatabase,
-    ('players' | 'customCards' | 'session' | 'cardImages')[],
+    ('players' | 'customCards' | 'session' | 'cardImages' | 'preferences')[],
     'readwrite'
   >,
 ): Promise<void> {
@@ -76,14 +83,15 @@ export function createLocalLibrary() {
 
   function database(): Promise<IDBPDatabase<LocalLibraryDatabase>> {
     if (!openingDatabase) {
-      openingDatabase = openDB<LocalLibraryDatabase>('tipsy-trouble', 2, {
+      openingDatabase = openDB<LocalLibraryDatabase>('tipsy-trouble', 3, {
         upgrade(library, oldVersion) {
           if (oldVersion < 1) {
             library.createObjectStore('players', { keyPath: 'id' })
             library.createObjectStore('customCards', { keyPath: 'id' })
             library.createObjectStore('session')
           }
-          library.createObjectStore('cardImages', { keyPath: 'id' })
+          if (oldVersion < 2) library.createObjectStore('cardImages', { keyPath: 'id' })
+          if (oldVersion < 3) library.createObjectStore('preferences')
         },
         blocking() {
           void openingDatabase?.then((library) => library.close())
@@ -100,7 +108,59 @@ export function createLocalLibrary() {
     return openingDatabase
   }
 
+  async function loadDeckConfiguration(): Promise<{
+    customCards: CardDefinition[]
+    disabledCardIds: readonly string[]
+  }> {
+    const library = await database()
+    const snapshot = library.transaction(['customCards', 'preferences'], 'readonly')
+    const [storedCards, storedPreferences] = await Promise.all([
+      snapshot.objectStore('customCards').getAll(),
+      snapshot.objectStore('preferences').get('deck'),
+      snapshot.done,
+    ])
+    const customCards = storedCards.map(parseCardDefinition)
+    const preferences = parseDeckPreferences(
+      storedPreferences ?? { disabledCardIds: [] },
+      [...builtInCards, ...customCards].map((card) => card.id),
+    )
+    return { customCards, disabledCardIds: preferences.disabledCardIds }
+  }
+
   return {
+    loadDeckConfiguration,
+
+    async listEnabledCards(): Promise<CardDefinition[]> {
+      const { customCards, disabledCardIds } = await loadDeckConfiguration()
+      const disabled = new Set(disabledCardIds)
+      return [...builtInCards, ...customCards].filter((card) => !disabled.has(card.id))
+    },
+
+    async setCardEnabled(cardId: string, enabled: boolean): Promise<void> {
+      const library = await database()
+      const write = library.transaction(['customCards', 'preferences'], 'readwrite')
+      try {
+        const [customIds, savedPreferences] = await Promise.all([
+          write.objectStore('customCards').getAllKeys(),
+          write.objectStore('preferences').get('deck'),
+        ])
+        const availableIds = [...builtInCards.map((card) => card.id), ...customIds]
+        if (!availableIds.includes(cardId))
+          throw new Error('This card is no longer in your library.')
+        const preferences = parseDeckPreferences(
+          savedPreferences ?? { disabledCardIds: [] },
+          availableIds,
+        )
+        const disabled = new Set(preferences.disabledCardIds)
+        if (enabled) disabled.delete(cardId)
+        else disabled.add(cardId)
+        await write.objectStore('preferences').put({ disabledCardIds: [...disabled] }, 'deck')
+        await write.done
+      } catch (error) {
+        await abortWrite(write, error)
+      }
+    },
+
     async listPlayers(): Promise<PlayerProfile[]> {
       const library = await database()
       return (await library.getAll('players'))
@@ -169,9 +229,22 @@ export function createLocalLibrary() {
 
     async deleteCustomCard(cardId: string): Promise<void> {
       const library = await database()
-      const write = library.transaction(['customCards', 'cardImages', 'session'], 'readwrite')
+      const write = library.transaction(
+        ['customCards', 'cardImages', 'session', 'preferences'],
+        'readwrite',
+      )
       try {
         await write.objectStore('customCards').delete(cardId)
+        const preferences = await write.objectStore('preferences').get('deck')
+        if (preferences)
+          await write.objectStore('preferences').put(
+            {
+              disabledCardIds: preferences.disabledCardIds.filter(
+                (disabledId) => disabledId !== cardId,
+              ),
+            },
+            'deck',
+          )
         await removeUnusedImages(write)
         await write.done
       } catch (error) {
@@ -216,14 +289,15 @@ export function createLocalLibrary() {
     async exportBackup(): Promise<string> {
       const library = await database()
       const snapshot = library.transaction(
-        ['players', 'customCards', 'session', 'cardImages'],
+        ['players', 'customCards', 'session', 'cardImages', 'preferences'],
         'readonly',
       )
-      const [players, customCards, session, cardImages] = await Promise.all([
+      const [players, customCards, session, cardImages, deckPreferences] = await Promise.all([
         snapshot.objectStore('players').getAll(),
         snapshot.objectStore('customCards').getAll(),
         snapshot.objectStore('session').get('current'),
         snapshot.objectStore('cardImages').getAll(),
+        snapshot.objectStore('preferences').get('deck'),
         snapshot.done,
       ])
       const referenced = referencedImageIds(customCards, session)
@@ -232,6 +306,7 @@ export function createLocalLibrary() {
         customCards,
         session,
         cardImages: cardImages.filter((image) => referenced.has(image.id)),
+        deckPreferences: deckPreferences ?? { disabledCardIds: [] },
       })
     },
 
@@ -252,7 +327,7 @@ export function createLocalLibrary() {
       const savedPlayers = await Promise.all(backup.players.map(encodePlayerProfile))
       const library = await database()
       const merge = library.transaction(
-        ['players', 'customCards', 'session', 'cardImages'],
+        ['players', 'customCards', 'session', 'cardImages', 'preferences'],
         'readwrite',
       )
       try {
@@ -269,7 +344,23 @@ export function createLocalLibrary() {
               'A different saved image already uses an identifier from this backup. Nothing was imported.',
             )
         }
+        let deckPreferences: DeckPreferences | undefined
+        if (backup.deckPreferences) {
+          const storedPreferences = await merge.objectStore('preferences').get('deck')
+          const current = parseDeckPreferences(storedPreferences ?? { disabledCardIds: [] }, [
+            ...builtInCards.map((card) => card.id),
+            ...cardIds,
+          ])
+          deckPreferences = mergeDeckPreferences(
+            current,
+            backup.deckPreferences,
+            [...builtInCards, ...backup.customCards].map((card) => card.id),
+          )
+        }
         const writes: Promise<unknown>[] = [
+          ...(deckPreferences
+            ? [merge.objectStore('preferences').put(deckPreferences, 'deck')]
+            : []),
           ...(backup.cardImages ?? []).map((image) => merge.objectStore('cardImages').put(image)),
           ...savedPlayers.map((player) => merge.objectStore('players').put(player)),
           ...backup.customCards.map((card) => merge.objectStore('customCards').put(card)),

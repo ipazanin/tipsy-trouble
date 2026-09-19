@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { t } from '@/app/i18n'
 import AppIcon from '@/shared/components/AppIcon.vue'
+import { useGameSession } from '@/features/game/composables/useGameSession'
+
+const { isGameActive, sessionLoaded } = useGameSession()
 </script>
 
 <template>
@@ -27,8 +30,12 @@ import AppIcon from '@/shared/components/AppIcon.vue'
         {{ t('shell.library.backups') }}<AppIcon name="arrow-right" :size="18" />
       </RouterLink>
     </details>
-    <RouterLink class="button button-primary" to="/players">
-      {{ t('shell.start') }}<AppIcon name="arrow-right" />
+    <RouterLink
+      v-if="sessionLoaded"
+      class="button button-primary"
+      :to="isGameActive ? '/play' : '/players'"
+    >
+      {{ t(isGameActive ? 'shell.resume' : 'shell.start') }}<AppIcon name="arrow-right" />
     </RouterLink>
   </section>
 </template>
@@ -55,7 +62,7 @@ import AppIcon from '@/shared/components/AppIcon.vue'
   flex: 0 0 32px;
   height: 32px;
   background: var(--panel);
-  color: var(--coral);
+  color: var(--accent);
   border: 1px solid var(--line);
   border-radius: 10px;
   font-weight: 750;

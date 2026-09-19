@@ -33,9 +33,10 @@ onMounted(() => loadSession())
             <AppIcon name="arrow-right" />
           </RouterLink>
           <p v-else class="muted" role="status">{{ t('common.loading') }}</p>
-          <RouterLink class="button button-quiet" to="/about">{{ t('shell.howTo') }}</RouterLink>
+          <RouterLink class="button button-secondary" to="/about">
+            <AppIcon name="info" :size="18" />{{ t('shell.howTo') }}
+          </RouterLink>
         </div>
-        <p v-if="isGameActive" class="home-saved">{{ t('shell.savedGame') }}</p>
       </div>
       <div class="home-deck" aria-hidden="true">
         <div class="sample-card">
@@ -87,7 +88,7 @@ onMounted(() => loadSession())
 }
 .home-copy h1 span {
   display: block;
-  color: var(--coral);
+  color: var(--accent);
 }
 .home-intro {
   max-width: 340px;
@@ -105,11 +106,7 @@ onMounted(() => loadSession())
 .home-actions .button-primary {
   min-width: 180px;
 }
-.home-saved {
-  color: var(--lime);
-  font-size: 0.8rem;
-  margin-top: 12px;
-}
+
 .home-deck {
   padding: 18px;
   min-width: 0;
@@ -177,12 +174,12 @@ onMounted(() => loadSession())
   background: var(--panel);
 }
 .home-library:hover {
-  border-color: var(--coral);
+  border-color: var(--accent);
 }
 .home-library-icon {
   display: grid;
   place-items: center;
-  color: var(--lime);
+  color: var(--positive);
 }
 .home-library-copy {
   flex: 1;

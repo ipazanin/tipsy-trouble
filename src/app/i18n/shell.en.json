@@ -14,7 +14,7 @@
     "savedGame": "Your game is right where you left it.",
     "libraryTitle": "Your library",
     "libraryDescription": "Saved players, custom cards and backups.",
-    "safe": "Any drink. No drink. Always okay to pass.",
+    "safe": "Any drink. No drink. Your call.",
     "sampleLabel": "A taste of trouble",
     "sampleTitle": "Most likely to…",
     "sampleText": "Turn a quiet night into a story?",
@@ -25,6 +25,16 @@
       "players": "Players",
       "cards": "Cards",
       "backups": "Backups"
+    },
+    "activeGame": "Game in progress",
+    "savedTurn": "Turn {count} · {name}",
+    "savedRuleTurn": "House rule · {name}",
+    "license": "MIT license",
+    "theme": {
+      "label": "Appearance",
+      "system": "Device default",
+      "light": "Light",
+      "dark": "Dark"
     }
   }
 }

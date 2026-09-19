@@ -12,7 +12,7 @@
     "playersIntro": "Save your people here, then choose who's playing when you start a game.",
     "playersEmpty": "Room for your people.",
     "playersEmptyText": "Add a name and an optional photo. They'll be here next time.",
-    "cardsIntro": "Your creations join {count} built-in cards in the next game you start.",
+    "cardsIntro": "{enabled} of {count} cards enabled. Changes apply to future games; your current deck stays the same.",
     "cardsEmpty": "Every group has a story.",
     "localNote": "Saved in this browser, on this device. Export a backup to keep a copy or move your library. Clearing browser data removes local saves.",
     "deleteTitle": "Remove from your library?",
@@ -24,6 +24,20 @@
     "imageReset": "Use stock photo",
     "imagePreview": "Card image preview",
     "imagePreparing": "Preparing your image…",
-    "restoreTitle": "Restore this saved game?"
+    "restoreTitle": "Restore this saved game?",
+    "enabledCustom": "Enabled custom cards",
+    "disabledCustom": "Disabled custom cards",
+    "enabledBuiltIn": "Enabled built-in cards",
+    "disabledBuiltIn": "Disabled built-in cards",
+    "noCards": "No cards in this list.",
+    "includeCard": "Include {title} in future games",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "cardEnabled": "{title} enabled for future games.",
+    "cardDisabled": "{title} disabled for future games.",
+    "noOrdinaryCards": "Enable at least one prompt or temporary rule before starting a new game. Special cards cannot form a deck on their own.",
+    "durationCircles": "{count} circles",
+    "durationTurns": "{count} turns",
+    "backupDeckHint": "Backups include which cards are enabled. Import restores choices for built-in cards and imported custom cards; choices for other custom cards stay. Older backups keep your current choices."
   }
 }

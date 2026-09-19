@@ -2,14 +2,12 @@ import { describe, expect, it } from 'vitest'
 import type { CardDefinition } from '../../../cards/domain/cards'
 import {
   GameError,
-  activateCurrentRule,
   completeTurn,
   createGame,
   getCurrentPlayer,
   getHouseRuleAuthor,
   getPlayerRules,
   parseGameSession,
-  skipCurrentCard,
   submitHouseRule,
   type GameSession,
 } from '../game'
@@ -38,7 +36,15 @@ const temporary = (
 })
 
 function advance(session: GameSession, turns: number): GameSession {
-  for (let turn = 0; turn < turns; turn++) session = skipCurrentCard(session, random)
+  for (let turn = 0; turn < turns; turn++)
+    session = completeTurn(
+      session,
+      random,
+      session.currentCard?.kind === 'temporary-rule' &&
+        session.currentCard.target === 'choose-player'
+        ? 'C'
+        : undefined,
+    )
   return session
 }
 
@@ -50,7 +56,6 @@ describe('turns and scheduled house rules', () => {
       expect(session.completedTurns).toBe((index + 1) * 8)
       expect(session.currentCard).toBeNull()
       expect(getHouseRuleAuthor(session)).toEqual(author)
-      expect(() => skipCurrentCard(session, random)).toThrow('Create the scheduled house rule')
       expect(() => completeTurn(session, random)).toThrow('Create the scheduled house rule')
       const before = session.completedTurns
       session = submitHouseRule(session, ` Rule ${index + 1} `, random)
@@ -64,9 +69,9 @@ describe('turns and scheduled house rules', () => {
     expect(session.houseRules).toHaveLength(4)
   })
 
-  it('skips consume exactly one card and one player turn', () => {
+  it('completing a prompt consumes exactly one card and one player turn', () => {
     const original = createGame(players, [prompt('one'), prompt('two')], undefined, random)
-    const next = skipCurrentCard(original, random)
+    const next = completeTurn(original, random)
     expect(next.completedTurns).toBe(1)
     expect(getCurrentPlayer(next).id).toBe('B')
     expect(next.currentCard?.id).toBe('two')
@@ -102,13 +107,11 @@ describe('temporary rule lifetimes', () => {
       undefined,
       random,
     )
-    expect(() => completeTurn(session, random)).toThrow('Activate this rule')
-    session = activateCurrentRule(session)
+    session = completeTurn(session, random)
+    expect(session.completedTurns).toBe(1)
+    expect(getCurrentPlayer(session).id).toBe('B')
     expect(session.temporaryRules[0]?.remainingTurns).toBe(2)
     expect(session.temporaryRules[0]?.scope).toEqual({ kind: 'player', playerId: 'A' })
-    expect(() => activateCurrentRule(session)).toThrow('already active')
-    session = completeTurn(session, random)
-    expect(session.temporaryRules[0]?.remainingTurns).toBe(2)
     session = completeTurn(session, random)
     expect(session.temporaryRules[0]?.remainingTurns).toBe(1)
     session = completeTurn(session, random)
@@ -132,7 +135,6 @@ describe('temporary rule lifetimes', () => {
       random,
     )
     session = advance(session, 7)
-    session = activateCurrentRule(session)
     session = completeTurn(session, random)
     expect(session.phase).toBe('house-rule')
     expect(session.temporaryRules[0]?.remainingTurns).toBe(4)
@@ -146,22 +148,22 @@ describe('temporary rule lifetimes', () => {
     expect(session.temporaryRules).toEqual([])
   })
 
-  it('requires valid chosen targets and removes an activation when its card is skipped', () => {
+  it('requires valid chosen targets and activates the chosen rule while advancing', () => {
     let session = createGame(players, [temporary('choose-player')], undefined, random)
-    expect(() => activateCurrentRule(session)).toThrow('Choose a player')
-    expect(() => activateCurrentRule(session, 'absent')).toThrow(GameError)
-    session = activateCurrentRule(session, 'D')
+    expect(() => completeTurn(session, random)).toThrow('Choose a player')
+    expect(() => completeTurn(session, random, 'absent')).toThrow(GameError)
+    session = completeTurn(session, random, 'D')
     expect(getPlayerRules(session, 'D').temporaryRules).toHaveLength(1)
     expect(getPlayerRules(session, 'A').temporaryRules).toHaveLength(0)
-    session = skipCurrentCard(session, random)
-    expect(session.temporaryRules).toEqual([])
+    expect(session.completedTurns).toBe(1)
+    expect(session.temporaryRules[0]?.remainingTurns).toBe(2)
   })
 
   it('does not allow overriding fixed rule targets', () => {
     const current = createGame(players, [temporary()], undefined, random)
     const everyone = createGame(players, [temporary('everyone')], undefined, random)
-    expect(() => activateCurrentRule(current, 'B')).toThrow(GameError)
-    expect(() => activateCurrentRule(everyone, 'A')).toThrow(GameError)
+    expect(() => completeTurn(current, random, 'B')).toThrow(GameError)
+    expect(() => completeTurn(everyone, random, 'A')).toThrow(GameError)
   })
 })
 
@@ -250,8 +252,7 @@ describe('session restoration', () => {
       random,
     )
     session = advance(session, 7)
-    session = activateCurrentRule(session, 'C')
-    session = completeTurn(session, random)
+    session = completeTurn(session, random, 'C')
     session = submitHouseRule(session, 'Say please.', random)
     const legacy = JSON.parse(JSON.stringify(session))
     legacy.houseRules[0].scope = { kind: 'player', playerId: 'C' }
@@ -265,25 +266,37 @@ describe('session restoration', () => {
   })
 
   it('preserves current activation and prevents a second application after JSON roundtrip', () => {
-    const session = activateCurrentRule(
-      createGame(players, [temporary('choose-player')], undefined, random),
-      'C',
-    )
+    const original = createGame(players, [temporary('choose-player')], undefined, random)
+    const session: GameSession = {
+      ...original,
+      temporaryRules: [
+        {
+          id: 'temporary-0',
+          cardId: 'rule',
+          text: 'Use a quiet voice.',
+          scope: { kind: 'player', playerId: 'C' },
+          remainingTurns: 2,
+          activatedOnTurn: 0,
+        },
+      ],
+    }
     const restored = parseGameSession(JSON.parse(JSON.stringify(session)))
     expect(restored).toEqual(session)
-    expect(() => activateCurrentRule(restored, 'C')).toThrow('already active')
-    expect(completeTurn(restored, random).temporaryRules[0]?.remainingTurns).toBe(2)
+    const advanced = completeTurn(restored, random)
+    expect(advanced.temporaryRules).toEqual(session.temporaryRules)
+    expect(advanced.completedTurns).toBe(1)
   })
 
   it('rejects inconsistent counters, deck, targeting, lifetime and duplicated activations', () => {
-    const session = activateCurrentRule(
+    const session = completeTurn(
       createGame(players, [temporary(), prompt('story')], undefined, random),
+      random,
     )
     const rule = session.temporaryRules[0]!
     const invalid = [
       null,
       { ...session, completedTurns: -1 },
-      { ...session, currentPlayerIndex: 1 },
+      { ...session, currentPlayerIndex: 2 },
       { ...session, phase: 'house-rule' },
       { ...session, currentCard: prompt('unknown') },
       { ...session, remainingCards: [session.currentCard] },
@@ -291,6 +304,196 @@ describe('session restoration', () => {
       { ...session, temporaryRules: [{ ...rule, remainingTurns: 99 }] },
       { ...session, temporaryRules: [{ ...rule, scope: { kind: 'player', playerId: 'B' } }] },
       { ...session, specialsDrawn: 2 },
+    ]
+    for (const candidate of invalid) expect(() => parseGameSession(candidate)).toThrow(GameError)
+  })
+})
+
+describe('seeded games', () => {
+  const deck: CardDefinition[] = [
+    prompt('one'),
+    prompt('two'),
+    prompt('three'),
+    temporary('everyone'),
+    { ...prompt('surprise'), kind: 'special' },
+  ]
+  const seededSettings = { seed: 'Saturday evening', specialChance: 0.3, maxSpecialsPerGame: 1 }
+  const unusedRandom = () => {
+    throw new Error('Seeded draws must not call the external random source.')
+  }
+
+  function progress(session: GameSession): GameSession {
+    return session.phase === 'house-rule'
+      ? submitHouseRule(session, 'Say please.', unusedRandom)
+      : completeTurn(session, unusedRandom)
+  }
+
+  it('replays the same deck and settings across reshuffles, special draws, house rules and reloads', () => {
+    let first = createGame(players, deck, seededSettings, unusedRandom)
+    let replay = createGame(
+      players,
+      deck,
+      { ...seededSettings, seed: '  Saturday evening  ' },
+      unusedRandom,
+    )
+    for (let turn = 0; turn < 40; turn++) {
+      expect(first).toEqual(replay)
+      expect(first.randomState).toBeGreaterThan(0)
+      first = progress(first)
+      replay = progress(parseGameSession(JSON.parse(JSON.stringify(replay))))
+    }
+    expect(first.specialsDrawn).toBe(1)
+    expect(first.houseRules).toHaveLength(players.length)
+  })
+
+  it('preserves state before a transition so retrying it produces the same result', () => {
+    const session = createGame(players, deck, seededSettings, unusedRandom)
+    const originalState = session.randomState
+    expect(completeTurn(session, unusedRandom)).toEqual(completeTurn(session, unusedRandom))
+    expect(session.randomState).toBe(originalState)
+    const other = createGame(
+      players,
+      deck,
+      { ...seededSettings, seed: 'Sunday evening' },
+      unusedRandom,
+    )
+    expect(other.randomState).not.toBe(originalState)
+  })
+
+  it.each(['', ' ', 'x'.repeat(81), null, 42])('rejects invalid host seed %#', (seed) => {
+    expect(() =>
+      createGame(players, deck, { ...seededSettings, seed: seed as string }, random),
+    ).toThrow('game seed')
+  })
+
+  it.each([undefined, null, 0, -1, 0.5, 4294967296, '10'])(
+    'rejects missing or invalid persisted random state %#',
+    (randomState) => {
+      const session = createGame(players, deck, seededSettings, unusedRandom)
+      expect(() => parseGameSession({ ...session, randomState })).toThrow(GameError)
+    },
+  )
+
+  it('keeps legacy games unseeded and rejects orphaned random state', () => {
+    const session = createGame(players, [prompt('one')], undefined, random)
+    expect(parseGameSession(JSON.parse(JSON.stringify(session)))).not.toHaveProperty('randomState')
+    expect(() => parseGameSession({ ...session, randomState: 12 })).toThrow('requires a game seed')
+    expect(
+      createGame(players, deck, { ...seededSettings, seed: 'x'.repeat(80) }, unusedRandom).settings
+        .seed,
+    ).toHaveLength(80)
+  })
+})
+
+describe('game input and restoration boundaries', () => {
+  it.each([-1, 1.1, NaN, Infinity])('rejects invalid special probability %s', (specialChance) => {
+    expect(() =>
+      createGame(players, [prompt('one')], { specialChance, maxSpecialsPerGame: 1 }, random),
+    ).toThrow('Special card chance')
+  })
+
+  it.each([
+    { id: '', name: 'A' },
+    { id: ' '.repeat(3), name: 'A' },
+    { id: 'x'.repeat(101), name: 'A' },
+    { id: 'A', name: '' },
+    { id: 'A', name: ' ' },
+    { id: 'A', name: 'x'.repeat(81) },
+  ])('rejects invalid roster entries %#', (invalid) => {
+    expect(() => createGame([invalid, players[1]!], [prompt('one')], undefined, random)).toThrow(
+      'unique IDs and names',
+    )
+  })
+
+  it('accepts roster limits and prevents the last card repeating across a reshuffle', () => {
+    const roster = Array.from({ length: 100 }, (_, index) => ({ id: String(index), name: ' x ' }))
+    expect(createGame(roster, [prompt('one')], undefined, random).players[0]?.name).toBe('x')
+    expect(() =>
+      createGame([...roster, { id: '101', name: 'x' }], [prompt('one')], undefined, random),
+    ).toThrow('between 2 and 100')
+    const initial = createGame(players, [prompt('one'), prompt('two')], undefined, random)
+    const second = completeTurn(initial, random)
+    const shuffled = completeTurn(second, () => 0)
+    expect(shuffled.currentCard?.id).toBe('one')
+    expect(shuffled.remainingCards.map((card) => card.id)).toEqual(['two'])
+  })
+
+  it('rejects malformed records, lists, texts, phases and settings before restoring', () => {
+    const session = createGame(players, [prompt('one'), prompt('two')], undefined, random)
+    const invalid = [
+      [],
+      'game',
+      { ...session, players: {} },
+      { ...session, players: [null] },
+      { ...session, players: [{ id: 12, name: 'A' }, players[1]] },
+      { ...session, players: [{ id: 'A', name: '' }, players[1]] },
+      { ...session, settings: {} },
+      { ...session, settings: { specialChance: 0 } },
+      { ...session, phase: 'finished' },
+      { ...session, currentCard: null },
+      { ...session, remainingCards: [session.remainingCards[0], session.remainingCards[0]] },
+      { ...session, currentCard: { ...session.currentCard, text: 'Changed after dealing' } },
+    ]
+    for (const candidate of invalid) expect(() => parseGameSession(candidate)).toThrow(GameError)
+  })
+
+  it('rejects unavailable, duplicate and inconsistent saved special draws', () => {
+    const special: CardDefinition = { ...prompt('special'), kind: 'special' }
+    const other: CardDefinition = { ...prompt('other-special'), kind: 'special' }
+    const session = createGame(
+      players,
+      [prompt('one'), special, other],
+      { specialChance: 1, maxSpecialsPerGame: 2 },
+      () => 0,
+    )
+    const invalid = [
+      { ...session, settings: { specialChance: 0, maxSpecialsPerGame: 2 } },
+      { ...session, drawnSpecialIds: ['absent'] },
+      { ...session, drawnSpecialIds: ['special', 'special'], specialsDrawn: 2 },
+      { ...session, drawnSpecialIds: ['other-special'] },
+      {
+        ...session,
+        currentCard: prompt('one'),
+        remainingCards: [],
+        drawnSpecialIds: ['special', 'other-special'],
+        specialsDrawn: 2,
+      },
+      { ...session, remainingCards: [other] },
+    ]
+    for (const candidate of invalid) expect(() => parseGameSession(candidate)).toThrow(GameError)
+  })
+
+  it('rejects house rule scope, author order and schedule corruption', () => {
+    const due = advance(createGame(players, [prompt('one')], undefined, random), 8)
+    const submitted = submitHouseRule(due, 'Say please.', random)
+    const houseRule = submitted.houseRules[0]!
+    const invalid = [
+      { ...submitted, houseRules: [{ ...houseRule, scope: { kind: 'unknown' } }] },
+      { ...submitted, houseRules: [{ ...houseRule, authorId: 'B' }] },
+      { ...submitted, houseRules: [{ ...houseRule, id: 'house-1' }] },
+      { ...submitted, houseRules: [] },
+      { ...due, completedTurns: 7, currentPlayerIndex: 3 },
+      { ...due, completedTurns: 0 },
+    ]
+    for (const candidate of invalid) expect(() => parseGameSession(candidate)).toThrow(GameError)
+  })
+
+  it('rejects temporary activations that disagree with deck, current card, target or timing', () => {
+    const session = completeTurn(
+      createGame(players, [temporary('choose-player'), prompt('one')], undefined, random),
+      random,
+      'C',
+    )
+    const rule = session.temporaryRules[0]!
+    const invalid = [
+      { ...session, temporaryRules: [{ ...rule, cardId: 'one' }] },
+      { ...session, temporaryRules: [{ ...rule, cardId: 'absent' }] },
+      { ...session, temporaryRules: [{ ...rule, activatedOnTurn: 2 }] },
+      { ...session, temporaryRules: [{ ...rule, id: 'temporary-99' }] },
+      { ...session, temporaryRules: [{ ...rule, text: 'Changed rule' }] },
+      { ...session, temporaryRules: [{ ...rule, remainingTurns: 0 }] },
+      { ...session, temporaryRules: [{ ...rule, scope: { kind: 'everyone' } }] },
+      { ...session, temporaryRules: [{ ...rule, activatedOnTurn: 1, id: 'temporary-1' }] },
     ]
     for (const candidate of invalid) expect(() => parseGameSession(candidate)).toThrow(GameError)
   })

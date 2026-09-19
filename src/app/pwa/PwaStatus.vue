@@ -96,8 +96,8 @@ onUnmounted(() => {
 .connection-status {
   margin: 2rem 0 0;
   padding: 0.6rem 1rem;
-  background: #e9ecc4;
-  color: #19212b;
+  background: var(--success-background);
+  color: var(--success-text);
   text-align: center;
   font-size: 0.85rem;
   border-radius: 0.75rem;
@@ -108,10 +108,10 @@ onUnmounted(() => {
   max-width: 28rem;
   margin: 2rem auto 0;
   padding: 1.1rem 1.25rem;
-  border: 1px solid #c9d1b4;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: #f5efdf;
-  color: #19212b;
+  background: var(--panel);
+  color: var(--text);
   overflow-wrap: anywhere;
 }
 
@@ -129,15 +129,15 @@ onUnmounted(() => {
 .pwa-notice button {
   min-height: 44px;
   padding: 0.5rem 1rem;
-  border: 1px solid #19212b;
+  border: 1px solid transparent;
   border-radius: 0.6rem;
-  background: #19212b;
-  color: #f5efdf;
+  background: var(--coral);
+  color: var(--ink);
   cursor: pointer;
 }
 
 .pwa-notice button:focus-visible {
-  outline: 3px solid #a14e2c;
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 </style>

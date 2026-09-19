@@ -1,5 +1,9 @@
 {
   "play": {
+    "restoreLoadError": "Your backup was saved, but the restored game could not be loaded. Playing is paused until you retry.",
+    "retryRestoredGame": "Retry loading restored game",
+    "seed": "Game seed:",
+    "activateAndNext": "Activate & next player",
     "prompt": "Prompt",
     "temporary": "Temporary rule",
     "special": "Special",

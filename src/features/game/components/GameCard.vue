@@ -5,7 +5,7 @@ import type { GameSession } from '../domain/game'
 import { useCardArtwork } from '@/features/cards/composables/useCardArtwork'
 import AppButton from '@/shared/components/AppButton.vue'
 const props = defineProps<{ session: GameSession; busy: boolean }>()
-const emit = defineEmits<{ next: []; skip: []; activate: [targetId?: string] }>()
+const emit = defineEmits<{ next: [targetId?: string] }>()
 const targetId = ref('')
 const card = computed(() => props.session.currentCard)
 const artwork = useCardArtwork(card)
@@ -62,7 +62,7 @@ watch(
     <form
       v-if="needsActivation"
       class="play-target-form"
-      @submit.prevent="emit('activate', targetId || undefined)"
+      @submit.prevent="emit('next', targetId || undefined)"
     >
       <label v-if="card.kind === 'temporary-rule' && card.target === 'choose-player'" class="field"
         >{{ t('game.target')
@@ -89,20 +89,14 @@ watch(
           :disabled="
             busy || (card.kind === 'temporary-rule' && card.target === 'choose-player' && !targetId)
           "
-          >{{ t('game.activate') }}</AppButton
+          >{{ t('play.activateAndNext') }}</AppButton
         >
-        <AppButton variant="secondary" :disabled="busy" @click="emit('skip')">{{
-          t('game.skip')
-        }}</AppButton>
       </div>
     </form>
     <div v-else class="play-actions">
       <AppButton :disabled="busy" @click="emit('next')"
         >{{ t('game.next') }} <span aria-hidden="true">→</span></AppButton
       >
-      <AppButton variant="secondary" :disabled="busy" @click="emit('skip')">{{
-        t('game.skip')
-      }}</AppButton>
     </div>
   </div>
 </template>

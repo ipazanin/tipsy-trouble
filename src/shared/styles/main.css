@@ -1,18 +1,36 @@
 :root {
   font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
-  color: #f5f0e6;
-  background: #131d27;
-  color-scheme: dark;
+  color: var(--text);
+  background: var(--background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   --ink: #131d27;
   --cream: #f5f0e6;
-  --muted: #b3bdc6;
+  --text: #1c2935;
+  --muted: #59636d;
+  --accent: #a9442e;
+  --positive: #49651c;
+  --focus: #53691e;
+  --input-border: #7c898e;
+  --error-background: #fff0ed;
+  --error-border: #ba7073;
+  --error-text: #8c2c30;
+  --success-background: #edf3df;
+  --success-border: #a0b47a;
+  --success-text: #365320;
+  --brand-hover: #ffa38f;
+  --danger-background: #6c3038;
+  --danger-hover: #853b45;
+  --danger-text: #ffede9;
+  --danger-border: #9c5158;
+  --on-card-muted: #514940;
+  --dialog-shadow: #0003;
+  --backdrop: #07111b80;
   --coral: #ff927a;
   --lime: #d4ed83;
-  --line: #35414b;
-  --panel: #1c2935;
+  --line: #c9d0ce;
+  --panel: #ffffff;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -25,6 +43,25 @@
   --radius: 16px;
   --radius-lg: 24px;
 }
+:root[data-theme='dark'] {
+  --text: #f5f0e6;
+  --muted: #b3bdc6;
+  --accent: #ff927a;
+  --positive: #d4ed83;
+  --focus: #d4ed83;
+  --line: #35414b;
+  --panel: #1c2935;
+  --input-border: #697c88;
+  --error-background: #4e2c34;
+  --error-border: #8f5262;
+  --error-text: #ffdedc;
+  --success-background: #293c2d;
+  --success-border: #637b51;
+  --success-text: #e2f4c2;
+  --dialog-shadow: #0008;
+  --backdrop: #07111bba;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -55,7 +92,7 @@ button:disabled {
   opacity: 0.5;
 }
 :where(button, a, input, textarea, select, summary):focus-visible {
-  outline: 3px solid var(--lime);
+  outline: 3px solid var(--focus);
   outline-offset: 4px;
 }
 h1,
@@ -141,7 +178,7 @@ summary {
   font-weight: 450;
 }
 .brand-dot {
-  color: var(--coral);
+  color: var(--accent);
 }
 .site-nav {
   display: flex;
@@ -161,8 +198,63 @@ summary {
 }
 .site-nav a:hover,
 .site-nav a.is-active {
-  color: var(--cream);
+  color: var(--text);
   background: var(--panel);
+}
+.resume-strip {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--background);
+  border-bottom: 1px solid var(--line);
+}
+.resume-game {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 64px;
+  padding: 10px 2px;
+}
+.resume-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: var(--lime);
+  color: var(--ink);
+  border-radius: 50%;
+}
+.resume-copy {
+  display: grid;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.resume-copy strong {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.85rem;
+}
+.resume-status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--positive);
+}
+.resume-copy > span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.resume-game > .app-icon {
+  color: var(--positive);
+}
+.resume-game:hover .resume-copy strong {
+  color: var(--positive);
 }
 main {
   flex: 1;
@@ -183,27 +275,55 @@ main:focus {
   font-size: 0.72rem;
   line-height: 1.6;
 }
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 20px;
-  align-items: center;
+.footer-credit {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
 }
-.footer-links > a {
+.footer-company {
+  color: var(--text);
+  font-weight: 600;
+}
+.footer-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+.footer-license {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--cream);
+  flex-shrink: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
-.footer-contact {
+.footer-preferences {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-5);
+}
+.theme-preference {
   display: grid;
-  align-content: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+.theme-preference select {
   min-height: 44px;
-  text-align: right;
-  overflow-wrap: anywhere;
+  max-width: 100%;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 28px 8px 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
 }
 .site-footer a:hover {
-  color: var(--coral);
+  color: var(--accent);
 }
 .page {
   padding-top: var(--space-6);
@@ -215,7 +335,7 @@ main:focus {
   margin-top: var(--space-3);
 }
 .eyebrow {
-  color: var(--coral);
+  color: var(--accent);
   font-size: 0.75rem;
   font-weight: 700;
   margin-bottom: var(--space-2);
@@ -235,7 +355,7 @@ main:focus {
 }
 .back-link:hover,
 .quiet-link:hover {
-  color: var(--cream);
+  color: var(--text);
 }
 .button {
   min-height: 44px;
@@ -251,20 +371,17 @@ main:focus {
   line-height: 1.4;
   text-align: center;
   overflow-wrap: anywhere;
-  transition:
-    background 0.15s,
-    border-color 0.15s;
 }
 .button-primary {
   background: var(--coral);
   color: var(--ink);
 }
 .button-primary:hover:not(:disabled) {
-  background: #ffa38f;
+  background: var(--brand-hover);
 }
 .button-secondary {
   background: var(--panel);
-  color: var(--cream);
+  color: var(--text);
   border-color: var(--line);
 }
 .button-secondary:hover:not(:disabled) {
@@ -281,15 +398,15 @@ main:focus {
 }
 .button-quiet:hover:not(:disabled) {
   background: var(--panel);
-  color: var(--cream);
+  color: var(--text);
 }
 .button-danger {
-  background: #6c3038;
-  color: #ffede9;
-  border-color: #9c5158;
+  background: var(--danger-background);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
 }
 .button-danger:hover:not(:disabled) {
-  background: #853b45;
+  background: var(--danger-hover);
 }
 .app-icon {
   flex-shrink: 0;
@@ -304,7 +421,7 @@ main:focus {
   align-items: center;
   justify-content: center;
   background: transparent;
-  color: var(--cream);
+  color: var(--text);
   flex-shrink: 0;
 }
 .icon-button:hover:not(:disabled) {
@@ -337,12 +454,12 @@ main:focus {
 .field textarea,
 .field select {
   width: 100%;
-  border: 1px solid #51606b;
+  border: 1px solid var(--input-border);
   border-radius: var(--radius-sm);
   padding: 11px 12px;
   min-height: 44px;
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--background);
+  color: var(--text);
 }
 .field textarea {
   min-height: 112px;
@@ -357,8 +474,8 @@ main:focus {
 .field input::file-selector-button {
   border: 0;
   border-radius: 6px;
-  background: var(--cream);
-  color: var(--ink);
+  background: var(--text);
+  color: var(--background);
   padding: 8px;
   margin-right: 8px;
 }
@@ -384,15 +501,15 @@ main:focus {
   overflow-wrap: anywhere;
 }
 .error-message {
-  background: #4e2c34;
-  border-color: #8f5262;
-  color: #ffdedc;
+  background: var(--error-background);
+  border-color: var(--error-border);
+  color: var(--error-text);
   margin: 16px 0;
 }
 .success-message {
-  background: #293c2d;
-  border-color: #637b51;
-  color: #e2f4c2;
+  background: var(--success-background);
+  border-color: var(--success-border);
+  color: var(--success-text);
   margin: 16px 0;
 }
 .empty-state {
@@ -460,7 +577,7 @@ main:focus {
 .checkbox-line input {
   width: 20px;
   height: 20px;
-  accent-color: var(--coral);
+  accent-color: var(--accent);
   flex-shrink: 0;
 }
 .library-tabs {
@@ -483,26 +600,26 @@ main:focus {
   font-weight: 650;
 }
 .library-tabs a:hover {
-  color: var(--cream);
+  color: var(--text);
 }
 .library-tabs a.is-active {
-  color: var(--coral);
-  border-bottom-color: var(--coral);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 .app-dialog {
   width: min(440px, calc(100% - 32px));
   max-height: calc(100dvh - 48px);
-  border: 1px solid #51606b;
+  border: 1px solid var(--input-border);
   border-radius: var(--radius);
   padding: var(--space-6);
   background: var(--panel);
-  color: var(--cream);
-  box-shadow: 0 24px 80px #0008;
+  color: var(--text);
+  box-shadow: 0 24px 80px var(--dialog-shadow);
   overflow-y: auto;
   overflow-wrap: anywhere;
 }
 .app-dialog::backdrop {
-  background: #07111bba;
+  background: var(--backdrop);
 }
 .dialog-body {
   margin: 16px 0 24px;
@@ -578,7 +695,10 @@ main:focus {
     font-size: 0.68rem;
   }
   .footer-contact {
-    text-align: left;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
   }
   .page {
     padding-top: var(--space-5);

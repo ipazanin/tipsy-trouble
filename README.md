@@ -21,7 +21,7 @@ Open the URL printed by Vite, including `/tipsy-trouble/`. Hash routing supports
 ```sh
 npm run lint
 npm run format:check
-npm run test:unit
+npm run test:coverage
 npm run build
 npx playwright install chromium firefox webkit
 npm run test:e2e
@@ -29,15 +29,20 @@ npm run test:e2e
 
 Browser tests build and serve the production app on port 4175. They cover Firefox, a narrow Firefox viewport, Chromium, and mobile WebKit. Chromium and Firefox use offline emulation. WebKit checks cached play after its test origin is shut down, because [Playwright's WebKit offline emulation currently rejects service-worker navigation](https://github.com/microsoft/playwright/issues/42775). Mobile emulation and origin outages do not replace installation, airplane-mode, and keyboard checks on physical phones.
 
+Business-logic coverage must reach at least 96% for statements, branches, functions, and lines in each domain module, game-session orchestration, and backup/import policy module. `npm run test:coverage` enforces these thresholds locally and in CI; its HTML report is written to `coverage/index.html`. Browser tests verify the IndexedDB and image-processing adapters against real browser APIs.
+
 The service worker runs in production builds. To check offline behavior manually, run `npm run build` and `npm run preview`, open the app online until it reports offline readiness, then disconnect and reload. Development mode does not register a worker.
 
 ## Gameplay
 
-- One completed or skipped card is one turn. Every player taking a turn completes one circle.
+- One completed card is one turn. Temporary rules activate and advance in a single saved action; there is no separate pass action. Every player taking a turn completes one circle.
 - After circles 2, 4, 6, and so on, the next player creates a permanent house rule that applies to everyone. This extra prompt does not consume a turn. Each player authors one rule.
 - Temporary rules count subsequent completed turns, excluding the card that creates the rule. A duration of one circle counts as one turn per player. House-rule prompts do not reduce countdowns.
 - Ordinary cards are drawn without replacement, then reshuffled. Special cards use a separate probability and game limit: 1% and one appearance by default. The host can change both settings. The same special never repeats within a game.
+- The two rare specials use three and five sips; neither asks players to finish their drink.
 - A game's roster and deck are fixed when it starts. Editing saved players or custom cards affects future games.
+- New-game setup is unavailable while a game is active. Resume the saved game or end it through its confirmation dialog first.
+- Advanced setup accepts an optional deck seed. Reusing it with the same deck order, player order, settings, and choices reproduces the card sequence. The game saves its random state after each action, including across refreshes and backups. Leave the seed blank for fresh random draws.
 
 ## Cards and language
 
@@ -45,7 +50,9 @@ Built-in mechanics live in `src/features/cards/catalogue/definitions.ts`; Englis
 
 Custom cards use the same validated definition format. Their `contentLocale` records the language they were written in. Text renders as plain text. Creating a permanent rule during a game does not add a reusable card to the library.
 
-The Library groups saved players, custom cards, and backups. Custom cards start with a stock image; an optional JPEG, PNG, or WebP upload can replace it. Uploads up to 10 MB are resized to at most 1200 × 800 pixels and 512 KiB. Images stay on the device and travel with exported backups. Game snapshots reference immutable stored images, so editing or deleting a library card does not change artwork in a game already in progress.
+The Library groups saved players, cards, and backups. Its card lists separate enabled and disabled custom cards from enabled and disabled built-in cards. Toggles control future games and travel with backups; a game already in progress keeps its original deck. At least one ordinary card must remain enabled to start a game.
+
+Custom cards start with a stock image; an optional JPEG, PNG, or WebP upload can replace it. Uploads up to 10 MB are resized to at most 1200 × 800 pixels and 512 KiB. Images stay on the device and travel with exported backups. Game snapshots reference immutable stored images, so editing or deleting a library card does not change artwork in a game already in progress.
 
 Card photos are local WebP assets in `public/artwork`, cached with the game. Built-in pairings and photographer/source/license metadata live in `src/features/cards/artwork`. Custom card IDs deterministically select from ten templates, so an image stays consistent across edits and reloads. Photos are used under the [Unsplash License](https://unsplash.com/license); each card links to its photographer’s source page. They are decorative, so all instructions remain in accessible text.
 
@@ -65,8 +72,18 @@ npm run icons:generate
 
 The same icon appears in the app header, favicon, and install assets. Shared interface components and offline design assets are described in [the design system](docs/design-system.md).
 
+The footer's Appearance setting offers Light, Dark, or Device default. Device default follows the system theme; an explicit choice stays on the device and works offline.
+
+## Multiplayer direction
+
+Multiplayer is being planned as direct WebRTC connections with manual QR or link pairing and no signaling, STUN, or TURN service. Shared-device play remains fully usable offline. See the [multiplayer design](docs/multiplayer.md) for the proposed pairing flow, network limitations, and validation required before implementation.
+
 ## Publishing
 
 The workflow checks formatting, lint, unit tests, production builds, and browser behavior. Successful pushes to `main` publish the verified artifact after the repository's Pages source is configured to GitHub Actions. Pull requests only run checks.
 
 The deployment path is `/tipsy-trouble/` throughout the Vite base, manifest, and service worker. No backend service or credentials are required for shared-device play.
+
+## License
+
+Original code and built-in card text are available under the [MIT License](LICENSE), copyright Ivan Pazanin. Third-party stock photographs retain the [Unsplash License](https://unsplash.com/license); attribution and sources are recorded in the artwork metadata. The footer links to a bundled license page that also works offline.

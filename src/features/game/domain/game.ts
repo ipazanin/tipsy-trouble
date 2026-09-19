@@ -1,3 +1,4 @@
+import { advanceSeedState, createSeedState } from './seededRandom'
 import {
   parseCardDefinition,
   parseCardDefinitions,
@@ -10,6 +11,7 @@ export interface Player {
 }
 
 export interface GameSettings {
+  readonly seed?: string
   readonly specialChance: number
   readonly maxSpecialsPerGame: number
 }
@@ -36,6 +38,7 @@ export interface HouseRule {
 }
 
 export interface GameSession {
+  readonly randomState?: number
   readonly players: readonly Player[]
   readonly deck: readonly CardDefinition[]
   readonly settings: GameSettings
@@ -77,6 +80,16 @@ function shuffle(cards: readonly CardDefinition[], random: Random): CardDefiniti
 }
 
 function drawCard(session: GameSession, random: Random): GameSession {
+  if (session.randomState === undefined) return drawCardWithRandom(session, random)
+  let randomState = session.randomState
+  const drawn = drawCardWithRandom(session, () => {
+    randomState = advanceSeedState(randomState)
+    return randomState / 4294967296
+  })
+  return { ...drawn, randomState }
+}
+
+function drawCardWithRandom(session: GameSession, random: Random): GameSession {
   const specials = session.deck.filter(
     (card) => card.kind === 'special' && !session.drawnSpecialIds.includes(card.id),
   )
@@ -131,6 +144,16 @@ export function createGame(
     throw new GameError('Players need unique IDs and names between 1 and 80 characters.')
   }
   const gameSettings = { ...(settings ?? DEFAULT_GAME_SETTINGS) }
+  if (gameSettings.seed !== undefined) {
+    if (
+      typeof gameSettings.seed !== 'string' ||
+      !gameSettings.seed.trim() ||
+      gameSettings.seed.trim().length > 80
+    ) {
+      throw new GameError('A game seed must contain between 1 and 80 characters.')
+    }
+    gameSettings.seed = gameSettings.seed.trim()
+  }
   if (
     !Number.isFinite(gameSettings.specialChance) ||
     gameSettings.specialChance < 0 ||
@@ -146,6 +169,7 @@ export function createGame(
     throw new GameError('The special card limit must be a whole number between 0 and 10.')
   }
   const session: GameSession = {
+    ...(gameSettings.seed === undefined ? {} : { randomState: createSeedState(gameSettings.seed) }),
     players: players.map((player) => ({ id: player.id, name: player.name.trim() })),
     deck: parseCardDefinitions(deck),
     settings: gameSettings,
@@ -177,8 +201,7 @@ function requireCurrentCard(session: GameSession): CardDefinition {
   return session.currentCard
 }
 
-function scopeFor(session: GameSession, targetId: string | undefined): RuleScope {
-  if (targetId === undefined) return { kind: 'everyone' }
+function scopeFor(session: GameSession, targetId: string): RuleScope {
   if (!session.players.some((player) => player.id === targetId)) {
     throw new GameError('Choose a player from this game.')
   }
@@ -189,11 +212,11 @@ function currentRuleIsActive(session: GameSession): boolean {
   return session.temporaryRules.some((rule) => rule.activatedOnTurn === session.completedTurns)
 }
 
-export function activateCurrentRule(session: GameSession, targetId?: string): GameSession {
-  const card = requireCurrentCard(session)
-  if (card.kind !== 'temporary-rule')
-    throw new GameError('This card does not create a temporary rule.')
-  if (currentRuleIsActive(session)) throw new GameError('This card rule is already active.')
+function activateCurrentRule(
+  session: GameSession,
+  card: Extract<CardDefinition, { kind: 'temporary-rule' }>,
+  targetId?: string,
+): GameSession {
   let scope: RuleScope
   if (card.target === 'current-player') {
     if (targetId !== undefined && targetId !== getCurrentPlayer(session).id) {
@@ -242,23 +265,13 @@ function advanceTurn(session: GameSession, random: Random): GameSession {
   return drawCard(advanced, random)
 }
 
-export function completeTurn(session: GameSession, random: Random): GameSession {
+export function completeTurn(session: GameSession, random: Random, targetId?: string): GameSession {
   const card = requireCurrentCard(session)
-  if (card.kind === 'temporary-rule' && !currentRuleIsActive(session)) {
-    throw new GameError('Activate this rule or skip the card before continuing.')
-  }
-  return advanceTurn(session, random)
-}
-
-export function skipCurrentCard(session: GameSession, random: Random): GameSession {
-  requireCurrentCard(session)
-  const withoutCurrentRule = {
-    ...session,
-    temporaryRules: session.temporaryRules.filter(
-      (rule) => rule.activatedOnTurn !== session.completedTurns,
-    ),
-  }
-  return advanceTurn(withoutCurrentRule, random)
+  const activatedSession =
+    card.kind === 'temporary-rule' && !currentRuleIsActive(session)
+      ? activateCurrentRule(session, card, targetId)
+      : session
+  return advanceTurn(activatedSession, random)
 }
 
 export function submitHouseRule(session: GameSession, text: string, random: Random): GameSession {
@@ -336,9 +349,21 @@ export function parseGameSession(candidate: unknown): GameSession {
   const base = createGame(
     players,
     deck,
-    { specialChance: settings.specialChance, maxSpecialsPerGame: settings.maxSpecialsPerGame },
+    {
+      specialChance: settings.specialChance,
+      maxSpecialsPerGame: settings.maxSpecialsPerGame,
+      ...(settings.seed === undefined ? {} : { seed: settings.seed as string }),
+    },
     () => 0,
   )
+  let randomState: number | undefined
+  if (base.settings.seed !== undefined) {
+    randomState = savedCount(saved.randomState)
+    if (randomState === 0 || randomState > 4294967295)
+      throw new GameError('Saved game contains an invalid random state.')
+  } else if (saved.randomState !== undefined) {
+    throw new GameError('Saved random state requires a game seed.')
+  }
   const completedTurns = savedCount(saved.completedTurns)
   const currentPlayerIndex = savedCount(saved.currentPlayerIndex)
   const specialsDrawn = savedCount(saved.specialsDrawn)
@@ -461,6 +486,7 @@ export function parseGameSession(candidate: unknown): GameSession {
   }
   return {
     ...base,
+    ...(randomState === undefined ? {} : { randomState }),
     remainingCards,
     currentCard,
     phase: saved.phase,

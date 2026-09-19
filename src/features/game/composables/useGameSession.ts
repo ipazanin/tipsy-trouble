@@ -1,12 +1,9 @@
 import { computed, ref, shallowRef } from 'vue'
 import { library } from '@/app/library'
 import { t } from '@/app/i18n'
-import { builtInCards } from '@/features/cards/catalogue'
 import {
-  activateCurrentRule,
   completeTurn,
   createGame,
-  skipCurrentCard,
   submitHouseRule,
   type GameSession,
   type GameSettings,
@@ -18,24 +15,33 @@ export const sessionLoaded = ref(false)
 export const sessionBusy = ref(false)
 export const isGameActive = computed(() => gameSession.value !== null)
 const sessionError = ref('')
-let loading: Promise<void> | undefined
+let loading: Promise<boolean> | undefined
+let loadRequest = 0
 
 function random(): number {
   return crypto.getRandomValues(new Uint32Array(1))[0]! / 4294967296
 }
 
-async function loadSession(force = false): Promise<void> {
-  if (sessionLoaded.value && !force) return
-  if (loading) return loading
+async function loadSession(force = false): Promise<boolean> {
+  if (sessionLoaded.value && !force) return true
+  if (loading && !force) return loading
+  const request = ++loadRequest
+  sessionLoaded.value = false
   sessionError.value = ''
   loading = (async () => {
     try {
-      gameSession.value = (await library.loadGame()) ?? null
+      const loadedSession = (await library.loadGame()) ?? null
+      if (request !== loadRequest) return false
+      gameSession.value = loadedSession
       sessionLoaded.value = true
+      return true
     } catch (error) {
-      sessionError.value = error instanceof Error ? error.message : t('common.error')
+      if (request === loadRequest) {
+        sessionError.value = error instanceof Error ? error.message : t('common.error')
+      }
+      return false
     } finally {
-      loading = undefined
+      if (request === loadRequest) loading = undefined
     }
   })()
   return loading
@@ -44,7 +50,7 @@ async function loadSession(force = false): Promise<void> {
 async function persistAction(
   change: () => Promise<GameSession | null> | GameSession | null,
 ): Promise<boolean> {
-  if (sessionBusy.value) return false
+  if (sessionBusy.value || !sessionLoaded.value) return false
   sessionBusy.value = true
   sessionError.value = ''
   try {
@@ -78,17 +84,14 @@ export function useGameSession() {
     startGame: (players: readonly Player[], settings: GameSettings) =>
       persistAction(async () => {
         if (gameSession.value) throw new Error(t('players.active'))
-        return createGame(
-          players,
-          [...builtInCards, ...(await library.listCustomCards())],
-          settings,
-          random,
-        )
+        const deck = await library.listEnabledCards()
+        if (!deck.some((card) => card.kind !== 'special')) {
+          throw new Error(t('library.noOrdinaryCards'))
+        }
+        return createGame(players, deck, settings, random)
       }),
-    nextTurn: () => persistAction(() => completeTurn(currentSession(), random)),
-    skipCard: () => persistAction(() => skipCurrentCard(currentSession(), random)),
-    activateRule: (targetId?: string) =>
-      persistAction(() => activateCurrentRule(currentSession(), targetId)),
+    nextTurn: (targetId?: string) =>
+      persistAction(() => completeTurn(currentSession(), random, targetId)),
     addHouseRule: (text: string) =>
       persistAction(() => submitHouseRule(currentSession(), text, random)),
     endGame: () => persistAction(() => null),

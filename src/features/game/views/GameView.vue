@@ -25,8 +25,6 @@ const {
   sessionError,
   loadSession,
   nextTurn,
-  skipCard,
-  activateRule,
   addHouseRule,
   endGame,
 } = useGameSession()
@@ -127,18 +125,19 @@ function saveHouseRule(text: string) {
             v-else
             :session="gameSession"
             :busy="sessionBusy"
-            @next="revealSavedTurn(nextTurn)"
-            @skip="revealSavedTurn(skipCard)"
-            @activate="activateRule"
+            @next="(targetId) => revealSavedTurn(() => nextTurn(targetId))"
           />
           <p class="play-save-hint">{{ t('play.savedLocally') }}</p>
         </div>
         <aside class="play-sidebar">
           <ActiveRules :session="gameSession" />
-          <details class="play-roster">
+          <details class="play-roster" open>
             <summary>
               {{ t('play.players') }} <span>{{ gameSession.players.length }}</span>
             </summary>
+            <p v-if="gameSession.settings.seed" class="help-text">
+              {{ t('play.seed') }} <code>{{ gameSession.settings.seed }}</code>
+            </p>
             <ol>
               <li
                 v-for="player in gameSession.players"
