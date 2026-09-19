@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { validateCardImage, type CardImage } from '@/features/cards/domain/cardImage'
 import { createGame } from '@/features/game/domain/game'
-import type { CardDefinition } from '@/features/cards/domain/cards'
+import { parseCardDefinitions, type CardDefinition } from '@/features/cards/domain/cards'
 import { parseBackup, serializeBackup } from '../localBackup'
 import { builtInCards } from '@/features/cards/catalogue'
 import { MAX_CUSTOM_CARDS, MAX_SAVED_PLAYERS } from '../localLibraryPolicy'
@@ -229,6 +229,19 @@ describe('local backup validation', () => {
     await expect(serializeBackup({ players: [], customCards: [collision] })).rejects.toThrow(
       'reserved for built-in cards',
     )
+  })
+
+  it('imports the published 958-card custom capacity alongside the expanded built-in deck', async () => {
+    const customCards = Array.from({ length: 958 }, (_, index) => ({
+      ...customCard,
+      id: `legacy-custom-${index}`,
+    }))
+    const restored = await parseBackup(backup({ customCards }))
+    expect(restored.customCards).toEqual(customCards)
+    expect(parseCardDefinitions([...builtInCards, ...restored.customCards])).toHaveLength(
+      builtInCards.length + 958,
+    )
+    expect((await parseBackup(await serializeBackup(restored))).customCards).toEqual(customCards)
   })
 
   it('round-trips a library at both collection limits', async () => {

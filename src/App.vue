@@ -7,15 +7,21 @@ import ThemePreference from '@/app/theme/ThemePreference.vue'
 import AppIcon from '@/shared/components/AppIcon.vue'
 import { useGameSession } from '@/features/game/composables/useGameSession'
 import { getCurrentPlayer, getHouseRuleAuthor } from '@/features/game/domain/game'
+import { useMultiplayer } from '@/features/multiplayer/composables/useMultiplayer'
 
 const route = useRoute()
 const mainContent = ref<HTMLElement>()
-const playing = computed(() => route.path === '/play')
+const playing = computed(() => route.path === '/play' || route.path === '/remote')
 const brandIcon = `${import.meta.env.BASE_URL}icon.svg`
 const { loadSession, sessionLoaded, isGameActive, gameSession } = useGameSession()
+const { guestActive, guestState } = useMultiplayer()
+const resumeRoute = computed(() =>
+  guestActive.value ? (guestState.value ? '/remote' : '/multiplayer') : '/play',
+)
+const resumeLabel = computed(() => t(guestActive.value ? 'multiplayer.resume' : 'shell.resume'))
 const savedTurn = computed(() => {
-  const session = gameSession.value
-  if (!session) return ''
+  const session = guestActive.value ? guestState.value?.game : gameSession.value
+  if (!session) return t('multiplayer.active')
   const ruleAuthor = getHouseRuleAuthor(session)
   const player = ruleAuthor ?? getCurrentPlayer(session)
   return t(ruleAuthor ? 'shell.savedRuleTurn' : 'shell.savedTurn', {
@@ -53,7 +59,7 @@ function focusContent() {
       </RouterLink>
       <nav class="site-nav" :aria-label="t('shell.navigation')">
         <RouterLink
-          v-if="sessionLoaded && !playing && !isGameActive"
+          v-if="sessionLoaded && !playing && !isGameActive && !guestActive"
           to="/players"
           :class="{ 'is-active': route.path === '/' || route.path === '/players' }"
         >
@@ -65,19 +71,19 @@ function focusContent() {
       </nav>
     </header>
     <aside
-      v-if="isGameActive && !playing && route.path !== '/'"
+      v-if="(isGameActive || guestActive) && !playing && route.path !== '/'"
       class="resume-strip"
       :aria-label="t('shell.activeGame')"
     >
       <RouterLink
         class="resume-game"
-        to="/play"
-        :aria-label="t('shell.resume')"
+        :to="resumeRoute"
+        :aria-label="resumeLabel"
         aria-describedby="saved-game-context"
       >
         <span class="resume-icon"><AppIcon name="play" :size="18" /></span>
         <span class="resume-copy">
-          <strong><span class="resume-status" aria-hidden="true" />{{ t('shell.resume') }}</strong>
+          <strong><span class="resume-status" aria-hidden="true" />{{ resumeLabel }}</strong>
           <span id="saved-game-context" :title="savedTurn">{{ savedTurn }}</span>
         </span>
         <AppIcon name="arrow-right" :size="20" />

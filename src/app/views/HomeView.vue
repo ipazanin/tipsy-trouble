@@ -5,8 +5,10 @@ import { useGameSession } from '@/features/game/composables/useGameSession'
 import InstallApp from '@/app/pwa/InstallApp.vue'
 import AppButton from '@/shared/components/AppButton.vue'
 import AppIcon from '@/shared/components/AppIcon.vue'
+import { useMultiplayer } from '@/features/multiplayer/composables/useMultiplayer'
 
 const { isGameActive, sessionLoaded, sessionError, loadSession } = useGameSession()
+const { guestActive, guestState } = useMultiplayer()
 const brandIcon = `${import.meta.env.BASE_URL}icon.svg`
 onMounted(() => loadSession())
 </script>
@@ -27,12 +29,25 @@ onMounted(() => loadSession())
           <RouterLink
             v-if="sessionLoaded"
             class="button button-primary"
-            :to="isGameActive ? '/play' : '/players'"
+            :to="
+              guestActive
+                ? guestState
+                  ? '/remote'
+                  : '/multiplayer'
+                : isGameActive
+                  ? '/play'
+                  : '/players'
+            "
           >
-            {{ t(isGameActive ? 'shell.resume' : 'shell.start') }}
+            {{
+              t(guestActive ? 'multiplayer.resume' : isGameActive ? 'shell.resume' : 'shell.start')
+            }}
             <AppIcon name="arrow-right" />
           </RouterLink>
           <p v-else class="muted" role="status">{{ t('common.loading') }}</p>
+          <RouterLink v-if="!guestActive" class="button button-secondary" to="/multiplayer">
+            {{ t('multiplayer.join') }}
+          </RouterLink>
           <RouterLink class="button button-secondary" to="/about">
             <AppIcon name="info" :size="18" />{{ t('shell.howTo') }}
           </RouterLink>

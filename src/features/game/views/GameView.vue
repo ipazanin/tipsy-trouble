@@ -12,9 +12,14 @@ import AppDialog from '@/shared/components/AppDialog.vue'
 import GameCard from '../components/GameCard.vue'
 import HouseRuleForm from '../components/HouseRuleForm.vue'
 import ActiveRules from '../components/ActiveRules.vue'
+import { useMultiplayer } from '@/features/multiplayer/composables/useMultiplayer'
 import '../styles/game.css'
 
 const router = useRouter()
+const { startHosting, hostConnections } = useMultiplayer()
+const connectedPhones = computed(
+  () => hostConnections.value.filter((connection) => connection.status === 'connected').length,
+)
 const turnHeading = ref<HTMLHeadingElement>()
 const endDialogOpen = ref(false)
 const endDialogInvoker = shallowRef<HTMLElement | null>(null)
@@ -131,6 +136,10 @@ function saveHouseRule(text: string) {
         </div>
         <aside class="play-sidebar">
           <ActiveRules :session="gameSession" />
+          <RouterLink class="button button-secondary" to="/multiplayer" @click="startHosting">
+            {{ t('multiplayer.connect')
+            }}<span v-if="connectedPhones"> ({{ connectedPhones }})</span>
+          </RouterLink>
           <details class="play-roster" open>
             <summary>
               {{ t('play.players') }} <span>{{ gameSession.players.length }}</span>

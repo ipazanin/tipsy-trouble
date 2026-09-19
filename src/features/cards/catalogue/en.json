@@ -166,5 +166,637 @@
   "captains-choice": {
     "title": "Captain’s choice",
     "text": "Give a victory speech worthy of a captain, then take five sips at your own pace."
+  },
+  "pocket-tradition": {
+    "title": "Small traditions",
+    "text": "Name a small tradition you would like this group to start. Everyone votes with a thumbs-up. If it gets unanimous support, give out one sip."
+  },
+  "childhood-invention": {
+    "title": "Junior inventor",
+    "text": "Describe something you tried to build as a child, or invent a childhood project. The next player supplies a grand name for it and gives out one sip."
+  },
+  "tiny-victory": {
+    "title": "Quietly winning",
+    "text": "Share a small task you finally finished, or imagine one. The table gives you a tiny cheer. Choose someone to join you for an optional sip."
+  },
+  "unexpected-expert": {
+    "title": "Ask the expert",
+    "text": "Name a harmless subject you know oddly well. The table asks one question about it. Answer it or admit defeat and take one sip."
+  },
+  "future-postcard": {
+    "title": "Wish you were here",
+    "text": "Describe an ordinary Tuesday in your ideal future. The next player adds one surprising detail. Give out one sip if you would keep their addition."
+  },
+  "sound-of-home": {
+    "title": "Sounds familiar",
+    "text": "Name a sound that reminds you of home without revealing an address. Anyone who picked the same kind of sound joins you for one optional sip."
+  },
+  "borrowed-skill": {
+    "title": "Skill swap",
+    "text": "Choose a skill you admire in another player. They name a skill they would borrow from you. If either person gets stuck, the group suggests one and shares a toast."
+  },
+  "perfect-break": {
+    "title": "Five minutes off",
+    "text": "Describe your perfect five-minute break using exactly five words. The table counts. Use too many or too few and take one sip."
+  },
+  "umbrella-election": {
+    "title": "Rain committee",
+    "text": "Would you rather have a tiny umbrella or enormous rain boots? Everyone chooses at once. The smaller group takes one sip; a tie means nobody does."
+  },
+  "fictional-mayor": {
+    "title": "An unusual election",
+    "text": "Everyone nominates a fictional character to run a town. Vote for the best candidate. The winning nominator gives out one sip; tied winners share that one sip."
+  },
+  "breakfast-border": {
+    "title": "Breakfast parliament",
+    "text": "Should soup count as breakfast? Everyone votes yes or no, then one player from each side makes a sentence-long case. You decide which side gives out one sip."
+  },
+  "robot-pet": {
+    "title": "Household upgrade",
+    "text": "Choose between a robot that tells terrible jokes and a plant that gives advice. Reveal your choices together. Anyone alone on their side gives out one sip."
+  },
+  "weekend-vote": {
+    "title": "The extra day",
+    "text": "Would you add an extra Friday or an extra Sunday to the week? Each side names the day. The table's favourite name earns its creator one sip to give out."
+  },
+  "new-colour": {
+    "title": "Colour committee",
+    "text": "Invent a colour name for tonight. Everyone points to their favourite suggestion. The winner gives out one sip; resolve a tie with a shared toast."
+  },
+  "team-mascot": {
+    "title": "Mascot auditions",
+    "text": "Each player names an animal mascot for this group. Vote, excluding your own suggestion. The winner demonstrates its greeting or takes one sip."
+  },
+  "small-luxury": {
+    "title": "Luxury budget",
+    "text": "Everyone chooses one everyday luxury they would keep on a tiny budget. You may swap your answer after hearing the others. Anyone who swaps takes one sip."
+  },
+  "last-letter-link": {
+    "title": "Letter relay",
+    "text": "Say an animal. Go once around the table: each new animal must start with the previous animal's last letter. The first repeat or five-second pause takes one sip, then stop."
+  },
+  "forbidden-vowel": {
+    "title": "Missing a vowel",
+    "text": "Describe a beach without saying any word containing the letter A. Speak for ten seconds. If the table spots an A-word, take one sip."
+  },
+  "compound-switch": {
+    "title": "Word renovation",
+    "text": "Say a compound word, such as lighthouse. The next player replaces one half to make a real new word. Keep going for six links. The first player stuck takes one sip."
+  },
+  "alliterative-alias": {
+    "title": "The name department",
+    "text": "Give yourself an alias with three words starting with the same letter. The next player repeats it. If they miss a word, they take one sip; otherwise you give out one."
+  },
+  "two-word-review": {
+    "title": "Extremely short review",
+    "text": "Review a familiar film using two words, without its title. The table gets three guesses. If nobody solves it, reveal the film and take one sip."
+  },
+  "rhyme-ladder": {
+    "title": "Rhyme time",
+    "text": "Choose a word that has several rhymes. Go around once, adding new rhymes. The first repeated rhyme or five-second pause takes one sip, and the ladder ends."
+  },
+  "acronym-agency": {
+    "title": "Official nonsense",
+    "text": "The player on your left gives you three letters. Turn them into the name of a ridiculous organisation and explain its job. Get stuck for ten seconds and take one sip."
+  },
+  "one-letter-upgrade": {
+    "title": "One letter better",
+    "text": "Name a word of at least four letters. Another player changes one letter to make a new word. Make four changes together; the first invalid word costs its speaker one sip."
+  },
+  "colour-menu": {
+    "title": "One-colour menu",
+    "text": "Pick a colour. Go once around naming foods naturally that colour. No repeats. The first player stuck for five seconds takes one sip, then reveal the rest of your ideas."
+  },
+  "things-with-wheels": {
+    "title": "Rolling stock",
+    "text": "Name something with wheels. Continue around once without repeats, but cars and bicycles are off limits. The first invalid answer takes one sip and ends the round."
+  },
+  "night-sounds": {
+    "title": "After dark",
+    "text": "Go around once naming sounds you might hear at night. Each player must make their sound too. The first repeat takes one sip; unusual but plausible answers count."
+  },
+  "fictional-places": {
+    "title": "Imaginary atlas",
+    "text": "Name a fictional place. Go around once adding new places, without naming the same story twice. The first person who cannot answer takes one sip."
+  },
+  "three-pocket-things": {
+    "title": "Pocket inventory",
+    "text": "Name three objects that fit in a pocket but are not usually carried there. The table checks their sizes. If all three fit, give out one sip; otherwise take one."
+  },
+  "weather-verbs": {
+    "title": "Weather does things",
+    "text": "Name something weather can do, using a verb. Continue around once without repeats. The first five-second pause takes one sip, then stop."
+  },
+  "no-kitchen-tools": {
+    "title": "Wrong department",
+    "text": "Name something you can stir with that is not a kitchen utensil. Each player adds a different imaginary option. The table's most impractical suggestion gives out one sip."
+  },
+  "round-things": {
+    "title": "Around we go",
+    "text": "Go around once naming round objects. Each answer must be smaller than the previous one. The first size dispute is settled by a vote; its losing speaker takes one sip."
+  },
+  "shopping-chain": {
+    "title": "Very strange shopping",
+    "text": "Start a shopping list with one unusual item. Each player repeats the list and adds one. Stop after one circle or the first mistake; whoever makes that mistake takes one sip."
+  },
+  "gesture-recall": {
+    "title": "Remember this move",
+    "text": "Each player makes a small hand gesture. After everyone has shown theirs, copy the gesture of the player opposite you, or your only partner. Miss it and take one sip."
+  },
+  "three-object-glance": {
+    "title": "Eyes on the table",
+    "text": "Another player names three visible objects. Look away and repeat them in reverse order. Get all three and give out one sip; miss one and take one."
+  },
+  "name-rewind": {
+    "title": "Cast roll backwards",
+    "text": "Say every player's name in reverse playing order, starting with yourself. You get one restart. If you still miss someone, take one sip."
+  },
+  "story-detail": {
+    "title": "Were you listening?",
+    "text": "Tell a made-up story with a colour, an animal, and a number. The next player recalls all three. If they succeed, you each give out one sip; otherwise they take one."
+  },
+  "silent-sequence": {
+    "title": "The silent sequence",
+    "text": "Show three simple hand poses. The player on your left copies them in reverse order. A correct sequence earns them one sip to give out; otherwise they take one."
+  },
+  "menu-memory": {
+    "title": "The absent-minded waiter",
+    "text": "Each player orders an imaginary snack. Without notes, repeat up to five orders. Miss an order and take one sip; get them all and give out one."
+  },
+  "first-word-return": {
+    "title": "Back to the beginning",
+    "text": "Each player says a word. After one circle, name the first and last words spoken by other players. With two players, repeat your partner's word backwards. Miss and take one sip."
+  },
+  "shared-count": {
+    "title": "Count us in",
+    "text": "As a group, count from one to ten with no fixed speaking order. If two people speak together, stop; those two each take one sip. You get one attempt."
+  },
+  "mirror-hands": {
+    "title": "Mirror partners",
+    "text": "Face another player and mirror their slow hand movements for ten seconds while both stay seated. They choose one unexpected change. Lose track and take one sip."
+  },
+  "same-shape": {
+    "title": "Shape agreement",
+    "text": "Choose another player. Without discussion, draw a shape in the air on three. Match and give out one sip together; differ and let the table name your combined shape."
+  },
+  "alphabet-duet": {
+    "title": "Alphabet duet",
+    "text": "You and the next player alternate letters from A to P. Clap instead of saying each vowel. The first person who slips takes one sip, then stop."
+  },
+  "clap-gap": {
+    "title": "Mind the gap",
+    "text": "Clap a steady four-beat pattern together. On the third repeat, everyone leaves the last beat silent. Anyone who claps into the gap takes one sip."
+  },
+  "countdown-pair": {
+    "title": "Almost synchronised",
+    "text": "Choose a partner. Close your eyes while seated and count five seconds silently, then say now. If the table hears two separate calls, you both take one sip."
+  },
+  "shared-drawing": {
+    "title": "Air sketch partners",
+    "text": "With a partner, draw an imaginary house: you describe each line while they trace it in the air. They must keep their finger moving for ten seconds. A pause costs you one sip."
+  },
+  "alternating-introductions": {
+    "title": "Alternating introductions",
+    "text": "You and the player on your right introduce an imaginary guest, alternating one word at a time. Complete one sensible sentence. If you both speak at once, take one sip each."
+  },
+  "customer-service": {
+    "title": "Please hold",
+    "text": "Give a polite customer-service apology for the moon arriving late. Include a proposed refund. The table chooses the best phrase; its first person to repeat it gives out one sip."
+  },
+  "slow-motion-goal": {
+    "title": "A very slow winner",
+    "text": "Celebrate winning a tiny imaginary prize in slow motion for ten seconds, staying seated. Anyone who guesses the prize gives out one sip; reveal it if nobody does."
+  },
+  "object-monologue": {
+    "title": "The object speaks",
+    "text": "Give a nearby object a twenty-second monologue about its day. Another player supplies its first sentence. Break character and take one sip."
+  },
+  "whisper-trailer": {
+    "title": "Quiet blockbuster",
+    "text": "Whisper a dramatic trailer for a film about doing laundry. Include a villain and a cliffhanger. The first person to laugh takes one sip."
+  },
+  "royal-announcement": {
+    "title": "Hear ye, hear ye",
+    "text": "Announce a completely ordinary household task as a royal decree. The next player formally objects. If either uses the word boring, they take one sip."
+  },
+  "sports-commentary": {
+    "title": "Live coverage",
+    "text": "Commentate on another player's slow imaginary sandwich-making for fifteen seconds. Invent a sporting record they might break. Run out of words and take one sip."
+  },
+  "voice-switch": {
+    "title": "Three voices",
+    "text": "Say the same friendly greeting as a robot, a wizard, and a tired shopkeeper. The table chooses its favourite voice. Use it to award someone one sip."
+  },
+  "pantomime-machine": {
+    "title": "Human appliance",
+    "text": "Act out an appliance using only your face and hands. The table gets three guesses. A correct guess earns one sip to give out; otherwise reveal it and take one."
+  },
+  "cloud-job": {
+    "title": "Cloud employment",
+    "text": "Invent a job that could exist in a city built on clouds. The next player explains its biggest workplace problem. The table awards the better idea one sip to give out."
+  },
+  "tiny-dragon": {
+    "title": "Pocket-sized problem",
+    "text": "A tiny dragon moves into your kitchen. Explain one house rule you would give it. Another player responds as the dragon. Whoever laughs first takes one sip."
+  },
+  "time-capsule-label": {
+    "title": "Open in one hundred years",
+    "text": "Choose a harmless object for a time capsule and write its imaginary warning label aloud. If anyone mistakes it for a different object, they take one sip."
+  },
+  "moon-shop": {
+    "title": "Lunar high street",
+    "text": "Invent a shop for the moon and its first sale. The next player is a difficult customer. Finish your two-line exchange without mentioning gravity, or take one sip."
+  },
+  "backwards-zoo": {
+    "title": "The visitors are on display",
+    "text": "Imagine a zoo where animals visit humans. Describe the sign outside your enclosure. The table adds one care instruction, then chooses someone for one sip."
+  },
+  "helpful-ghost": {
+    "title": "Haunted but helpful",
+    "text": "A friendly ghost can perform one chore badly. Choose its chore and demonstrate the problem using your hands. The table's best repair suggestion gives out one sip."
+  },
+  "weather-subscription": {
+    "title": "Weather on demand",
+    "text": "Invent a weather subscription with a ridiculous premium feature. Pitch it in one sentence. Anyone who would subscribe raises a hand; no customers means you take one sip."
+  },
+  "miniature-city": {
+    "title": "City in a cereal box",
+    "text": "Design one landmark for a tiny city inside a cereal box. The next player names its mayor. Give out one sip if the mayor's name makes you smile."
+  },
+  "sandwich-constitution": {
+    "title": "Sandwich law",
+    "text": "State one rule for what counts as a sandwich. The next player offers a tricky example. If your rule contradicts your answer, take one sip."
+  },
+  "snack-sound-effects": {
+    "title": "Crunch, probably",
+    "text": "Make the sound of eating an imaginary snack without naming it. The first correct guess gives out one sip. After three guesses, reveal the snack and move on."
+  },
+  "menu-translation": {
+    "title": "Fancy menu decoder",
+    "text": "Describe toast as if it costs a fortune at a restaurant. Another player translates your description back into plain language. The shorter description gives out one sip."
+  },
+  "flavour-invention": {
+    "title": "Questionable flavour lab",
+    "text": "Invent a new ice-cream flavour using two things that are actually edible. Everyone votes try it or leave it. If nobody would try it, take one sip."
+  },
+  "picnic-problem": {
+    "title": "Picnic with a catch",
+    "text": "Plan a picnic where every food must begin with the same letter as your name. Name three foods or take one sip. Repeating ingredients is allowed; repeating foods is not."
+  },
+  "last-biscuit": {
+    "title": "The last biscuit hearing",
+    "text": "Make a ten-second argument for why an imaginary last biscuit belongs to you. The next player is the judge. Accept their verdict with a bow, or take one sip."
+  },
+  "soup-advert": {
+    "title": "Soup, now with drama",
+    "text": "Create a five-word slogan for an ordinary soup. Everyone repeats it together. If anyone adds a word, that person takes one sip."
+  },
+  "midnight-menu": {
+    "title": "The midnight special",
+    "text": "Everyone names a late-night snack. You must combine two suggestions into one imaginary dish and give it a name. Its two contributors share one optional sip."
+  },
+  "wrong-guidebook": {
+    "title": "The unreliable guide",
+    "text": "Describe a familiar place as if your guidebook got one fact hilariously wrong. The first person to identify the invented detail gives out one sip."
+  },
+  "suitcase-limits": {
+    "title": "Only three things",
+    "text": "You have room for three items on a fictional holiday. Name them, then the next player removes one. Explain how you will cope without it or take one sip."
+  },
+  "station-announcement": {
+    "title": "Platform nonsense",
+    "text": "Announce a train to an impossible destination. Include a delay caused by something tiny. Anyone who smiles before you finish takes one sip."
+  },
+  "island-government": {
+    "title": "Island administration",
+    "text": "This group has founded an imaginary island. Give it a name, a flag design, and one public holiday. If any detail repeats another player's earlier idea tonight, take one sip."
+  },
+  "postcard-mixup": {
+    "title": "Wish you were somewhere",
+    "text": "The player on your left names a place. Give a postcard message that could apply there or in a supermarket. A convincing message earns you one sip to give out."
+  },
+  "tourist-statue": {
+    "title": "The local landmark",
+    "text": "Pose with your face and hands as an imaginary statue while seated. The next player explains what it commemorates. The first person to break a straight face takes one sip."
+  },
+  "hotel-review": {
+    "title": "One peculiar star",
+    "text": "Review a fictional hotel with one excellent feature and one absurd inconvenience. The group rates it from one to five using fingers. The highest rating gives out one sip; ties share it."
+  },
+  "travel-initials": {
+    "title": "Alphabet itinerary",
+    "text": "Plan three imaginary stops whose initials spell a three-letter word. Explain your route. If the table cannot identify the word, reveal it and take one sip."
+  },
+  "song-without-song": {
+    "title": "The song description",
+    "text": "Describe a familiar song without singing, humming, or quoting lyrics. Give three clues. The first correct guess gives out one sip; no guess means you take one."
+  },
+  "doorbell-composer": {
+    "title": "A grand entrance",
+    "text": "Compose a three-note doorbell sound using your voice. The table echoes it once. The player whose version you would install gives out one sip."
+  },
+  "beat-name": {
+    "title": "Name that beat",
+    "text": "Tap the rhythm of your full name on your knees while seated. The next player answers with theirs. If the rhythms match, share an optional sip."
+  },
+  "soundtrack-switch": {
+    "title": "Wrong soundtrack",
+    "text": "Choose music for a dramatic scene, then replace it with the least suitable genre you can imagine. Describe the result. The table's first laugh takes one sip."
+  },
+  "fictional-band": {
+    "title": "Band meeting",
+    "text": "You are forming a band. Assign the next three players, or as many as available, imaginary instruments. They each make one sound. Name the band and give out one sip."
+  },
+  "tiny-jingle": {
+    "title": "Eight-second advert",
+    "text": "Invent an eight-second jingle for a household object. You may speak rhythmically instead of singing. Forget to name the object and take one sip."
+  },
+  "volume-detective": {
+    "title": "Indoor voice detective",
+    "text": "Say one sentence in three different moods at the same quiet volume. The table identifies the moods. For each missed mood, reveal it; if all three are missed, take one sip."
+  },
+  "percussion-pass": {
+    "title": "The rhythm parcel",
+    "text": "Tap twice, then point to another player. They tap twice and choose someone new. Continue until everyone has played. The first extra tap costs one sip."
+  },
+  "plot-in-reverse": {
+    "title": "Spoil it backwards",
+    "text": "Describe a familiar story backwards in three sentences, without names. The table gets one guess per player. The first correct guess gives out one sip."
+  },
+  "sequel-title": {
+    "title": "The unnecessary sequel",
+    "text": "Invent a sequel to an ordinary chore. Give it a dramatic title and a one-sentence plot. Everyone votes watch or skip; if nobody would watch, take one sip."
+  },
+  "background-actor": {
+    "title": "A very important extra",
+    "text": "Describe a film scene from the perspective of an unnoticed background character. The next player guesses the genre. Agree with the guess and give out one sip; disagree and take one."
+  },
+  "book-cover": {
+    "title": "Judge this cover",
+    "text": "Invent a book title from the last object you touched and the current weather. The next player supplies its opening sentence. If the group wants chapter two, give out one sip."
+  },
+  "three-genre-story": {
+    "title": "Genre collision",
+    "text": "Tell a three-sentence story: first a mystery, then a romance, then science fiction. The table supplies your main character's name. Miss a genre and take one sip."
+  },
+  "movie-prop": {
+    "title": "One essential prop",
+    "text": "Name an ordinary object. The next player invents a film scene that makes it crucial. You have one sentence to explain its unexpected sequel appearance, or take one sip."
+  },
+  "ending-vote": {
+    "title": "Choose the ending",
+    "text": "Begin a story in two sentences. The next two players, or your only partner and you, each suggest an ending. Vote for one; its author gives out one sip."
+  },
+  "trailer-voiceover": {
+    "title": "Coming eventually",
+    "text": "Give a serious trailer voiceover for tomorrow's breakfast. Use exactly three sentences. The table counts; the wrong number costs one sip."
+  },
+  "unsung-helper": {
+    "title": "Behind the scenes",
+    "text": "Name a small helpful thing someone at the table has done, or might do well. That person chooses someone else to thank. End with an optional shared sip."
+  },
+  "compliment-metaphor": {
+    "title": "A slightly odd compliment",
+    "text": "Compliment another player by comparing them to a useful object. Explain the comparison kindly. They may accept with an imaginary medal or return a compliment."
+  },
+  "team-superpower": {
+    "title": "Collective talent",
+    "text": "Name a task this group could do surprisingly well together. Assign everyone a role. Anyone who wants a different role must pitch it in five words or take one sip."
+  },
+  "good-news-bulletin": {
+    "title": "Some good news",
+    "text": "Give a fifteen-second news bulletin about three tiny positive things, real or invented. If you repeat a topic, take one sip; otherwise give out one."
+  },
+  "future-award": {
+    "title": "Next year's headline",
+    "text": "Invent a positive headline about the player on your right one year from now. They give a short response. Both of you choose someone for an optional toast."
+  },
+  "kindness-chain": {
+    "title": "Pass something good",
+    "text": "Each player names one small kindness someone could do tomorrow. No repeats. If an idea has already been said, offer a new one or take one sip."
+  },
+  "shared-project": {
+    "title": "The group project",
+    "text": "Choose a harmless imaginary project for the group. Everyone contributes one idea. You have ten seconds to combine up to three of those ideas into a plan, or take one sip."
+  },
+  "celebration-budget": {
+    "title": "A party for almost nothing",
+    "text": "Plan a celebration using only things already in this room, without moving or using them. The table votes on the best detail. Its creator gives out one sip."
+  },
+  "opposite-advice": {
+    "title": "Advice in reverse",
+    "text": "Give obviously terrible advice for keeping a houseplant alive. The next player converts it into useful advice. If either accidentally gives the wrong kind, take one sip."
+  },
+  "explain-without-hands": {
+    "title": "Hands off the explanation",
+    "text": "Explain how to wrap a present without moving your hands. The next player watches for gestures. A gesture costs one sip; a clean explanation earns one to give out."
+  },
+  "object-alibi": {
+    "title": "The missing spoon",
+    "text": "Give a nearby object an alibi for an imaginary missing spoon. Another player asks one follow-up question. Contradict yourself and take one sip."
+  },
+  "odd-instruction": {
+    "title": "Instruction manual",
+    "text": "Explain how to use an umbrella to someone who thinks it is a musical instrument. You cannot say rain or wet. Use either word and take one sip."
+  },
+  "size-order": {
+    "title": "Small, medium, surprising",
+    "text": "Another player names three objects. Put them in size order, then invent a situation where the order reverses. If the table accepts the explanation, give out one sip."
+  },
+  "false-choice": {
+    "title": "A third option",
+    "text": "The player on your left offers two ordinary choices. Invent a sensible third option that combines both. If the table cannot see both parts, take one sip."
+  },
+  "question-detective": {
+    "title": "Five-question mystery",
+    "text": "Think of an everyday object. The table may ask five yes-or-no questions, then make one shared guess. If correct, you take one sip; otherwise give out one."
+  },
+  "ridiculous-proof": {
+    "title": "Prove the obvious",
+    "text": "Explain why a chair is definitely not a sandwich, without using the words sit, bread, or eat. Use a forbidden word and take one sip."
+  },
+  "secret-season": {
+    "title": "Season forecast",
+    "text": "Privately choose a favourite season. Everyone points to someone and predicts theirs. Reveal in playing order. Each incorrect predictor takes one sip."
+  },
+  "number-agreement": {
+    "title": "Meet in the middle",
+    "text": "Everyone chooses a number from one to five and reveals it with fingers together. Anyone whose number matches yours gives out one sip; if nobody matches, you take one."
+  },
+  "predict-the-snack": {
+    "title": "Snack forecast",
+    "text": "Guess the next player's choice between sweet, salty, and sour before they answer. A correct guess earns you one sip to give out; a wrong guess costs one sip."
+  },
+  "colour-consensus": {
+    "title": "What colour is Monday?",
+    "text": "Everyone secretly decides what colour Monday would be. Reveal together. If any answers match, those players give out one sip together; otherwise the table shares a toast."
+  },
+  "fictional-roommate": {
+    "title": "Roommate shortlist",
+    "text": "Name two fictional characters. Predict which one the next player would prefer as a roommate. They reveal their choice and one reason. Guess wrong and take one sip."
+  },
+  "choose-the-ending": {
+    "title": "Predict the punchline",
+    "text": "Start an invented sentence with Tomorrow I will definitely. The next player privately chooses an ending; predict its first word. Match and give out three sips, shared among volunteers."
+  },
+  "weekend-object": {
+    "title": "One-object weekend",
+    "text": "Think of an object that represents your ideal weekend. Give its colour as a clue. The table gets three guesses. A correct guess gives out one sip; otherwise reveal it."
+  },
+  "secret-hand": {
+    "title": "Empty-handed guess",
+    "text": "Put an imaginary coin in either closed hand and choose honestly. Another player guesses which hand. A wrong guess costs them one sip; a correct guess costs you one."
+  },
+  "nearest-match": {
+    "title": "Find the connection",
+    "text": "Name something visible in the room. The next player names something else and explains a connection in one sentence. Continue for four links; the first repeat takes one sip."
+  },
+  "table-map": {
+    "title": "Map of the room",
+    "text": "Describe this room as an imaginary country. Give three landmarks playful names. The first player to identify all three real locations gives out one sip."
+  },
+  "object-election": {
+    "title": "Chair of the committee",
+    "text": "Nominate three visible objects for an imaginary committee. Everyone votes on its chairperson. Give the winning object a one-sentence acceptance speech, or take one sip."
+  },
+  "left-right-check": {
+    "title": "Know your neighbours",
+    "text": "Without looking, name one visible colour worn by the player on each side. With two players, name two colours your partner wears. If either is wrong, take one sip."
+  },
+  "caption-contest": {
+    "title": "Freeze-frame caption",
+    "text": "Make a harmless seated pose with your hands and face. Everyone supplies a caption. Choose your favourite; its author gives out one sip."
+  },
+  "common-ground": {
+    "title": "Find a connection",
+    "text": "Find one harmless preference shared by every player using no more than five questions. Succeed and give out three sips among volunteers; otherwise offer a shared toast."
+  },
+  "room-riddle": {
+    "title": "The room has an answer",
+    "text": "Make a two-line riddle about something visible nearby, without naming its colour. The first player to solve it gives out one sip. Reveal the answer after three guesses."
+  },
+  "farewell-speech": {
+    "title": "Until the next card",
+    "text": "Give a ten-second farewell speech to the card you are reading. Include one sincere compliment about its punctuation. If you laugh before finishing, take one sip."
+  },
+  "radio-signoff": {
+    "title": "Over and out",
+    "text": "End each conversational reply with “over.” Forget your radio sign-off and take one sip."
+  },
+  "proper-introductions": {
+    "title": "A formal address",
+    "text": "Before asking someone a question, introduce yourself with your full first name. Forget the introduction and take one sip."
+  },
+  "no-yes-no": {
+    "title": "Beyond yes and no",
+    "text": "In conversation, answer without using the words yes or no. Say either word and take one sip."
+  },
+  "weather-comparison": {
+    "title": "Forecast included",
+    "text": "Whenever someone asks how you are, answer with a weather forecast for your mood. Give an ordinary answer and take one sip."
+  },
+  "phantom-notebook": {
+    "title": "Taking notes",
+    "text": "When another player gives you a direct instruction, mime noting it in a little notebook. Forget your notes and take one sip."
+  },
+  "finger-curtain": {
+    "title": "Opening night",
+    "text": "Before reading a new card aloud, mime opening a tiny curtain with your hands. Miss the opening and take one sip."
+  },
+  "polite-correction": {
+    "title": "Pardon the interruption",
+    "text": "If you interrupt another player, immediately say “please continue” and let them finish. Forget the phrase and take one sip."
+  },
+  "question-echo": {
+    "title": "Just to confirm",
+    "text": "Repeat the last word of any question addressed to you before answering it. Skip the echo and take one sip."
+  },
+  "name-free-chat": {
+    "title": "Names off duty",
+    "text": "Use friendly descriptions instead of players' names during conversation. Say a player's name and take one sip. Reading names printed on a card is allowed."
+  },
+  "mini-bow": {
+    "title": "A gracious reply",
+    "text": "Give a small seated nod whenever another player thanks you. Miss the acknowledgment and take one sip."
+  },
+  "robot-punctuation": {
+    "title": "Punctuation unit",
+    "text": "Say “full stop” after each conversational statement and “question mark” after each question. Miss the punctuation and take one sip."
+  },
+  "word-of-the-round": {
+    "title": "A useful word",
+    "text": "Whenever you say “actually” in conversation, immediately add “and that is official.” Forget the addition and take one sip."
+  },
+  "future-tense": {
+    "title": "Looking ahead",
+    "text": "When talking about yourself in conversation, describe what you will do rather than what you did. Slip into your own past and take one sip."
+  },
+  "thanks-to-the-table": {
+    "title": "Credit where due",
+    "text": "Whenever you receive a compliment, thank the whole table by saying “team effort.” Forget the phrase and take one sip."
+  },
+  "pretend-doorbell": {
+    "title": "Someone at the door",
+    "text": "Before asking the whole group a question, say “ding-dong” once. Forget the doorbell and take one sip."
+  },
+  "number-as-words": {
+    "title": "Count it out",
+    "text": "Whenever you mention a number from one to five in conversation, show it with your fingers too. Forget the matching fingers and take one sip."
+  },
+  "curious-expert": {
+    "title": "According to my research",
+    "text": "Begin explanations of how something works with “according to my research.” Forget your scholarly opening and take one sip."
+  },
+  "no-pointing": {
+    "title": "The open-hand policy",
+    "text": "Indicate people and objects with an open hand rather than one pointing finger. Point with a finger and take one sip."
+  },
+  "fictional-assistant": {
+    "title": "I'll ask my assistant",
+    "text": "Before giving an opinion, briefly consult an imaginary assistant beside you. Forget the consultation and take one sip."
+  },
+  "soft-fanfare": {
+    "title": "A small announcement",
+    "text": "Before announcing a decision, make a quiet two-note fanfare. Forget the fanfare and take one sip."
+  },
+  "compliment-receipt": {
+    "title": "Compliment received",
+    "text": "When someone compliments you, mime placing the compliment safely in a pocket. Forget to keep it and take one sip."
+  },
+  "royal-we": {
+    "title": "We have an opinion",
+    "text": "Use “we” instead of “I” when sharing your own opinions. Slip back into the singular and take one sip."
+  },
+  "handmade-quotation": {
+    "title": "Quote, unquote",
+    "text": "When quoting something another person said, make small quotation marks with your fingers. Forget the gesture and take one sip."
+  },
+  "left-hand-wave": {
+    "title": "Hello again",
+    "text": "Whenever you say hello or goodbye, add a small wave with your left hand. Miss the wave and take one sip."
+  },
+  "sporting-answer": {
+    "title": "Post-match interview",
+    "text": "Begin answers to personal questions with “it was a team effort.” Forget the interview phrase and take one sip."
+  },
+  "imaginary-spectacles": {
+    "title": "Let me examine that",
+    "text": "Before reading anything aloud, adjust a pair of imaginary spectacles. Forget your spectacles and take one sip."
+  },
+  "proper-food-title": {
+    "title": "Chef's compliments",
+    "text": "Whenever you name a food in conversation, call it “the magnificent” food. For example, the magnificent toast. Forget its title and take one sip."
+  },
+  "thoughtful-chin": {
+    "title": "A moment of thought",
+    "text": "Touch your chin briefly before answering a question about your preferences. Forget your thoughtful pose and take one sip."
+  },
+  "sound-effect-agreement": {
+    "title": "Audible approval",
+    "text": "Add a quiet “ta-da” whenever you agree to a suggestion. Forget your sound effect and take one sip."
+  },
+  "tiny-round-table": {
+    "title": "All in favour",
+    "text": "When a card asks the group to vote, wait for the current player to say “polls open.” Vote before that announcement and take one sip."
   }
 }

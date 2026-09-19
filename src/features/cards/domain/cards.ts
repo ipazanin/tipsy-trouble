@@ -1,6 +1,6 @@
 import { validateCardImageId } from './cardImage'
 
-export const MAX_DECK_CARDS = 1000
+export const MAX_DECK_CARDS = 2000
 
 export interface CardContent {
   readonly id: string

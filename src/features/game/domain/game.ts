@@ -186,11 +186,15 @@ export function createGame(
   return drawCard(session, random)
 }
 
-export function getCurrentPlayer(session: GameSession): Player {
+export function getCurrentPlayer(
+  session: Pick<GameSession, 'players' | 'currentPlayerIndex'>,
+): Player {
   return session.players[session.currentPlayerIndex]!
 }
 
-export function getHouseRuleAuthor(session: GameSession): Player | null {
+export function getHouseRuleAuthor(
+  session: Pick<GameSession, 'players' | 'phase' | 'houseRules'>,
+): Player | null {
   return session.phase === 'house-rule' ? session.players[session.houseRules.length]! : null
 }
 

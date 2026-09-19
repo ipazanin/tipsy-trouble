@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { CardValidationError, parseCardDefinition, parseCardDefinitions } from '../cards'
+import {
+  CardValidationError,
+  MAX_DECK_CARDS,
+  parseCardDefinition,
+  parseCardDefinitions,
+} from '../cards'
 
 const prompt = { id: 'custom-story', title: ' Story ', text: ' Tell a story. ', kind: 'prompt' }
 
@@ -74,6 +79,17 @@ describe('card import validation', () => {
     for (const deck of [[], [prompt, prompt], [{ ...prompt, kind: 'special' }], 'cards']) {
       expect(() => parseCardDefinitions(deck)).toThrow(CardValidationError)
     }
+  })
+
+  it('accepts a complete deck at capacity and rejects one extra card', () => {
+    const cards = Array.from({ length: MAX_DECK_CARDS }, (_, index) => ({
+      ...prompt,
+      id: `card-${index}`,
+    }))
+    expect(parseCardDefinitions(cards)).toHaveLength(MAX_DECK_CARDS)
+    expect(() => parseCardDefinitions([...cards, { ...prompt, id: 'one-more' }])).toThrow(
+      CardValidationError,
+    )
   })
 
   it('imports text as plain content and discards executable-looking extra properties', () => {

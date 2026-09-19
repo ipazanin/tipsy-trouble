@@ -1,8 +1,7 @@
 import { builtInCards } from '@/features/cards/catalogue'
-import { MAX_DECK_CARDS } from '@/features/cards/domain/cards'
 
 export const MAX_SAVED_PLAYERS = 1000
-export const MAX_CUSTOM_CARDS = MAX_DECK_CARDS - builtInCards.length
+export const MAX_CUSTOM_CARDS = 1000
 
 const builtInCardIds = new Set(builtInCards.map((card) => card.id))
 

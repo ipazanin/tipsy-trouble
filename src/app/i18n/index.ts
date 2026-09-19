@@ -4,6 +4,7 @@ import coreMessages from './core.en.json'
 import shellMessages from './shell.en.json'
 import gameMessages from './game.en.json'
 import libraryMessages from './library.en.json'
+import multiplayerMessages from './multiplayer.en.json'
 
 export const i18n = createI18n({
   legacy: false,
@@ -16,6 +17,7 @@ export const i18n = createI18n({
       ...shellMessages,
       ...gameMessages,
       ...libraryMessages,
+      ...multiplayerMessages,
     },
   },
 })

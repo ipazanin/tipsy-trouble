@@ -299,7 +299,7 @@ test('keeps an all-disabled deck editable and explains why a new game cannot sta
   ).toBeVisible()
   await expect(
     page.getByRole('region', { name: 'Disabled built-in cards', exact: true }).locator('article'),
-  ).toHaveCount(42)
+  ).toHaveCount(builtInCards.length)
   await page.goto('./#/players')
   for (const name of ['Alice', 'Bob'])
     await page.getByRole('button', { name: `Add ${name} to this game` }).click()

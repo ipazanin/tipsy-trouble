@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:4175/tipsy-trouble/',
+    baseURL: 'http://127.0.0.1:4175/tipsy-trouble/',
     headless: true,
     trace: 'on-first-retry',
   },
@@ -22,8 +22,8 @@ export default defineConfig({
     { name: 'mobile-webkit', use: { ...devices['iPhone 13'] } },
   ],
   webServer: {
-    command: 'npm run build && npm run preview -- --host localhost --port 4175 --strictPort',
-    url: 'http://localhost:4175/tipsy-trouble/',
+    command: 'npm run build && npm run preview -- --host 127.0.0.1 --port 4175 --strictPort',
+    url: 'http://127.0.0.1:4175/tipsy-trouble/',
     reuseExistingServer: false,
   },
 })

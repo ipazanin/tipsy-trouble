@@ -19,7 +19,10 @@ describe('local library capacity', () => {
     }))
 
     expect(() => validateCustomCardIds(customCards.map((card) => card.id))).not.toThrow()
-    expect(parseCardDefinitions([...builtInCards, ...customCards])).toHaveLength(MAX_DECK_CARDS)
+    expect(parseCardDefinitions([...builtInCards, ...customCards])).toHaveLength(
+      builtInCards.length + MAX_CUSTOM_CARDS,
+    )
+    expect(builtInCards.length + MAX_CUSTOM_CARDS).toBeLessThanOrEqual(MAX_DECK_CARDS)
     expect(() =>
       validateCustomCardIds([...customCards.map((card) => card.id), 'one-too-many']),
     ).toThrow(`at most ${MAX_CUSTOM_CARDS}`)

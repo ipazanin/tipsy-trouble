@@ -13,6 +13,7 @@ export default mergeConfig(
         include: [
           'src/features/**/domain/**/*.ts',
           'src/features/game/composables/useGameSession.ts',
+          'src/features/multiplayer/composables/useMultiplayer.ts',
           'src/infrastructure/storage/localBackup.ts',
           'src/infrastructure/storage/localLibraryPolicy.ts',
         ],

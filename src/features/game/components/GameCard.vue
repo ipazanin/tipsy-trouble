@@ -2,13 +2,28 @@
 import { computed, ref, watch } from 'vue'
 import { t } from '@/app/i18n'
 import type { GameSession } from '../domain/game'
+import { getCardArtwork } from '@/features/cards/artwork'
 import { useCardArtwork } from '@/features/cards/composables/useCardArtwork'
 import AppButton from '@/shared/components/AppButton.vue'
-const props = defineProps<{ session: GameSession; busy: boolean }>()
+const props = defineProps<{
+  session: Pick<
+    GameSession,
+    'currentCard' | 'temporaryRules' | 'completedTurns' | 'players' | 'currentPlayerIndex'
+  >
+  busy: boolean
+  readOnly?: boolean
+  remote?: boolean
+  remoteArtwork?: string
+}>()
 const emit = defineEmits<{ next: [targetId?: string] }>()
 const targetId = ref('')
 const card = computed(() => props.session.currentCard)
-const artwork = useCardArtwork(card)
+const localArtwork = useCardArtwork(() => (props.remote ? null : card.value))
+const artwork = computed(() => {
+  if (!props.remote) return localArtwork.value
+  if (props.remoteArtwork) return { src: props.remoteArtwork, alt: '', credit: '', sourceUrl: '' }
+  return card.value ? getCardArtwork(card.value) : null
+})
 const activated = computed(() =>
   props.session.temporaryRules.some(
     (rule) => rule.activatedOnTurn === props.session.completedTurns,
@@ -60,7 +75,7 @@ watch(
       >
     </article>
     <form
-      v-if="needsActivation"
+      v-if="needsActivation && !readOnly"
       class="play-target-form"
       @submit.prevent="emit('next', targetId || undefined)"
     >
@@ -93,7 +108,7 @@ watch(
         >
       </div>
     </form>
-    <div v-else class="play-actions">
+    <div v-else-if="!readOnly" class="play-actions">
       <AppButton :disabled="busy" @click="emit('next')"
         >{{ t('game.next') }} <span aria-hidden="true">→</span></AppButton
       >

@@ -2,7 +2,9 @@
 import { computed, ref } from 'vue'
 import { t } from '@/app/i18n'
 import type { GameSession, RuleScope } from '../domain/game'
-const props = defineProps<{ session: GameSession }>()
+const props = defineProps<{
+  session: Pick<GameSession, 'players' | 'temporaryRules' | 'houseRules'>
+}>()
 const expanded = ref(true)
 const ruleCount = computed(
   () => props.session.temporaryRules.length + props.session.houseRules.length,

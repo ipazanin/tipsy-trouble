@@ -42,7 +42,7 @@
   "about": {
     "eyebrow": "LESS READING. MORE PLAYING.",
     "title": "How to play",
-    "intro": "One shared phone, a circle of friends, and a deck with a few surprises.",
+    "intro": "A circle of friends, a deck with a few surprises, and one shared phone or connected player phones.",
     "step1Title": "Get your people in",
     "step1": "Add at least two players, choose who's joining, and set the order. Saved players stay on this device for next time.",
     "step2Title": "Follow the card",
@@ -54,7 +54,9 @@
     "note": "No scores, no pressure, and no one has to drink. Agree on boundaries together; any drink or no drink works.",
     "storageTitle": "Your game stays with you",
     "storage": "Players, photos, custom cards, and your current game are stored in this browser. Clearing browser data removes them. Export a backup from the card library. Private browsing may not keep saves after you close it.",
-    "start": "Bring the crew"
+    "start": "Bring the crew",
+    "phonesTitle": "Play on your own phones",
+    "phones": "Start a game on the host, then choose Connect players. Each player reads the host’s pairing code and shows their reply to the host. Use the same Wi-Fi or hotspot and keep both pages open. Only the current player or host can advance. Refreshing keeps the host’s saved game, but phones need to pair again."
   },
   "players": {
     "eyebrow": "FIRST, THE GOOD COMPANY",

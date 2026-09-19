@@ -2,8 +2,10 @@
 import { t } from '@/app/i18n'
 import AppIcon from '@/shared/components/AppIcon.vue'
 import { useGameSession } from '@/features/game/composables/useGameSession'
+import { useMultiplayer } from '@/features/multiplayer/composables/useMultiplayer'
 
 const { isGameActive, sessionLoaded } = useGameSession()
+const { guestActive, guestState } = useMultiplayer()
 </script>
 
 <template>
@@ -24,6 +26,13 @@ const { isGameActive, sessionLoaded } = useGameSession()
     </ol>
     <aside class="callout">{{ t('about.note') }}</aside>
     <details class="storage-details">
+      <summary>{{ t('about.phonesTitle') }}</summary>
+      <p>{{ t('about.phones') }}</p>
+      <RouterLink class="back-link" to="/multiplayer"
+        >{{ t('multiplayer.room.title') }}<AppIcon name="arrow-right" :size="18"
+      /></RouterLink>
+    </details>
+    <details class="storage-details">
       <summary>{{ t('about.storageTitle') }}</summary>
       <p>{{ t('shell.storage') }}</p>
       <RouterLink class="back-link" to="/library?tab=backups">
@@ -33,9 +42,18 @@ const { isGameActive, sessionLoaded } = useGameSession()
     <RouterLink
       v-if="sessionLoaded"
       class="button button-primary"
-      :to="isGameActive ? '/play' : '/players'"
+      :to="
+        guestActive
+          ? guestState
+            ? '/remote'
+            : '/multiplayer'
+          : isGameActive
+            ? '/play'
+            : '/players'
+      "
     >
-      {{ t(isGameActive ? 'shell.resume' : 'shell.start') }}<AppIcon name="arrow-right" />
+      {{ t(guestActive ? 'multiplayer.resume' : isGameActive ? 'shell.resume' : 'shell.start')
+      }}<AppIcon name="arrow-right" />
     </RouterLink>
   </section>
 </template>

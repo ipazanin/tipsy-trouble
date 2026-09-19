@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 import { t } from '@/app/i18n'
 import {
@@ -7,6 +7,10 @@ import {
   sessionLoaded,
   sessionBusy,
 } from '@/features/game/composables/useGameSession'
+import { useMultiplayer } from '@/features/multiplayer/composables/useMultiplayer'
+
+const { multiplayerActive } = useMultiplayer()
+const activePlay = computed(() => isGameActive.value || multiplayerActive.value)
 
 const offline = ref(!navigator.onLine)
 const registrationFailed = ref(false)
@@ -31,7 +35,7 @@ function dismiss() {
 }
 
 async function installUpdate() {
-  if (!sessionLoaded.value || sessionBusy.value || isGameActive.value || updating.value) return
+  if (!sessionLoaded.value || sessionBusy.value || activePlay.value || updating.value) return
   updating.value = true
   updateFailed.value = false
   try {
@@ -67,14 +71,14 @@ onUnmounted(() => {
       <button type="button" @click="dismiss">{{ t('pwa.close') }}</button>
     </template>
     <template v-else-if="needRefresh">
-      <p v-if="isGameActive">{{ t('pwa.updateAfterGame') }}</p>
+      <p v-if="activePlay">{{ t('pwa.updateAfterGame') }}</p>
       <template v-else>
         <strong>{{ t('pwa.update') }}</strong>
         <p>{{ t('pwa.updateDetails') }}</p>
       </template>
       <div class="pwa-actions">
         <button
-          v-if="sessionLoaded && !isGameActive"
+          v-if="sessionLoaded && !activePlay"
           type="button"
           :disabled="updating || sessionBusy"
           @click="installUpdate"

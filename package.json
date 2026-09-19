@@ -20,11 +20,15 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "icons:generate": "pwa-assets-generator",
-    "verify": "npm run lint && npm run format:check && npm run test:coverage && npm run build",
-    "test:coverage": "vitest run --coverage"
+    "verify": "npm run cards:check && npm run lint && npm run format:check && npm run test:coverage && npm run build",
+    "test:coverage": "vitest run --coverage",
+    "cards:generate": "node scripts/generate-card-catalogue.mjs",
+    "cards:check": "node scripts/generate-card-catalogue.mjs --check"
   },
   "dependencies": {
     "idb": "^8.0.3",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4",
     "vue": "^3.5.42",
     "vue-i18n": "^11.4.12",
     "vue-router": "^5.3.1"
@@ -34,6 +38,7 @@
     "@tsconfig/node24": "^24.0.5",
     "@types/jsdom": "^30.0.0",
     "@types/node": "^24.13.4",
+    "@types/qrcode": "^1.5.6",
     "@vite-pwa/assets-generator": "^1.0.4",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-v8": "^4.1.11",

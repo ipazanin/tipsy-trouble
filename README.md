@@ -2,7 +2,7 @@
 
 [Play Tipsy Trouble](https://ipazanin.github.io/tipsy-trouble/)
 
-A drinking card game for one shared device: reusable players and photos, custom cards, temporary rules with visible countdowns, and permanent rules written by the table.
+A drinking card game for a shared device or directly connected player phones: reusable players and photos, custom cards, temporary rules with visible countdowns, and permanent rules written by the table.
 
 The app runs on GitHub Pages and caches its complete built-in game for offline play after the first successful online visit. Game progress and personal collections are saved locally in IndexedDB. Export a backup from Library → Backups before clearing browser data or moving to another device.
 
@@ -19,6 +19,7 @@ npm run dev
 Open the URL printed by Vite, including `/tipsy-trouble/`. Hash routing supports direct links and reloads on GitHub Pages without server rewrites.
 
 ```sh
+npm run cards:check
 npm run lint
 npm run format:check
 npm run test:coverage
@@ -29,7 +30,7 @@ npm run test:e2e
 
 Browser tests build and serve the production app on port 4175. They cover Firefox, a narrow Firefox viewport, Chromium, and mobile WebKit. Chromium and Firefox use offline emulation. WebKit checks cached play after its test origin is shut down, because [Playwright's WebKit offline emulation currently rejects service-worker navigation](https://github.com/microsoft/playwright/issues/42775). Mobile emulation and origin outages do not replace installation, airplane-mode, and keyboard checks on physical phones.
 
-Business-logic coverage must reach at least 96% for statements, branches, functions, and lines in each domain module, game-session orchestration, and backup/import policy module. `npm run test:coverage` enforces these thresholds locally and in CI; its HTML report is written to `coverage/index.html`. Browser tests verify the IndexedDB and image-processing adapters against real browser APIs.
+Business-logic coverage must reach at least 96% for statements, branches, functions, and lines in each domain module, game and multiplayer orchestration module, and backup/import policy module. `npm run test:coverage` enforces these thresholds locally and in CI; its HTML report is written to `coverage/index.html`. Browser tests verify the IndexedDB and image-processing adapters against real browser APIs.
 
 The service worker runs in production builds. To check offline behavior manually, run `npm run build` and `npm run preview`, open the app online until it reports offline readiness, then disconnect and reload. Development mode does not register a worker.
 
@@ -46,13 +47,15 @@ The service worker runs in production builds. To check offline behavior manually
 
 ## Cards and language
 
+The complete [card catalogue](docs/cards.md) lists every built-in card for review, with its stable ID, exact English wording, target, duration, and artwork theme. It is an original Tipsy Trouble deck; it is not a verbatim copy or a verified complete mapping of Drunk Pirate. Run `npm run cards:generate` after editing the catalogue; CI checks that this document matches the source.
+
 Built-in mechanics live in `src/features/cards/catalogue/definitions.ts`; English wording lives in the adjacent `en.json`. Stable card IDs join the two. Add definitions and wording together; catalogue checks catch missing or orphaned text.
 
-Custom cards use the same validated definition format. Their `contentLocale` records the language they were written in. Text renders as plain text. Creating a permanent rule during a game does not add a reusable card to the library.
+Save up to 1,000 custom cards independently of the built-in catalogue size. Custom cards use the same validated definition format. Their `contentLocale` records the language they were written in. Text renders as plain text. Creating a permanent rule during a game does not add a reusable card to the library.
 
 The Library groups saved players, cards, and backups. Its card lists separate enabled and disabled custom cards from enabled and disabled built-in cards. Toggles control future games and travel with backups; a game already in progress keeps its original deck. At least one ordinary card must remain enabled to start a game.
 
-Custom cards start with a stock image; an optional JPEG, PNG, or WebP upload can replace it. Uploads up to 10 MB are resized to at most 1200 × 800 pixels and 512 KiB. Images stay on the device and travel with exported backups. Game snapshots reference immutable stored images, so editing or deleting a library card does not change artwork in a game already in progress.
+Custom cards start with a stock image; an optional JPEG, PNG, or WebP upload can replace it. Uploads up to 10 MB are resized to at most 1200 × 800 pixels and 512 KiB. Images stay on the device, travel with exported backups, and are sent directly to paired phones when their card is shown. Game snapshots reference immutable stored images, so editing or deleting a library card does not change artwork in a game already in progress.
 
 Card photos are local WebP assets in `public/artwork`, cached with the game. Built-in pairings and photographer/source/license metadata live in `src/features/cards/artwork`. Custom card IDs deterministically select from ten templates, so an image stays consistent across edits and reloads. Photos are used under the [Unsplash License](https://unsplash.com/license); each card links to its photographer’s source page. They are decorative, so all instructions remain in accessible text.
 
@@ -74,9 +77,15 @@ The same icon appears in the app header, favicon, and install assets. Shared int
 
 The footer's Appearance setting offers Light, Dark, or Device default. Device default follows the system theme; an explicit choice stays on the device and works offline.
 
-## Multiplayer direction
+## Local multiplayer
 
-Multiplayer is being planned as direct WebRTC connections with manual QR or link pairing and no signaling, STUN, or TURN service. Shared-device play remains fully usable offline. See the [multiplayer design](docs/multiplayer.md) for the proposed pairing flow, network limitations, and validation required before implementation.
+Start a game, choose **Connect players**, and assign a phone to an existing player. The guest scans or pastes the host’s offer, then the host reads the guest’s reply inside the app. Repeat for up to 12 guest phones. QR generation, camera decoding, image upload, and paste fallbacks are bundled for offline use.
+
+The current player or host can advance. The scheduled author can submit a permanent rule; the host can also enter it. Guests see the saved current card, its custom image when present, active rules, and player names. The future deck and random seed remain on the host. Joining another game leaves the guest’s own saved game intact.
+
+Connections use WebRTC with no signaling, discovery, STUN, or TURN service. Use the same Wi-Fi or hotspot; some networks and browsers cannot establish a direct connection. Every device must cache the app before going offline. A refresh preserves the host’s game but requires pairing phones again. Keep the host page open; shared-device play remains available when connections fail.
+
+See [multiplayer behavior and protocol](docs/multiplayer.md) for the pairing steps, limits, recovery, and test-environment restrictions. Physical-phone LAN and hotspot compatibility has not been verified in this workspace.
 
 ## Publishing
 

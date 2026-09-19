@@ -20,6 +20,7 @@
 - Keep the shared-device game usable offline with bundled assets. Preserve hash routing and the `/tipsy-trouble/` base across routes, manifest, and service worker. Never activate an update during an active game.
 - Save a transition before displaying it. Failed writes must leave the current game intact and retryable; do not rely on unload events to save progress.
 - Preserve existing saves and backups during schema changes. Validate imports before writing and commit related records atomically. Store plain serializable records rather than Vue proxies.
+- Keep multiplayer host-authoritative: derive permissions from the paired connection, save before broadcasting, reject stale commands, and preserve the guest’s own local save. Keep `iceServers: []`; external signaling, STUN, and TURN are outside the project’s chosen scope.
 - Treat the active roster, deck, and image references as snapshots. Library edits and image cleanup must preserve assets referenced by the current game. Gameplay invariants are documented in [README.md](README.md#gameplay).
 
 ## Validation
