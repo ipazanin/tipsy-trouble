@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "game": "Drunk Pirate",
+  "exportedAt": "2026-09-21T07:57:16.644Z",
+  "datasetStatus": "reference-only-no-card-text",
+  "exportedCardCount": 0,
+  "totalCardCount": null,
+  "completeCatalogue": false,
+  "scope": "Source and research notes only. The cards array is intentionally empty: no Drunk Pirate card deck has been exported. Do not interpret this as a game with zero cards or use it for card-by-card comparisons yet.",
+  "sources": [
+    {
+      "url": "https://drunkpirate.co.uk/",
+      "checkedOn": "2026-09-21",
+      "verification": "Retrieved official homepage identifies an online drinking game and a start action. No card text or gameplay instructions appeared in the retrieved page."
+    },
+    {
+      "url": "https://drunkpirate.co.uk/?welcome",
+      "checkedOn": "2026-09-21",
+      "verification": "Could not reverify through the available web reader; it normalized the query and reported the URL inaccessible."
+    },
+    {
+      "url": "https://drunkpirate.co.uk/?play",
+      "checkedOn": "2026-09-21",
+      "verification": "Could not reverify through the available web reader; it normalized the query and reported the URL inaccessible."
+    }
+  ],
+  "priorResearch": {
+    "recordedOn": "2026-09-19",
+    "evidence": "https://github.com/ipazanin/tipsy-trouble/blob/0e532084c8682f9a970b61affaa9a552a50adb3d/docs/cards.md#provenance-and-scope",
+    "verification": "Notes retained from the previous research session; these details were not independently reverified on 2026-09-21.",
+    "observations": [
+      "Players draw cards and follow their instructions.",
+      "Some cards introduce rules lasting multiple turns.",
+      "The welcome screen advertised more than 100 guest cards and 50 additional cards for signed-in users; this was not an enumerated inventory."
+    ]
+  },
+  "missingDataset": "The complete third-party card catalogue is not reproduced from the website. A user-provided card export or card text is needed to populate this file for card-by-card analysis.",
+  "cards": []
+}

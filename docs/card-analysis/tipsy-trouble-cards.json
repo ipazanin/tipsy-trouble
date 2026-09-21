@@ -1,0 +1,3018 @@
+{
+  "schemaVersion": 1,
+  "game": "Tipsy Trouble",
+  "exportedAt": "2026-09-21T07:57:16.644Z",
+  "datasetStatus": "complete-built-in-catalogue",
+  "exportedCardCount": 200,
+  "countsByKind": {
+    "prompt": 160,
+    "temporary-rule": 38,
+    "special": 2
+  },
+  "scope": "All built-in English cards from the repository. Device-local custom cards and rules written during a game are not included.",
+  "provenance": {
+    "repository": "https://github.com/ipazanin/tipsy-trouble",
+    "sourceCommit": "0e532084c8682f9a970b61affaa9a552a50adb3d",
+    "sourceFiles": [
+      "src/features/cards/catalogue/definitions.ts",
+      "src/features/cards/catalogue/en.json",
+      "src/features/cards/artwork/pairings.json",
+      "src/features/cards/artwork/photos.json"
+    ],
+    "wording": "Exact project wording; no rewriting or analysis applied.",
+    "cardTextLicense": "MIT"
+  },
+  "comparisonNote": "This is an original Tipsy Trouble deck, not a copied or exhaustively mapped Drunk Pirate catalogue.",
+  "cards": [
+    {
+      "id": "three-word-day",
+      "kind": "prompt",
+      "title": "Three-word day",
+      "text": "Describe your day in exactly three words. Everyone votes on the most dramatic description. Its author gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tiny-sales-pitch",
+      "kind": "prompt",
+      "title": "An offer you can refuse",
+      "text": "Pick an ordinary object nearby and give it a ten-second sales pitch. If anyone wants to buy it, give out one sip. Otherwise, take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "unpopular-snack",
+      "kind": "prompt",
+      "title": "Snack court",
+      "text": "Defend an unpopular food combination. The table votes: delicious or disaster? Join the smaller group for one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "soundtrack",
+      "kind": "prompt",
+      "title": "Your entrance music",
+      "text": "Choose the song that should play whenever you enter a room. The player on your left chooses your entrance pose. Perform the pose or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "bad-superpower",
+      "kind": "prompt",
+      "title": "Super, probably",
+      "text": "Invent a useless superpower. The player on your right explains how it could save the world. If the table buys the explanation, you both give out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "two-second-logo",
+      "kind": "prompt",
+      "title": "Air designer",
+      "text": "Draw a familiar logo in the air with one finger. The first person to name it gives out one sip. Nobody gets it? Take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "imaginary-holiday",
+      "kind": "prompt",
+      "title": "National what day?",
+      "text": "Invent a holiday and its strangest tradition. Everyone who would celebrate it raises a hand. If nobody volunteers, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "table-awards",
+      "kind": "prompt",
+      "title": "And the award goes to…",
+      "text": "Give the player on your left a made-up award for something kind or funny. They give a five-second acceptance speech, then choose someone to take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "odd-one-out",
+      "kind": "prompt",
+      "title": "Three things",
+      "text": "Name three things. The next player has ten seconds to explain something they all have in common. A convincing answer earns them one sip to give away; otherwise they take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "five-things",
+      "kind": "prompt",
+      "title": "Packing light",
+      "text": "Name five things you would take to a deserted island, without using anything another player says first. The table supplies distractions. Pause for five seconds and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "backwards-introduction",
+      "kind": "prompt",
+      "title": "Wrong answers welcome",
+      "text": "The player on your right asks you three simple questions. Give a different, obviously wrong answer each time. Accidentally tell the truth? Take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "mystery-object",
+      "kind": "prompt",
+      "title": "Mystery object",
+      "text": "Choose something you can see. Describe it without its name, colour, or usual purpose. The first person to guess it gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "group-photo-title",
+      "kind": "prompt",
+      "title": "Name the album",
+      "text": "If tonight were an album, what would its title be? Everyone suggests one. The table’s favourite gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tiny-debate",
+      "kind": "prompt",
+      "title": "Very serious debate",
+      "text": "You and the player on your left each get ten seconds: which is better, an extra hour of sleep or an extra hour of free time? Everyone else votes. The losing side takes one sip; with two players, call it a draw.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "holiday-planner",
+      "kind": "prompt",
+      "title": "Mystery holiday",
+      "text": "Describe a real place you want to visit using only three clues. The first person to guess it gives out one sip. Reveal the answer if nobody knows it.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "silent-movie",
+      "kind": "prompt",
+      "title": "Silent cinema",
+      "text": "Act out making your favourite meal without speaking. You have twenty seconds. Whoever guesses first gives out one sip; no correct guesses means you take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "table-telepathy",
+      "kind": "prompt",
+      "title": "Same wavelength",
+      "text": "Choose another player. On the count of three, each name a fruit. Match and give out one sip each. Miss and simply try again once.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "museum-piece",
+      "kind": "prompt",
+      "title": "Museum of ordinary things",
+      "text": "Present something nearby as a priceless museum exhibit. Explain its mysterious history in two sentences. The first player to laugh takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "new-constellation",
+      "kind": "prompt",
+      "title": "Written in the stars",
+      "text": "Invent a constellation named after someone at the table. Describe its shape and the legend behind it. That player gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "restaurant-review",
+      "kind": "prompt",
+      "title": "Five-star nonsense",
+      "text": "Review an imaginary restaurant where the food is great but everything else is bizarre. Finish with a star rating. The table’s harshest critic takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "animal-interview",
+      "kind": "prompt",
+      "title": "A word with the penguin",
+      "text": "The player on your right interviews you as an animal they choose. Answer two questions in character. Break character and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "penguin",
+        "assetPath": "public/artwork/penguin.webp",
+        "photographer": "Francisco Arnela",
+        "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "one-word-story",
+      "kind": "prompt",
+      "title": "Once upon a table",
+      "text": "Build a story around the table, one word per player. After one complete circle, you must give the story a title. Anyone who laughs during their word takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "terrible-invention",
+      "kind": "prompt",
+      "title": "Patent pending",
+      "text": "Invent a product that solves a very minor problem in a ridiculous way. The next player names it. Everyone who would use it takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "time-traveller",
+      "kind": "prompt",
+      "title": "Welcome to the future",
+      "text": "Explain a smartphone to a visitor from two hundred years ago without using the words phone, internet, or computer. Let another player choose a sip for you if you slip up.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "fake-fact",
+      "kind": "prompt",
+      "title": "Completely unverified",
+      "text": "Make up a harmless, obviously silly fact about an everyday object. Another player delivers it like a documentary narrator. First to laugh takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "perfect-pair",
+      "kind": "prompt",
+      "title": "Better together",
+      "text": "Name two things that belong together. The next player replaces one with something unexpected and explains why the new pair works. The table decides who gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "mini-mime",
+      "kind": "prompt",
+      "title": "Tiny job interview",
+      "text": "Mime a job using only your hands. The first player to guess the job gives out one sip. After twenty seconds, reveal it and move on.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "opening-credits",
+      "kind": "prompt",
+      "title": "Tonight, starring…",
+      "text": "Introduce the table as the cast of a fictional show. Give each player a character name. The player on your left chooses someone to take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "weather-report",
+      "kind": "prompt",
+      "title": "Party forecast",
+      "text": "Deliver a ten-second weather forecast for the mood at the table. Include one dramatic prediction. Anyone who interrupts takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "first-impression",
+      "kind": "prompt",
+      "title": "A pleasant surprise",
+      "text": "Tell someone at the table one nice thing you noticed about them. Both of you choose a third player for a shared toast; with two players, toast each other.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "rhythm-copy",
+      "kind": "prompt",
+      "title": "Tabletop orchestra",
+      "text": "Tap a short rhythm. The player on your left copies it and adds one beat. Continue once around the table. The first missed beat costs one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "shared-toast",
+      "kind": "prompt",
+      "title": "Cheers to that",
+      "text": "Name one small thing worth celebrating today. Everyone may add their own. Raise a glass together and take a sip if you like.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "royal-requests",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Royal requests",
+      "text": "Begin every request to another player with “Your Majesty.” Forget the royal treatment and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "third-person",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Your own narrator",
+      "text": "Speak about yourself in the third person. Slip back to “I” or “me” and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "news-anchor",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Live from the table",
+      "text": "Deliver everything you say in your best serious newsreader voice. Break character and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "question-time",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Any questions?",
+      "text": "Everything you say must be a question. Make a statement and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "invisible-microphone",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "You’re on air",
+      "text": "Hold an imaginary microphone whenever you speak. Forget it and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "dramatic-pause",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Wait for it…",
+      "text": "Pause dramatically before answering any question. Rush the answer and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "round-of-applause",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "The standing ovation, seated",
+      "text": "Give a tiny round of applause whenever someone finishes reading a new card. Miss your cue and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "imaginary-hat",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "A tip of the hat",
+      "text": "Tip an imaginary hat whenever you say another player’s name. Forget your manners and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "last-call",
+      "kind": "special",
+      "title": "Last call",
+      "text": "Raise a toast to the table, then take three sips at your own pace.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "captains-choice",
+      "kind": "special",
+      "title": "Captain’s choice",
+      "text": "Give a victory speech worthy of a captain, then take five sips at your own pace.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "pocket-tradition",
+      "kind": "prompt",
+      "title": "Small traditions",
+      "text": "Name a small tradition you would like this group to start. Everyone votes with a thumbs-up. If it gets unanimous support, give out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "childhood-invention",
+      "kind": "prompt",
+      "title": "Junior inventor",
+      "text": "Describe something you tried to build as a child, or invent a childhood project. The next player supplies a grand name for it and gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tiny-victory",
+      "kind": "prompt",
+      "title": "Quietly winning",
+      "text": "Share a small task you finally finished, or imagine one. The table gives you a tiny cheer. Choose someone to join you for an optional sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "unexpected-expert",
+      "kind": "prompt",
+      "title": "Ask the expert",
+      "text": "Name a harmless subject you know oddly well. The table asks one question about it. Answer it or admit defeat and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "future-postcard",
+      "kind": "prompt",
+      "title": "Wish you were here",
+      "text": "Describe an ordinary Tuesday in your ideal future. The next player adds one surprising detail. Give out one sip if you would keep their addition.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "sound-of-home",
+      "kind": "prompt",
+      "title": "Sounds familiar",
+      "text": "Name a sound that reminds you of home without revealing an address. Anyone who picked the same kind of sound joins you for one optional sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "borrowed-skill",
+      "kind": "prompt",
+      "title": "Skill swap",
+      "text": "Choose a skill you admire in another player. They name a skill they would borrow from you. If either person gets stuck, the group suggests one and shares a toast.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "perfect-break",
+      "kind": "prompt",
+      "title": "Five minutes off",
+      "text": "Describe your perfect five-minute break using exactly five words. The table counts. Use too many or too few and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "umbrella-election",
+      "kind": "prompt",
+      "title": "Rain committee",
+      "text": "Would you rather have a tiny umbrella or enormous rain boots? Everyone chooses at once. The smaller group takes one sip; a tie means nobody does.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "fictional-mayor",
+      "kind": "prompt",
+      "title": "An unusual election",
+      "text": "Everyone nominates a fictional character to run a town. Vote for the best candidate. The winning nominator gives out one sip; tied winners share that one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "breakfast-border",
+      "kind": "prompt",
+      "title": "Breakfast parliament",
+      "text": "Should soup count as breakfast? Everyone votes yes or no, then one player from each side makes a sentence-long case. You decide which side gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "robot-pet",
+      "kind": "prompt",
+      "title": "Household upgrade",
+      "text": "Choose between a robot that tells terrible jokes and a plant that gives advice. Reveal your choices together. Anyone alone on their side gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "penguin",
+        "assetPath": "public/artwork/penguin.webp",
+        "photographer": "Francisco Arnela",
+        "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "weekend-vote",
+      "kind": "prompt",
+      "title": "The extra day",
+      "text": "Would you add an extra Friday or an extra Sunday to the week? Each side names the day. The table's favourite name earns its creator one sip to give out.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "new-colour",
+      "kind": "prompt",
+      "title": "Colour committee",
+      "text": "Invent a colour name for tonight. Everyone points to their favourite suggestion. The winner gives out one sip; resolve a tie with a shared toast.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "team-mascot",
+      "kind": "prompt",
+      "title": "Mascot auditions",
+      "text": "Each player names an animal mascot for this group. Vote, excluding your own suggestion. The winner demonstrates its greeting or takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "penguin",
+        "assetPath": "public/artwork/penguin.webp",
+        "photographer": "Francisco Arnela",
+        "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "small-luxury",
+      "kind": "prompt",
+      "title": "Luxury budget",
+      "text": "Everyone chooses one everyday luxury they would keep on a tiny budget. You may swap your answer after hearing the others. Anyone who swaps takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "last-letter-link",
+      "kind": "prompt",
+      "title": "Letter relay",
+      "text": "Say an animal. Go once around the table: each new animal must start with the previous animal's last letter. The first repeat or five-second pause takes one sip, then stop.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "forbidden-vowel",
+      "kind": "prompt",
+      "title": "Missing a vowel",
+      "text": "Describe a beach without saying any word containing the letter A. Speak for ten seconds. If the table spots an A-word, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "compound-switch",
+      "kind": "prompt",
+      "title": "Word renovation",
+      "text": "Say a compound word, such as lighthouse. The next player replaces one half to make a real new word. Keep going for six links. The first player stuck takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "alliterative-alias",
+      "kind": "prompt",
+      "title": "The name department",
+      "text": "Give yourself an alias with three words starting with the same letter. The next player repeats it. If they miss a word, they take one sip; otherwise you give out one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "two-word-review",
+      "kind": "prompt",
+      "title": "Extremely short review",
+      "text": "Review a familiar film using two words, without its title. The table gets three guesses. If nobody solves it, reveal the film and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "rhyme-ladder",
+      "kind": "prompt",
+      "title": "Rhyme time",
+      "text": "Choose a word that has several rhymes. Go around once, adding new rhymes. The first repeated rhyme or five-second pause takes one sip, and the ladder ends.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "acronym-agency",
+      "kind": "prompt",
+      "title": "Official nonsense",
+      "text": "The player on your left gives you three letters. Turn them into the name of a ridiculous organisation and explain its job. Get stuck for ten seconds and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "one-letter-upgrade",
+      "kind": "prompt",
+      "title": "One letter better",
+      "text": "Name a word of at least four letters. Another player changes one letter to make a new word. Make four changes together; the first invalid word costs its speaker one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "colour-menu",
+      "kind": "prompt",
+      "title": "One-colour menu",
+      "text": "Pick a colour. Go once around naming foods naturally that colour. No repeats. The first player stuck for five seconds takes one sip, then reveal the rest of your ideas.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "things-with-wheels",
+      "kind": "prompt",
+      "title": "Rolling stock",
+      "text": "Name something with wheels. Continue around once without repeats, but cars and bicycles are off limits. The first invalid answer takes one sip and ends the round.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "night-sounds",
+      "kind": "prompt",
+      "title": "After dark",
+      "text": "Go around once naming sounds you might hear at night. Each player must make their sound too. The first repeat takes one sip; unusual but plausible answers count.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "fictional-places",
+      "kind": "prompt",
+      "title": "Imaginary atlas",
+      "text": "Name a fictional place. Go around once adding new places, without naming the same story twice. The first person who cannot answer takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "three-pocket-things",
+      "kind": "prompt",
+      "title": "Pocket inventory",
+      "text": "Name three objects that fit in a pocket but are not usually carried there. The table checks their sizes. If all three fit, give out one sip; otherwise take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "weather-verbs",
+      "kind": "prompt",
+      "title": "Weather does things",
+      "text": "Name something weather can do, using a verb. Continue around once without repeats. The first five-second pause takes one sip, then stop.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "no-kitchen-tools",
+      "kind": "prompt",
+      "title": "Wrong department",
+      "text": "Name something you can stir with that is not a kitchen utensil. Each player adds a different imaginary option. The table's most impractical suggestion gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "round-things",
+      "kind": "prompt",
+      "title": "Around we go",
+      "text": "Go around once naming round objects. Each answer must be smaller than the previous one. The first size dispute is settled by a vote; its losing speaker takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "shopping-chain",
+      "kind": "prompt",
+      "title": "Very strange shopping",
+      "text": "Start a shopping list with one unusual item. Each player repeats the list and adds one. Stop after one circle or the first mistake; whoever makes that mistake takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "gesture-recall",
+      "kind": "prompt",
+      "title": "Remember this move",
+      "text": "Each player makes a small hand gesture. After everyone has shown theirs, copy the gesture of the player opposite you, or your only partner. Miss it and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "three-object-glance",
+      "kind": "prompt",
+      "title": "Eyes on the table",
+      "text": "Another player names three visible objects. Look away and repeat them in reverse order. Get all three and give out one sip; miss one and take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "name-rewind",
+      "kind": "prompt",
+      "title": "Cast roll backwards",
+      "text": "Say every player's name in reverse playing order, starting with yourself. You get one restart. If you still miss someone, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "story-detail",
+      "kind": "prompt",
+      "title": "Were you listening?",
+      "text": "Tell a made-up story with a colour, an animal, and a number. The next player recalls all three. If they succeed, you each give out one sip; otherwise they take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "silent-sequence",
+      "kind": "prompt",
+      "title": "The silent sequence",
+      "text": "Show three simple hand poses. The player on your left copies them in reverse order. A correct sequence earns them one sip to give out; otherwise they take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "menu-memory",
+      "kind": "prompt",
+      "title": "The absent-minded waiter",
+      "text": "Each player orders an imaginary snack. Without notes, repeat up to five orders. Miss an order and take one sip; get them all and give out one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "first-word-return",
+      "kind": "prompt",
+      "title": "Back to the beginning",
+      "text": "Each player says a word. After one circle, name the first and last words spoken by other players. With two players, repeat your partner's word backwards. Miss and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "shared-count",
+      "kind": "prompt",
+      "title": "Count us in",
+      "text": "As a group, count from one to ten with no fixed speaking order. If two people speak together, stop; those two each take one sip. You get one attempt.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "mirror-hands",
+      "kind": "prompt",
+      "title": "Mirror partners",
+      "text": "Face another player and mirror their slow hand movements for ten seconds while both stay seated. They choose one unexpected change. Lose track and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "same-shape",
+      "kind": "prompt",
+      "title": "Shape agreement",
+      "text": "Choose another player. Without discussion, draw a shape in the air on three. Match and give out one sip together; differ and let the table name your combined shape.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "alphabet-duet",
+      "kind": "prompt",
+      "title": "Alphabet duet",
+      "text": "You and the next player alternate letters from A to P. Clap instead of saying each vowel. The first person who slips takes one sip, then stop.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "clap-gap",
+      "kind": "prompt",
+      "title": "Mind the gap",
+      "text": "Clap a steady four-beat pattern together. On the third repeat, everyone leaves the last beat silent. Anyone who claps into the gap takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "countdown-pair",
+      "kind": "prompt",
+      "title": "Almost synchronised",
+      "text": "Choose a partner. Close your eyes while seated and count five seconds silently, then say now. If the table hears two separate calls, you both take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "shared-drawing",
+      "kind": "prompt",
+      "title": "Air sketch partners",
+      "text": "With a partner, draw an imaginary house: you describe each line while they trace it in the air. They must keep their finger moving for ten seconds. A pause costs you one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "alternating-introductions",
+      "kind": "prompt",
+      "title": "Alternating introductions",
+      "text": "You and the player on your right introduce an imaginary guest, alternating one word at a time. Complete one sensible sentence. If you both speak at once, take one sip each.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "customer-service",
+      "kind": "prompt",
+      "title": "Please hold",
+      "text": "Give a polite customer-service apology for the moon arriving late. Include a proposed refund. The table chooses the best phrase; its first person to repeat it gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "slow-motion-goal",
+      "kind": "prompt",
+      "title": "A very slow winner",
+      "text": "Celebrate winning a tiny imaginary prize in slow motion for ten seconds, staying seated. Anyone who guesses the prize gives out one sip; reveal it if nobody does.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "object-monologue",
+      "kind": "prompt",
+      "title": "The object speaks",
+      "text": "Give a nearby object a twenty-second monologue about its day. Another player supplies its first sentence. Break character and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "whisper-trailer",
+      "kind": "prompt",
+      "title": "Quiet blockbuster",
+      "text": "Whisper a dramatic trailer for a film about doing laundry. Include a villain and a cliffhanger. The first person to laugh takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "royal-announcement",
+      "kind": "prompt",
+      "title": "Hear ye, hear ye",
+      "text": "Announce a completely ordinary household task as a royal decree. The next player formally objects. If either uses the word boring, they take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "sports-commentary",
+      "kind": "prompt",
+      "title": "Live coverage",
+      "text": "Commentate on another player's slow imaginary sandwich-making for fifteen seconds. Invent a sporting record they might break. Run out of words and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "voice-switch",
+      "kind": "prompt",
+      "title": "Three voices",
+      "text": "Say the same friendly greeting as a robot, a wizard, and a tired shopkeeper. The table chooses its favourite voice. Use it to award someone one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "pantomime-machine",
+      "kind": "prompt",
+      "title": "Human appliance",
+      "text": "Act out an appliance using only your face and hands. The table gets three guesses. A correct guess earns one sip to give out; otherwise reveal it and take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "cloud-job",
+      "kind": "prompt",
+      "title": "Cloud employment",
+      "text": "Invent a job that could exist in a city built on clouds. The next player explains its biggest workplace problem. The table awards the better idea one sip to give out.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tiny-dragon",
+      "kind": "prompt",
+      "title": "Pocket-sized problem",
+      "text": "A tiny dragon moves into your kitchen. Explain one house rule you would give it. Another player responds as the dragon. Whoever laughs first takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "penguin",
+        "assetPath": "public/artwork/penguin.webp",
+        "photographer": "Francisco Arnela",
+        "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "time-capsule-label",
+      "kind": "prompt",
+      "title": "Open in one hundred years",
+      "text": "Choose a harmless object for a time capsule and write its imaginary warning label aloud. If anyone mistakes it for a different object, they take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "moon-shop",
+      "kind": "prompt",
+      "title": "Lunar high street",
+      "text": "Invent a shop for the moon and its first sale. The next player is a difficult customer. Finish your two-line exchange without mentioning gravity, or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "backwards-zoo",
+      "kind": "prompt",
+      "title": "The visitors are on display",
+      "text": "Imagine a zoo where animals visit humans. Describe the sign outside your enclosure. The table adds one care instruction, then chooses someone for one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "penguin",
+        "assetPath": "public/artwork/penguin.webp",
+        "photographer": "Francisco Arnela",
+        "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "helpful-ghost",
+      "kind": "prompt",
+      "title": "Haunted but helpful",
+      "text": "A friendly ghost can perform one chore badly. Choose its chore and demonstrate the problem using your hands. The table's best repair suggestion gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "weather-subscription",
+      "kind": "prompt",
+      "title": "Weather on demand",
+      "text": "Invent a weather subscription with a ridiculous premium feature. Pitch it in one sentence. Anyone who would subscribe raises a hand; no customers means you take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "miniature-city",
+      "kind": "prompt",
+      "title": "City in a cereal box",
+      "text": "Design one landmark for a tiny city inside a cereal box. The next player names its mayor. Give out one sip if the mayor's name makes you smile.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "sandwich-constitution",
+      "kind": "prompt",
+      "title": "Sandwich law",
+      "text": "State one rule for what counts as a sandwich. The next player offers a tricky example. If your rule contradicts your answer, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "snack-sound-effects",
+      "kind": "prompt",
+      "title": "Crunch, probably",
+      "text": "Make the sound of eating an imaginary snack without naming it. The first correct guess gives out one sip. After three guesses, reveal the snack and move on.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "menu-translation",
+      "kind": "prompt",
+      "title": "Fancy menu decoder",
+      "text": "Describe toast as if it costs a fortune at a restaurant. Another player translates your description back into plain language. The shorter description gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "flavour-invention",
+      "kind": "prompt",
+      "title": "Questionable flavour lab",
+      "text": "Invent a new ice-cream flavour using two things that are actually edible. Everyone votes try it or leave it. If nobody would try it, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "picnic-problem",
+      "kind": "prompt",
+      "title": "Picnic with a catch",
+      "text": "Plan a picnic where every food must begin with the same letter as your name. Name three foods or take one sip. Repeating ingredients is allowed; repeating foods is not.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "last-biscuit",
+      "kind": "prompt",
+      "title": "The last biscuit hearing",
+      "text": "Make a ten-second argument for why an imaginary last biscuit belongs to you. The next player is the judge. Accept their verdict with a bow, or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "soup-advert",
+      "kind": "prompt",
+      "title": "Soup, now with drama",
+      "text": "Create a five-word slogan for an ordinary soup. Everyone repeats it together. If anyone adds a word, that person takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "midnight-menu",
+      "kind": "prompt",
+      "title": "The midnight special",
+      "text": "Everyone names a late-night snack. You must combine two suggestions into one imaginary dish and give it a name. Its two contributors share one optional sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "wrong-guidebook",
+      "kind": "prompt",
+      "title": "The unreliable guide",
+      "text": "Describe a familiar place as if your guidebook got one fact hilariously wrong. The first person to identify the invented detail gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "suitcase-limits",
+      "kind": "prompt",
+      "title": "Only three things",
+      "text": "You have room for three items on a fictional holiday. Name them, then the next player removes one. Explain how you will cope without it or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "station-announcement",
+      "kind": "prompt",
+      "title": "Platform nonsense",
+      "text": "Announce a train to an impossible destination. Include a delay caused by something tiny. Anyone who smiles before you finish takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "island-government",
+      "kind": "prompt",
+      "title": "Island administration",
+      "text": "This group has founded an imaginary island. Give it a name, a flag design, and one public holiday. If any detail repeats another player's earlier idea tonight, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "postcard-mixup",
+      "kind": "prompt",
+      "title": "Wish you were somewhere",
+      "text": "The player on your left names a place. Give a postcard message that could apply there or in a supermarket. A convincing message earns you one sip to give out.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tourist-statue",
+      "kind": "prompt",
+      "title": "The local landmark",
+      "text": "Pose with your face and hands as an imaginary statue while seated. The next player explains what it commemorates. The first person to break a straight face takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "hotel-review",
+      "kind": "prompt",
+      "title": "One peculiar star",
+      "text": "Review a fictional hotel with one excellent feature and one absurd inconvenience. The group rates it from one to five using fingers. The highest rating gives out one sip; ties share it.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "travel-initials",
+      "kind": "prompt",
+      "title": "Alphabet itinerary",
+      "text": "Plan three imaginary stops whose initials spell a three-letter word. Explain your route. If the table cannot identify the word, reveal it and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "song-without-song",
+      "kind": "prompt",
+      "title": "The song description",
+      "text": "Describe a familiar song without singing, humming, or quoting lyrics. Give three clues. The first correct guess gives out one sip; no guess means you take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "doorbell-composer",
+      "kind": "prompt",
+      "title": "A grand entrance",
+      "text": "Compose a three-note doorbell sound using your voice. The table echoes it once. The player whose version you would install gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "beat-name",
+      "kind": "prompt",
+      "title": "Name that beat",
+      "text": "Tap the rhythm of your full name on your knees while seated. The next player answers with theirs. If the rhythms match, share an optional sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "soundtrack-switch",
+      "kind": "prompt",
+      "title": "Wrong soundtrack",
+      "text": "Choose music for a dramatic scene, then replace it with the least suitable genre you can imagine. Describe the result. The table's first laugh takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "fictional-band",
+      "kind": "prompt",
+      "title": "Band meeting",
+      "text": "You are forming a band. Assign the next three players, or as many as available, imaginary instruments. They each make one sound. Name the band and give out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tiny-jingle",
+      "kind": "prompt",
+      "title": "Eight-second advert",
+      "text": "Invent an eight-second jingle for a household object. You may speak rhythmically instead of singing. Forget to name the object and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "volume-detective",
+      "kind": "prompt",
+      "title": "Indoor voice detective",
+      "text": "Say one sentence in three different moods at the same quiet volume. The table identifies the moods. For each missed mood, reveal it; if all three are missed, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "percussion-pass",
+      "kind": "prompt",
+      "title": "The rhythm parcel",
+      "text": "Tap twice, then point to another player. They tap twice and choose someone new. Continue until everyone has played. The first extra tap costs one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "plot-in-reverse",
+      "kind": "prompt",
+      "title": "Spoil it backwards",
+      "text": "Describe a familiar story backwards in three sentences, without names. The table gets one guess per player. The first correct guess gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "sequel-title",
+      "kind": "prompt",
+      "title": "The unnecessary sequel",
+      "text": "Invent a sequel to an ordinary chore. Give it a dramatic title and a one-sentence plot. Everyone votes watch or skip; if nobody would watch, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "background-actor",
+      "kind": "prompt",
+      "title": "A very important extra",
+      "text": "Describe a film scene from the perspective of an unnoticed background character. The next player guesses the genre. Agree with the guess and give out one sip; disagree and take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "book-cover",
+      "kind": "prompt",
+      "title": "Judge this cover",
+      "text": "Invent a book title from the last object you touched and the current weather. The next player supplies its opening sentence. If the group wants chapter two, give out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "three-genre-story",
+      "kind": "prompt",
+      "title": "Genre collision",
+      "text": "Tell a three-sentence story: first a mystery, then a romance, then science fiction. The table supplies your main character's name. Miss a genre and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "movie-prop",
+      "kind": "prompt",
+      "title": "One essential prop",
+      "text": "Name an ordinary object. The next player invents a film scene that makes it crucial. You have one sentence to explain its unexpected sequel appearance, or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "ending-vote",
+      "kind": "prompt",
+      "title": "Choose the ending",
+      "text": "Begin a story in two sentences. The next two players, or your only partner and you, each suggest an ending. Vote for one; its author gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "trailer-voiceover",
+      "kind": "prompt",
+      "title": "Coming eventually",
+      "text": "Give a serious trailer voiceover for tomorrow's breakfast. Use exactly three sentences. The table counts; the wrong number costs one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "unsung-helper",
+      "kind": "prompt",
+      "title": "Behind the scenes",
+      "text": "Name a small helpful thing someone at the table has done, or might do well. That person chooses someone else to thank. End with an optional shared sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "compliment-metaphor",
+      "kind": "prompt",
+      "title": "A slightly odd compliment",
+      "text": "Compliment another player by comparing them to a useful object. Explain the comparison kindly. They may accept with an imaginary medal or return a compliment.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "team-superpower",
+      "kind": "prompt",
+      "title": "Collective talent",
+      "text": "Name a task this group could do surprisingly well together. Assign everyone a role. Anyone who wants a different role must pitch it in five words or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "good-news-bulletin",
+      "kind": "prompt",
+      "title": "Some good news",
+      "text": "Give a fifteen-second news bulletin about three tiny positive things, real or invented. If you repeat a topic, take one sip; otherwise give out one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "future-award",
+      "kind": "prompt",
+      "title": "Next year's headline",
+      "text": "Invent a positive headline about the player on your right one year from now. They give a short response. Both of you choose someone for an optional toast.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "kindness-chain",
+      "kind": "prompt",
+      "title": "Pass something good",
+      "text": "Each player names one small kindness someone could do tomorrow. No repeats. If an idea has already been said, offer a new one or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "shared-project",
+      "kind": "prompt",
+      "title": "The group project",
+      "text": "Choose a harmless imaginary project for the group. Everyone contributes one idea. You have ten seconds to combine up to three of those ideas into a plan, or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "celebration-budget",
+      "kind": "prompt",
+      "title": "A party for almost nothing",
+      "text": "Plan a celebration using only things already in this room, without moving or using them. The table votes on the best detail. Its creator gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "opposite-advice",
+      "kind": "prompt",
+      "title": "Advice in reverse",
+      "text": "Give obviously terrible advice for keeping a houseplant alive. The next player converts it into useful advice. If either accidentally gives the wrong kind, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "explain-without-hands",
+      "kind": "prompt",
+      "title": "Hands off the explanation",
+      "text": "Explain how to wrap a present without moving your hands. The next player watches for gestures. A gesture costs one sip; a clean explanation earns one to give out.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "object-alibi",
+      "kind": "prompt",
+      "title": "The missing spoon",
+      "text": "Give a nearby object an alibi for an imaginary missing spoon. Another player asks one follow-up question. Contradict yourself and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "odd-instruction",
+      "kind": "prompt",
+      "title": "Instruction manual",
+      "text": "Explain how to use an umbrella to someone who thinks it is a musical instrument. You cannot say rain or wet. Use either word and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "size-order",
+      "kind": "prompt",
+      "title": "Small, medium, surprising",
+      "text": "Another player names three objects. Put them in size order, then invent a situation where the order reverses. If the table accepts the explanation, give out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "false-choice",
+      "kind": "prompt",
+      "title": "A third option",
+      "text": "The player on your left offers two ordinary choices. Invent a sensible third option that combines both. If the table cannot see both parts, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "question-detective",
+      "kind": "prompt",
+      "title": "Five-question mystery",
+      "text": "Think of an everyday object. The table may ask five yes-or-no questions, then make one shared guess. If correct, you take one sip; otherwise give out one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "ridiculous-proof",
+      "kind": "prompt",
+      "title": "Prove the obvious",
+      "text": "Explain why a chair is definitely not a sandwich, without using the words sit, bread, or eat. Use a forbidden word and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "secret-season",
+      "kind": "prompt",
+      "title": "Season forecast",
+      "text": "Privately choose a favourite season. Everyone points to someone and predicts theirs. Reveal in playing order. Each incorrect predictor takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "number-agreement",
+      "kind": "prompt",
+      "title": "Meet in the middle",
+      "text": "Everyone chooses a number from one to five and reveals it with fingers together. Anyone whose number matches yours gives out one sip; if nobody matches, you take one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "predict-the-snack",
+      "kind": "prompt",
+      "title": "Snack forecast",
+      "text": "Guess the next player's choice between sweet, salty, and sour before they answer. A correct guess earns you one sip to give out; a wrong guess costs one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "colour-consensus",
+      "kind": "prompt",
+      "title": "What colour is Monday?",
+      "text": "Everyone secretly decides what colour Monday would be. Reveal together. If any answers match, those players give out one sip together; otherwise the table shares a toast.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "fictional-roommate",
+      "kind": "prompt",
+      "title": "Roommate shortlist",
+      "text": "Name two fictional characters. Predict which one the next player would prefer as a roommate. They reveal their choice and one reason. Guess wrong and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "penguin",
+        "assetPath": "public/artwork/penguin.webp",
+        "photographer": "Francisco Arnela",
+        "sourceUrl": "https://unsplash.com/photos/penguin-standing-on-cliff-mgxphPyKxns",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "choose-the-ending",
+      "kind": "prompt",
+      "title": "Predict the punchline",
+      "text": "Start an invented sentence with Tomorrow I will definitely. The next player privately chooses an ending; predict its first word. Match and give out three sips, shared among volunteers.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "weekend-object",
+      "kind": "prompt",
+      "title": "One-object weekend",
+      "text": "Think of an object that represents your ideal weekend. Give its colour as a clue. The table gets three guesses. A correct guess gives out one sip; otherwise reveal it.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "secret-hand",
+      "kind": "prompt",
+      "title": "Empty-handed guess",
+      "text": "Put an imaginary coin in either closed hand and choose honestly. Another player guesses which hand. A wrong guess costs them one sip; a correct guess costs you one.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "nearest-match",
+      "kind": "prompt",
+      "title": "Find the connection",
+      "text": "Name something visible in the room. The next player names something else and explains a connection in one sentence. Continue for four links; the first repeat takes one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "table-map",
+      "kind": "prompt",
+      "title": "Map of the room",
+      "text": "Describe this room as an imaginary country. Give three landmarks playful names. The first player to identify all three real locations gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "island",
+        "assetPath": "public/artwork/island.webp",
+        "photographer": "Sharif Khaleel",
+        "sourceUrl": "https://unsplash.com/photos/a-small-island-with-trees-HPk-3D8GcH8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "object-election",
+      "kind": "prompt",
+      "title": "Chair of the committee",
+      "text": "Nominate three visible objects for an imaginary committee. Everyone votes on its chairperson. Give the winning object a one-sentence acceptance speech, or take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "left-right-check",
+      "kind": "prompt",
+      "title": "Know your neighbours",
+      "text": "Without looking, name one visible colour worn by the player on each side. With two players, name two colours your partner wears. If either is wrong, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "caption-contest",
+      "kind": "prompt",
+      "title": "Freeze-frame caption",
+      "text": "Make a harmless seated pose with your hands and face. Everyone supplies a caption. Choose your favourite; its author gives out one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "common-ground",
+      "kind": "prompt",
+      "title": "Find a connection",
+      "text": "Find one harmless preference shared by every player using no more than five questions. Succeed and give out three sips among volunteers; otherwise offer a shared toast.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "room-riddle",
+      "kind": "prompt",
+      "title": "The room has an answer",
+      "text": "Make a two-line riddle about something visible nearby, without naming its colour. The first player to solve it gives out one sip. Reveal the answer after three guesses.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "farewell-speech",
+      "kind": "prompt",
+      "title": "Until the next card",
+      "text": "Give a ten-second farewell speech to the card you are reading. Include one sincere compliment about its punctuation. If you laugh before finishing, take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "radio-signoff",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Over and out",
+      "text": "End each conversational reply with “over.” Forget your radio sign-off and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "proper-introductions",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "A formal address",
+      "text": "Before asking someone a question, introduce yourself with your full first name. Forget the introduction and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "no-yes-no",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Beyond yes and no",
+      "text": "In conversation, answer without using the words yes or no. Say either word and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "weather-comparison",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Forecast included",
+      "text": "Whenever someone asks how you are, answer with a weather forecast for your mood. Give an ordinary answer and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "rain",
+        "assetPath": "public/artwork/rain.webp",
+        "photographer": "Mila Vasileva",
+        "sourceUrl": "https://unsplash.com/photos/a-close-up-of-a-rain-covered-window-HDO_Frbstgk",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "phantom-notebook",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Taking notes",
+      "text": "When another player gives you a direct instruction, mime noting it in a little notebook. Forget your notes and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "finger-curtain",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Opening night",
+      "text": "Before reading a new card aloud, mime opening a tiny curtain with your hands. Miss the opening and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "cinema",
+        "assetPath": "public/artwork/cinema.webp",
+        "photographer": "André Julien",
+        "sourceUrl": "https://unsplash.com/photos/vintage-film-camera-on-tripod-in-a-dimly-lit-room-Ef_OXF-JdCs",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "polite-correction",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Pardon the interruption",
+      "text": "If you interrupt another player, immediately say “please continue” and let them finish. Forget the phrase and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "question-echo",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Just to confirm",
+      "text": "Repeat the last word of any question addressed to you before answering it. Skip the echo and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "name-free-chat",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Names off duty",
+      "text": "Use friendly descriptions instead of players' names during conversation. Say a player's name and take one sip. Reading names printed on a card is allowed.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "mini-bow",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "A gracious reply",
+      "text": "Give a small seated nod whenever another player thanks you. Miss the acknowledgment and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "robot-punctuation",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Punctuation unit",
+      "text": "Say “full stop” after each conversational statement and “question mark” after each question. Miss the punctuation and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "word-of-the-round",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "A useful word",
+      "text": "Whenever you say “actually” in conversation, immediately add “and that is official.” Forget the addition and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "future-tense",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Looking ahead",
+      "text": "When talking about yourself in conversation, describe what you will do rather than what you did. Slip into your own past and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "stars",
+        "assetPath": "public/artwork/stars.webp",
+        "photographer": "Dario Brönnimann",
+        "sourceUrl": "https://unsplash.com/fr/photos/une-galaxie-dans-lespace-jwoavhUh_2A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "thanks-to-the-table",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Credit where due",
+      "text": "Whenever you receive a compliment, thank the whole table by saying “team effort.” Forget the phrase and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "pretend-doorbell",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Someone at the door",
+      "text": "Before asking the whole group a question, say “ding-dong” once. Forget the doorbell and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "number-as-words",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Count it out",
+      "text": "Whenever you mention a number from one to five in conversation, show it with your fingers too. Forget the matching fingers and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "curious-expert",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "According to my research",
+      "text": "Begin explanations of how something works with “according to my research.” Forget your scholarly opening and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "no-pointing",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "The open-hand policy",
+      "text": "Indicate people and objects with an open hand rather than one pointing finger. Point with a finger and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "fictional-assistant",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "I'll ask my assistant",
+      "text": "Before giving an opinion, briefly consult an imaginary assistant beside you. Forget the consultation and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "creativity",
+        "assetPath": "public/artwork/creativity.webp",
+        "photographer": "Jess Bailey",
+        "sourceUrl": "https://unsplash.com/photos/glasses-notebooks-and-pencils-on-a-white-desk-k5BvNg8-SRA",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "soft-fanfare",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "A small announcement",
+      "text": "Before announcing a decision, make a quiet two-note fanfare. Forget the fanfare and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "compliment-receipt",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Compliment received",
+      "text": "When someone compliments you, mime placing the compliment safely in a pocket. Forget to keep it and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "royal-we",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "We have an opinion",
+      "text": "Use “we” instead of “I” when sharing your own opinions. Slip back into the singular and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "handmade-quotation",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Quote, unquote",
+      "text": "When quoting something another person said, make small quotation marks with your fingers. Forget the gesture and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "left-hand-wave",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Hello again",
+      "text": "Whenever you say hello or goodbye, add a small wave with your left hand. Miss the wave and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "sporting-answer",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Post-match interview",
+      "text": "Begin answers to personal questions with “it was a team effort.” Forget the interview phrase and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "microphone",
+        "assetPath": "public/artwork/microphone.webp",
+        "photographer": "Mona Rivas",
+        "sourceUrl": "https://unsplash.com/photos/microphone-on-a-stage-ready-to-perform-hQf5S42jIjQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "imaginary-spectacles",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "Let me examine that",
+      "text": "Before reading anything aloud, adjust a pair of imaginary spectacles. Forget your spectacles and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "hat",
+        "assetPath": "public/artwork/hat.webp",
+        "photographer": "Benjamin R.",
+        "sourceUrl": "https://unsplash.com/photos/a-hat-on-a-table-ZJsGfWQdxd8",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "proper-food-title",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Chef's compliments",
+      "text": "Whenever you name a food in conversation, call it “the magnificent” food. For example, the magnificent toast. Forget its title and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "snacks",
+        "assetPath": "public/artwork/snacks.webp",
+        "photographer": "Hybrid Storytellers",
+        "sourceUrl": "https://unsplash.com/photos/a-wooden-bowl-filled-with-popcorn-on-a-yellow-background-z5PYFG-Zu_E",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "thoughtful-chin",
+      "kind": "temporary-rule",
+      "target": "current-player",
+      "duration": {
+        "amount": 3,
+        "unit": "turns"
+      },
+      "title": "A moment of thought",
+      "text": "Touch your chin briefly before answering a question about your preferences. Forget your thoughtful pose and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "books",
+        "assetPath": "public/artwork/books.webp",
+        "photographer": "Martin de Arriba",
+        "sourceUrl": "https://unsplash.com/photos/stack-of-books-on-white-table-EuCpEo1BKZQ",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "sound-effect-agreement",
+      "kind": "temporary-rule",
+      "target": "choose-player",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "Audible approval",
+      "text": "Add a quiet “ta-da” whenever you agree to a suggestion. Forget your sound effect and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "music",
+        "assetPath": "public/artwork/music.webp",
+        "photographer": "The Retro Store",
+        "sourceUrl": "https://unsplash.com/photos/a-person-holding-a-record-player-next-to-a-potted-plant--yHuByHFEWI",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    },
+    {
+      "id": "tiny-round-table",
+      "kind": "temporary-rule",
+      "target": "everyone",
+      "duration": {
+        "amount": 1,
+        "unit": "circles"
+      },
+      "title": "All in favour",
+      "text": "When a card asks the group to vote, wait for the current player to say “polls open.” Vote before that announcement and take one sip.",
+      "contentLocale": "en",
+      "artwork": {
+        "theme": "celebration",
+        "assetPath": "public/artwork/celebration.webp",
+        "photographer": "Vitaliy Zamedyanskiy",
+        "sourceUrl": "https://unsplash.com/photos/champagne-glasses-on-table-at-beach-ycPQpFQcD9A",
+        "licenseUrl": "https://unsplash.com/license"
+      }
+    }
+  ]
+}

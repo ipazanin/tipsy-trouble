@@ -49,6 +49,8 @@ The service worker runs in production builds. To check offline behavior manually
 
 The complete [card catalogue](docs/cards.md) lists every built-in card for review, with its stable ID, exact English wording, target, duration, and artwork theme. It is an original Tipsy Trouble deck; it is not a verbatim copy or a verified complete mapping of Drunk Pirate. Run `npm run cards:generate` after editing the catalogue; CI checks that this document matches the source.
 
+For later analysis, `docs/card-analysis/` preserves a snapshot dated September 21, 2026: [all 200 Tipsy Trouble cards](docs/card-analysis/tipsy-trouble-cards.json) with their wording, mechanics, and artwork metadata, alongside [Drunk Pirate reference notes](docs/card-analysis/drunk-pirate-reference.json). The Drunk Pirate file contains sources and research notes only; it does not contain their card deck. These files are historical snapshots and do not update with the live catalogue.
+
 Built-in mechanics live in `src/features/cards/catalogue/definitions.ts`; English wording lives in the adjacent `en.json`. Stable card IDs join the two. Add definitions and wording together; catalogue checks catch missing or orphaned text.
 
 Save up to 1,000 custom cards independently of the built-in catalogue size. Custom cards use the same validated definition format. Their `contentLocale` records the language they were written in. Text renders as plain text. Creating a permanent rule during a game does not add a reusable card to the library.
