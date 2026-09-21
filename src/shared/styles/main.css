@@ -292,7 +292,7 @@ main:focus {
   min-height: 44px;
   overflow-wrap: anywhere;
 }
-.footer-license {
+.footer-link {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -303,6 +303,7 @@ main:focus {
 .footer-preferences {
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
   gap: var(--space-5);
 }
 .theme-preference {

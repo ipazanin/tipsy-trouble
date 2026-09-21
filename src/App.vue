@@ -101,7 +101,23 @@ function focusContent() {
       </div>
       <div class="footer-preferences">
         <ThemePreference />
-        <RouterLink class="footer-license" to="/license">{{ t('shell.license') }}</RouterLink>
+        <a
+          class="footer-link"
+          href="https://github.com/ipazanin/tipsy-trouble"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ t('shell.source') }}
+        </a>
+        <a
+          class="footer-link"
+          href="https://buymeacoffee.com/ipazanin"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ t('shell.support') }}
+        </a>
+        <RouterLink class="footer-link" to="/license">{{ t('shell.license') }}</RouterLink>
       </div>
     </footer>
   </div>

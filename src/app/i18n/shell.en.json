@@ -29,6 +29,8 @@
     "activeGame": "Game in progress",
     "savedTurn": "Turn {count} · {name}",
     "savedRuleTurn": "House rule · {name}",
+    "source": "Source on GitHub",
+    "support": "Buy me a coffee",
     "license": "MIT license",
     "theme": {
       "label": "Appearance",

@@ -4,6 +4,8 @@
 
 A drinking card game for a shared device or directly connected player phones: reusable players and photos, custom cards, temporary rules with visible countdowns, and permanent rules written by the table.
 
+If you enjoy the game and want to support its development, you can [buy me a coffee](https://buymeacoffee.com/ipazanin).
+
 The app runs on GitHub Pages and caches its complete built-in game for offline play after the first successful online visit. Game progress and personal collections are saved locally in IndexedDB. Export a backup from Library → Backups before clearing browser data or moving to another device.
 
 ## Development
